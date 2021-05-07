@@ -1,9 +1,9 @@
 <?php
 
-$dbHost="localhost";
-$dbUsername="id16760623_group7projectuser";
-$dbPassword="8mjk{!=Mg2?/a#Bf";
-$dbName="id16760623_group7project";
+$dbHost="remotemysql.com";
+$dbUsername="8Q5ZMBBfQp";
+$dbPassword="YW6EDH5lvv";
+$dbName="8Q5ZMBBfQp";
 
 $conn = mysqli_connect($dbHost, $dbUsername, $dbPassword, $dbName);
 
