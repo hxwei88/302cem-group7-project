@@ -1,0 +1,48 @@
+<main id="add_stock">
+    <div class="container-fluid">
+        <h1>Add Stock</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+            <li class="breadcrumb-item active">Add</li>
+        </ol>
+        <div style="width:50%">        
+            <form action="<?php $_SERVER['PHP_SELF']; ?>" method = "POST" enctype="multipart/form-data">
+                <input type="text" style="width:100%" name="isbn_input" required="required" placeholder="Enter ISBN">
+                <input type="text" style="width:100%" name="name_input" required="required" placeholder="Enter book's name">
+                <input type="text" style="width:100%" name="author_input" required="required" placeholder="Enter author's name">
+                <input type="date" name="date_input" required="required">
+                <textarea style="width:100%" rows="10" cols="50" name="description_input">Enter product description here.</textarea>
+                <input type="file" name="image" accept="image/*">
+
+                <hr>
+                <p>
+                    <label>Trade price:</label>
+                    <input type="range" id=tradePrice" value="50" min="1" max="100" name="trade_input"
+                           oninput="document.getElementById('tPrice').innerHTML = this.value" />
+                    <label id="tPrice"></label>
+                </p>
+
+                <hr>
+                <p>
+                    <label>Retail price:</label>
+                    <input type="range" id="retailPrice" value="50" min="1" max="100" name="retail_input"
+                           oninput="document.getElementById('rPrice').innerHTML = this.value" />
+                    <label id="rPrice"></label>
+                </p>
+
+                <hr>
+                <p>
+                    <label>Quantity:</label>
+                    <input type="range" id="quantity" value="50" min="1" max="100" name="quantity_input"
+                           oninput="document.getElementById('qNum').innerHTML = this.value" />
+                    <label id="qNum"></label>
+                </p>
+
+                <hr>
+                <button type="submit" name="submit">Add product</button>
+
+            </form>
+        </div>
+    </div>
+</main>
+
