@@ -1,7 +1,7 @@
 <?php
     include ('folder_path.php');
     //needs checking when hosted online
-    include $views_path.'default_head.html';
+    include $views_path.'default_header.html';
     include ('db.php'); 
 
     if($_SERVER['REQUEST_METHOD'] == "POST")
