@@ -5,8 +5,9 @@ include $views_path . 'default_header.html';
 include ('db.php');
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
+//    C:\Users\lihsh\Documents\NetBeansProjects\302cem-group7-project\public\resources\images
 //    <img src="../resources/images/amogus.jpg" width="500" height="600">
-    $target = "../resources/images/" . basename($_FILES['image']['name']);
+    $target = "../Documents/NetBeansProjects/302cem-group7-project/public/resources/images/" . basename($_FILES['image']['name']);
 
     $image = $_FILES['image']['name'];
     
