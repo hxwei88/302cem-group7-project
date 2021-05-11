@@ -34,6 +34,4 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         echo'Product ID already exists!</div>';
     }
 }
-include $views_path.'add_stock.html'; 
-include $views_path.'admin_footer.html'
 ?>
