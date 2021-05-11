@@ -19,11 +19,15 @@
         e.preventDefault();
         $("body").toggleClass("sb-sidenav-toggled");
     });
+    
+    $('#layoutSidenav_content').load('/302cem-group7-project/views/stock.html');
 })(jQuery);
 
 function dashboard_switch(html_script)
 {
-    document.getElementById("layoutSidenav_content").innerHTML = html_script;
+    $('#layoutSidenav_content').html('Did i disappear?');
+    $('#layoutSidenav_content').load('/302cem-group7-project/views/' + html_script);
+    //document.getElementById("layoutSidenav_content").innerHTML = html_script;
 }
 
 //trade price slider
