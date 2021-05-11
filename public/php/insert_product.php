@@ -35,20 +35,3 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 }
 ?>
-
-<section style="width:50%">        
-    <form action="<?php $_SERVER['PHP_SELF']; ?>" method = "POST" enctype="multipart/form-data">
-        <input type="text" style="width:100%" name="isbn_input" required="required" placeholder="Enter ISBN">
-        <input type="text" style="width:100%" name="name_input" required="required" placeholder="Enter book's name">
-        <input type="text" style="width:100%" name="author_input" required="required" placeholder="Enter author's name">
-        <input type="date" name="date_input" required="required">
-        <textarea style="width:100%" rows="10" cols="50" name="description_input">Enter product description here.</textarea>
-        <input type="file" name="image" accept="image/*">
-        <input style="width:100%" type="number" name="trade_input" min="1" step="0.01" required="required" placeholder="Enter the product price">
-        <input style="width:100%" type="number" name="retail_input" min="1" step="0.01" required="required" placeholder="Enter the product price">
-        <input style="width:100%" type="number" name="quantity_input" min="1" step="0.01" required="required" placeholder="Enter the quantity">
-        <button type="submit" name="submit">Add product</button>
-    </form>
-    
-   
-</section>

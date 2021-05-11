@@ -25,3 +25,30 @@ function dashboard_switch(html_script)
 {
     document.getElementById("layoutSidenav_content").innerHTML = html_script;
 }
+
+//trade price slider
+var trade_slider = document.getElementById("trade_id");
+var trade_output = document.getElementById("trade_value");
+trade_output.innerHTML = trade_slider.trade_value;
+
+trade_slider.oninput = function() {
+  trade_output.innerHTML = this.value;
+}
+
+//retail price slider
+var retail_slider = document.getElementById("retail_id");
+var retail_output = document.getElementById("retail_value");
+retail_output.innerHTML = retail_slider.trade_value;
+
+retail_slider.oninput = function() {
+  retail_output.innerHTML = this.value;
+}
+
+//quantity slider
+var quantity_slider = document.getElementById("quantity_id");
+var quantity_output = document.getElementById("quantity_value");
+quantity_output.innerHTML = quantity_slider.trade_value;
+
+quantity_slider.oninput = function() {
+  quantity_output.innerHTML = this.value;
+}
