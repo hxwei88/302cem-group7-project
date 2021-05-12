@@ -25,9 +25,9 @@
 
 function dashboard_switch(html_script)
 {
-    $('#layoutSidenav_content').html('Did i disappear?');
-    $('#layoutSidenav_content').load('/302cem-group7-project/views/' + html_script);
-    //document.getElementById("layoutSidenav_content").innerHTML = html_script;
+    $.when($('#layoutSidenav_content').fadeOut('fast')).done(function () {
+        $('#layoutSidenav_content').load('/302cem-group7-project/views/' + html_script).fadeIn();
+    });
 }
 
 //trade price slider
