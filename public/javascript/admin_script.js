@@ -57,14 +57,10 @@ quantity_slider.oninput = function() {
   quantity_output.innerHTML = this.value;
 }
 
-$("#insertStockForm").submit(function (e) {
-//$.ajax({
-//        type: "POST",
-//        dataType: "json",
-//        data: { data: dataget input value },
-//        url: "/search",
-//        success: function (data) { }
-//        })
-e.preventDefault();
-alert("test");
-});
+$('form').on('submit', '#test', function (e) {
+    alert('test');
+})
+
+function submit_add_stock(event) {
+    event.preventDefault();
+}

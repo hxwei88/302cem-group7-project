@@ -7,7 +7,7 @@
         </ol>
         <div style="width:50%">        
 <!--           <form action="../php/admin.php" method = "POST" enctype="multipart/form-data" id="insertStockForm">-->
-               <form id="insertStockForm" enctype="multipart/form-data">
+            <form action="../php/insert_product.php" enctype="multipart/form-data" onsubmit="submit_add_stock(event)">
                 <input type="text" style="width:100%" name="isbn_input" required="required" placeholder="Enter ISBN">
                 <input type="text" style="width:100%" name="name_input" required="required" placeholder="Enter book's name">
                 <input type="text" style="width:100%" name="author_input" required="required" placeholder="Enter author's name">
@@ -40,7 +40,7 @@
                 </p>
 
                 <hr>
-                <button type="submit" formmethod="post">Add product</button>
+                <button type="submit">Add product</button>
             </form>
         </div>
     </div>
