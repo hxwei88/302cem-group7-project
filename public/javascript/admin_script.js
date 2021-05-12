@@ -56,3 +56,11 @@ quantity_output.innerHTML = quantity_slider.trade_value;
 quantity_slider.oninput = function() {
   quantity_output.innerHTML = this.value;
 }
+
+$('form').on('submit', '#test', function (e) {
+    alert('test');
+})
+
+function submit_add_stock(event) {
+    event.preventDefault();
+}
