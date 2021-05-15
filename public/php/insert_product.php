@@ -1,13 +1,16 @@
 <?php
+
 include ('folder_path.php');
 //needs checking when hosted online
 include ('db.php');
 
-//if ($_SERVER['REQUEST_METHOD'] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
 //    <img src="../resources/images/amogus.jpg" width="500" height="600">
-    echo '<script>alert("hi.")</script>';
+    echo '<script type="text/javascript">';
+    echo ' alert("JavaScript Alert Box by PHP")';  //not showing an alert box.
+    echo '</script>';
     //assign variable from input form
-    $image = $_FILES['image']['name'];
+//    $image = $_FILES['image']['name'];
     $isbn = $_POST['isbn_input'];
     $name = $_POST['name_input'];
     $author = $_POST['author_input'];
@@ -16,13 +19,21 @@ include ('db.php');
     $trade = $_POST['trade_input'];
     $retail = $_POST['retail_input'];
     $quantity = $_POST['quantity_input'];
-    
+
+    echo '<pre>';
+    echo $isbn;
+    echo '</pre>';
     //specify upload location for image file, still need file type verfication.
     $target = "../resources/images/" . basename($_FILES['image']['name']);
-    
+
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target, PATHINFO_EXTENSION));
     
+    if ($isbn != null ){
+        $a = 1;
+        return  $a;
+    }
+
     // Check if image file is a actual image or fake image
 //    if(isset($_POST["submit"])) {
 //      $check = getimagesize($_FILES["image"]["tmp_name"]);
@@ -46,31 +57,29 @@ include ('db.php');
 //      echo '<script>alert("Sorry, your file is too large.")</script>';
 //      $uploadOk = 0;
 //    }
-    
     // Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 0) {
-      echo '<script>alert("Sorry, your file was not uploaded.")</script>';
-    // if everything is ok, try to upload file
-    } else {
-      if (move_uploaded_file($_FILES["image"]["tmp_name"], $target)) {
-        echo '<script>alert("The file has been uploaded.")</script>';
-        
-        //insert into books table
-        $newProduct = "INSERT INTO books (isbn, name, author, publication_date, description, image, trade_price, retail_price, quantity) VALUES "
-                . "('$isbn', '$name', '$author', '$date','$description', '$target', '$trade', '$retail', '$quantity')";
-
-        //Move uploaded file to specified location, /public/resources/images/ in this case, location specified in $target.
-        (move_uploaded_file($_FILES['image']['tmp_name'], $target));
-
-        if (mysqli_query($conn, $newProduct)) {
-            echo '<script>alert("Product Successfully added.")</script>';
-        } else {
-            echo '<script>alert("Product ID already exists!")</script>';
-        }
-    
-      } else {
-        echo '<script>alert("Sorry, there was an error uploading your file")</script>';
-      }
-    }
-//}
+//    if ($uploadOk == 0) {
+//        echo '<script>alert("Sorry, your file was not uploaded.")</script>';
+//        // if everything is ok, try to upload file
+//    } else {
+//        if (move_uploaded_file($_FILES["image"]["tmp_name"], $target)) {
+//            echo '<script>alert("The file has been uploaded.")</script>';
+//
+//            //insert into books table
+//            $newProduct = "INSERT INTO books (isbn, name, author, publication_date, description, image, trade_price, retail_price, quantity) VALUES "
+//                    . "('$isbn', '$name', '$author', '$date','$description', '$target', '$trade', '$retail', '$quantity')";
+//
+//            //Move uploaded file to specified location, /public/resources/images/ in this case, location specified in $target.
+//            (move_uploaded_file($_FILES['image']['tmp_name'], $target));
+//
+//            if (mysqli_query($conn, $newProduct)) {
+//                echo '<script>alert("Product Successfully added.")</script>';
+//            } else {
+//                echo '<script>alert("Product ID already exists!")</script>';
+//            }
+//        } else {
+//            echo '<script>alert("Sorry, there was an error uploading your file")</script>';
+//        }
+//    }
+}
 ?>

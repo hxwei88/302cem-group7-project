@@ -69,7 +69,6 @@ function upload(file){
 }
 
 function submit_add_stock(event) {
-    alert($('#isbn_input').val());
     var isbn = $('#isbn_input').val();
     var name = $('#name_input').val();
     var author = $('#author_input').val();
@@ -79,15 +78,30 @@ function submit_add_stock(event) {
     var tradePrice = $('#tradePrice').val();
     var retailPrice = $('#retailPrice').val();
     var quantity = $('#quantity').val();
-    $.ajax({
-        type: 'POST',
-        url: '/302cem-group7-project/public/php/insert_product.php',
-        data: { isbn_input: isbn, name_input: name, author_input: author, date_input: date, description_input: desc, image: img, tradePrice: tradePrice, retailPrice: retailPrice, quantity: quantity },
-        success: function(response) {
-          
-            console.log(response);
-        }
-    });
+//    $.ajax({
+//        type: 'POST',
+//        url: '/302cem-group7-project/public/php/insert_product.php',
+//        dataType:'json',
+//        data: { isbn_input: isbn, name_input: name, author_input: author, date_input: date, description_input: desc, image: img, tradePrice: tradePrice, retailPrice: retailPrice, quantity: quantity },
+//        success: function(response) {
+//          
+//           if ( response != null ){
+//             alert("hi"); 
+//          }
+//        }
+//    });
     
+    
+    var submit_data = { isbn_input: isbn, name_input: name, author_input: author, date_input: date,
+        description_input: desc, image: img, tradePrice: tradePrice, retailPrice: retailPrice, quantity: quantity };
+    
+     $.post( "/302cem-group7-project/public/php/insert_product.php", submit_data, function( data ) {
+         console.log(submit_data);
+          console.log(data);
+          if ( data != null ){
+             alert("hi"); 
+          }
+     });
+     
     event.preventDefault();
 }
