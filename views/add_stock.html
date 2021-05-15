@@ -6,8 +6,7 @@
             <li class="breadcrumb-item active">Add</li>
         </ol>
         <div style="width:50%; padding-bottom:3%">        
-            <!--           <form action="../php/admin.php" method = "POST" enctype="multipart/form-data" id="insertStockForm">-->
-            <form id="insertStockForm" onsubmit="submit_add_stock(event)" enctype="multipart/form-data">
+            <form id="insertStockForm" onsubmit="submit_add_stock(event);" enctype="multipart/form-data">
                 <div class="form-group row">
                     <label for="isbn_input" class="col-sm-2 col-form-label">ISBN:</label>
                     <div class="col-sm-10">
@@ -38,7 +37,7 @@
                     <textarea class="form-control" id="description_input" name="description_input" placeholder="Product description" rows="10"></textarea>
                 </div>
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="image" name="image" accept="image/*" onchange="upload(this.value)" >
+                    <input type="file" class="custom-file-input" id="image" name="image" accept=".jpg,.png,.jpeg" onchange="upload_validation(this)" >
                     <label class="custom-file-label" id="imageID" for="image">Select image</label>
                 </div>
                 <hr>
@@ -74,7 +73,7 @@
                 </div>
                 
                 <hr>
-                <button type="submit" class="btn btn-primary" formmethod="post"><i class="fa fa-plus" aria-hidden="true"></i> Add Product</button>
+                <button type="submit" class="btn btn-primary" formmethod="post"><i class="fa fa-plus" aria-hidden="true"></i>Add Product</button>
             </form>
         </div>
     </div>
