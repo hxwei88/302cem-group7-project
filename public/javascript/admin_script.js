@@ -35,7 +35,7 @@ trade_output.innerHTML = trade_slider.trade_value;
 
 trade_slider.oninput = function() {
   trade_output.innerHTML = this.value;
-}
+};
 
 //retail price slider
 var retail_slider = document.getElementById("retail_id");
@@ -44,7 +44,7 @@ retail_output.innerHTML = retail_slider.trade_value;
 
 retail_slider.oninput = function() {
   retail_output.innerHTML = this.value;
-}
+};
 
 //quantity slider
 var quantity_slider = document.getElementById("quantity_id");
@@ -53,4 +53,36 @@ quantity_output.innerHTML = quantity_slider.trade_value;
 
 quantity_slider.oninput = function() {
   quantity_output.innerHTML = this.value;
+};
+
+function upload(file){
+    var ext = file.split(".");
+    ext = ext[ext.length-1].toLowerCase();
+    var arrayExtensions = ["jpg" , "jpeg", "png"];
+
+    if (arrayExtensions.lastIndexOf(ext) == -1) {
+        alert("Sorry, only JPG, JPEG and PNG files are allowed.");
+        $("#image").val("");
+    }
 }
+
+$('#submit').click(function() {
+    var isbn = $('#isbn_input').val();
+    var name = $('#name_input').val();
+    var author = $('#author_input').val();
+    var date = $('#date_input').val();
+    var desc = $('#description_input').val();
+    var img = $('#image').val();
+    var tradePrice = $('#tradePrice').val();
+    var retailPrice = $('#retailPrice').val();
+    var quantity = $('#quantity').val();
+    
+    $.ajax({
+        type: 'POST',
+        url: 'insert_product.php',
+        data: { isbn_input: isbn, name_input: name, author_input: author, date_input: date, description_input: desc, image: img, tradePrice: tradePrice, retailPrice: retailPrice, quantity: quantity },
+        succes: function(response) {
+            $('#result').html(response);
+        }
+    });
+});

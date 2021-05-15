@@ -7,12 +7,12 @@
         </ol>
         <div style="width:50%">        
             <form action="<?php $_SERVER['PHP_SELF']; ?>" method = "POST" enctype="multipart/form-data">
-                <input type="text" style="width:100%" name="isbn_input" required="required" placeholder="Enter ISBN">
-                <input type="text" style="width:100%" name="name_input" required="required" placeholder="Enter book's name">
-                <input type="text" style="width:100%" name="author_input" required="required" placeholder="Enter author's name">
-                <input type="date" name="date_input" required="required">
-                <textarea style="width:100%" rows="10" cols="50" name="description_input" placeholder="Enter product description here."></textarea>
-                <input type="file" name="image" accept="image/*">
+                <input type="text" style="width:100%" id="isbn_input" name="isbn_input" required="required" placeholder="Enter ISBN">
+                <input type="text" style="width:100%" id="name_input" name="name_input" required="required" placeholder="Enter book's name">
+                <input type="text" style="width:100%" id="author_input" name="author_input" required="required" placeholder="Enter author's name">
+                <input type="date" id="date_input" name="date_input" required="required">
+                <textarea style="width:100%" rows="10" cols="50" id="description_input" name="description_input" placeholder="Enter product description here."></textarea>
+                <input type="file" id="image" name="image" accept="image/*" onchange="upload(this.value)">
 
                 <hr>
                 <p>
@@ -39,7 +39,7 @@
                 </p>
 
                 <hr>
-                <button type="submit" name="submit">Add product</button>
+                <button type="submit" id="submit" name="submit">Add product</button>
             </form>
         </div>
     </div>
