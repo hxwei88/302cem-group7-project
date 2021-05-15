@@ -8,10 +8,12 @@
 
     /** Comment it after testing is done **/
 
+    //if connection failed directly return with error message
     if(mysqli_connect_errno()){
-        echo "Connection to db could not be established. Error: ".mysqli_connect_error();
+        exit(json_encode(array("status"=>0, "error"=>mysqli_connect_error)));
     }
-    else {
-        echo "Connection to db is successful.";
-    }
+//    else {
+//        echo array(status=>1);
+//        echo "Connection to db is successful.";
+//    }
 ?>

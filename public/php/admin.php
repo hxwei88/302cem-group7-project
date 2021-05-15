@@ -4,4 +4,3 @@
     include $views_path.'admin.html'; 
     include $views_path.'admin_footer.html';
 ?>
-
