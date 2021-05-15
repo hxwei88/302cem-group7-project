@@ -61,10 +61,15 @@ function upload(file){
     var ext = file.split(".");
     ext = ext[ext.length-1].toLowerCase();
     var arrayExtensions = ["jpg" , "jpeg", "png"];
+    var path = "Path = " + file.toString();
+    var img = path.replace(/^.*[\\\/]/, '');
 
     if (arrayExtensions.lastIndexOf(ext) == -1) {
         alert("Sorry, only JPG, JPEG and PNG files are allowed.");
         $("#image").val("");
+    }
+    else {
+        document.getElementById('imageID').innerHTML = img;
     }
 }
 
