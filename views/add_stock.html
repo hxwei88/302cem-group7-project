@@ -1,45 +1,80 @@
 <main id="add_stock">
     <div class="container-fluid">
-        <h1>Add Stock</h1>
+        <h1 class="mt-4">Add Stock</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
             <li class="breadcrumb-item active">Add</li>
         </ol>
-        <div style="width:50%">        
-            <form action="<?php $_SERVER['PHP_SELF']; ?>" method = "POST" enctype="multipart/form-data">
-                <input type="text" style="width:100%" id="isbn_input" name="isbn_input" required="required" placeholder="Enter ISBN">
-                <input type="text" style="width:100%" id="name_input" name="name_input" required="required" placeholder="Enter book's name">
-                <input type="text" style="width:100%" id="author_input" name="author_input" required="required" placeholder="Enter author's name">
-                <input type="date" id="date_input" name="date_input" required="required">
-                <textarea style="width:100%" rows="10" cols="50" id="description_input" name="description_input" placeholder="Enter product description here."></textarea>
-                <input type="file" id="image" name="image" accept="image/*" onchange="upload(this.value)">
+        <div style="width:50%; padding-bottom:3%">        
+            <!--           <form action="../php/admin.php" method = "POST" enctype="multipart/form-data" id="insertStockForm">-->
+            <form id="insertStockForm" onsubmit="submit_add_stock(event)" enctype="multipart/form-data">
+                <div class="form-group row">
+                    <label for="isbn_input" class="col-sm-2 col-form-label">ISBN:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="isbn_input" placeholder="ISBN" name="isbn_input" required="required">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="name_input" class="col-sm-2 col-form-label">Book:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="name_input" placeholder="Book title" name="name_input" required="required">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="author_input" class="col-sm-2 col-form-label">Author:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="author_input" placeholder="Author's name" name="author_input" required="required">
+                    </div> 
+                </div>
+                <div class="form-group row">
+                    <label for="date_input" class="col-sm-2 col-form-label">Date:</label>
+                    <div class="col-sm-10">
+                        <input type="date" id="date_input" name="date_input" class="form-control" value="2011-01-01" required="required">
+                    </div> 
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="description_input">Description:</label>
+                    <textarea class="form-control" id="description_input" name="description_input" placeholder="Product description" rows="10"></textarea>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="image" name="image" accept="image/*" onchange="upload(this.value)" >
+                    <label class="custom-file-label" for="image">Select image</label>
+                </div>
+                <hr>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Trade price:</label>
+                    <div class="col-sm-10">
+                        <input type="range" id="tradePrice" value="50" min="1" max="100" name="trade_input" style="width:90%"
+                               oninput="document.getElementById('tPrice').innerHTML = this.value" />
+                        <label id="tPrice"></label>
+                    </div> 
+                </div>
 
                 <hr>
-                <p>
-                    <label>Trade price:</label>
-                    <input type="range" id="tradePrice" value="50" min="1" max="100" name="trade_input"
-                           oninput="document.getElementById('tPrice').innerHTML = this.value" />
-                    <label id="tPrice"></label>
-                </p>
+                
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Retail price:</label>
+                    <div class="col-sm-10">
+                        <input type="range" id="retailPrice" value="50" min="1" max="100" name="retail_input" style="width:90%"
+                               oninput="document.getElementById('rPrice').innerHTML = this.value" />
+                        <label id="rPrice"></label>
+                    </div> 
+                </div>
 
                 <hr>
-                <p>
-                    <label>Retail price:</label>
-                    <input type="range" id="retailPrice" value="50" min="1" max="100" name="retail_input"
-                           oninput="document.getElementById('rPrice').innerHTML = this.value" />
-                    <label id="rPrice"></label>
-                </p>
-
+                
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Quantity:</label>
+                    <div class="col-sm-10">
+                        <input type="range" id="quantity" value="50" min="1" max="100" name="quantity_input" style="width:90%"
+                               oninput="document.getElementById('qNum').innerHTML = this.value" />
+                        <label id="qNum"></label>
+                    </div> 
+                </div>
+                
                 <hr>
-                <p>
-                    <label>Quantity:</label>
-                    <input type="range" id="quantity" value="50" min="1" max="100" name="quantity_input"
-                           oninput="document.getElementById('qNum').innerHTML = this.value" />
-                    <label id="qNum"></label>
-                </p>
-
-                <hr>
-                <button type="submit" id="submit" name="submit">Add product</button>
+                <button type="submit" class="btn btn-primary" formmethod="post"><i class="fa fa-plus" aria-hidden="true"></i> Add Product</button>
             </form>
         </div>
     </div>

@@ -25,7 +25,9 @@
 
 function dashboard_switch(html_script)
 {
-    document.getElementById("layoutSidenav_content").innerHTML = html_script;
+    $.when($('#layoutSidenav_content').fadeOut('fast')).done(function () {
+        $('#layoutSidenav_content').load('/302cem-group7-project/views/' + html_script).fadeIn();
+    });
 }
 
 //trade price slider
@@ -66,23 +68,26 @@ function upload(file){
     }
 }
 
-$('#submit').click(function() {
+function submit_add_stock(event) {
+    alert($('#isbn_input').val());
     var isbn = $('#isbn_input').val();
     var name = $('#name_input').val();
     var author = $('#author_input').val();
     var date = $('#date_input').val();
     var desc = $('#description_input').val();
-    var img = $('#image').val();
+    var img = "$('#image').val()";
     var tradePrice = $('#tradePrice').val();
     var retailPrice = $('#retailPrice').val();
     var quantity = $('#quantity').val();
-    
     $.ajax({
         type: 'POST',
-        url: 'insert_product.php',
+        url: '/302cem-group7-project/public/php/insert_product.php',
         data: { isbn_input: isbn, name_input: name, author_input: author, date_input: date, description_input: desc, image: img, tradePrice: tradePrice, retailPrice: retailPrice, quantity: quantity },
-        succes: function(response) {
-            $('#result').html(response);
+        success: function(response) {
+          
+            console.log(response);
         }
     });
-});
+    
+    event.preventDefault();
+}

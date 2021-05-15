@@ -1,12 +1,11 @@
 <?php
 include ('folder_path.php');
 //needs checking when hosted online
-include $views_path . 'default_header.html';
 include ('db.php');
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
+//if ($_SERVER['REQUEST_METHOD'] == "POST") {
 //    <img src="../resources/images/amogus.jpg" width="500" height="600">
-    
+    echo '<script>alert("hi.")</script>';
     //assign variable from input form
     $image = $_FILES['image']['name'];
     $isbn = $_POST['isbn_input'];
@@ -73,5 +72,5 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         echo '<script>alert("Sorry, there was an error uploading your file")</script>';
       }
     }
-}
+//}
 ?>
