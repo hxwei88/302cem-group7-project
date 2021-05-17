@@ -4,7 +4,34 @@
  * and open the template in the editor.
  */
 
+//error alert
+function error(title, message) {
+    Swal.fire({
+     icon: 'error',
+     title: title,
+     text: message
+   })   
+}
 
+//success alert
+function success(title, message) {
+    Swal.fire({
+     icon: 'success',
+     title: title,
+     text: message
+   })   
+}
+
+//info alert
+function info(title, message) {
+    Swal.fire({
+     icon: 'info',
+     title: title,
+     text: message
+   })   
+}
+
+//loading alert
 function loading(title, message) {
     var swal = Swal.fire({
         title: title,
@@ -15,7 +42,6 @@ function loading(title, message) {
             Swal.showLoading()
         }
     });
-
     return swal;
 }
 
@@ -40,6 +66,5 @@ function loadingfailure(title, message, escape) {
         text: message,
         allowOutsideClick: escape
     });
-
     return swal;
 }
