@@ -36,10 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     
     //Check if file already exists
     //Need to allow user to upload image with same name
-    if (file_exists($target)) {
-        exit(json_encode(array("status"=>0, "error"=>"Sorry, file already exists.")));
-        $uploadOk = 0;
-    }
+//    if (file_exists($target)) {
+//        exit(json_encode(array("status"=>0, "error"=>"Sorry, file already exists.")));
+//        $uploadOk = 0;
+//    }
     
     // Check file size, 10mb
     if ($_FILES["image"]["size"] > (10 * pow(1000, 2))) {
@@ -56,14 +56,21 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
             
             //get isbn from all rows in books table
-            $dupeCheck="SELECT * FROM books where(isbn = '$isbn')";
+            $isbnCheck = "SELECT * FROM books WHERE(isbn = '$isbn')";
             
             //run query
-            $run=mysqli_query($conn,$dupeCheck);
+            $run = mysqli_query($conn,$isbnCheck);
             
             //if query shows 1 or more row then display error
-            if(mysqli_num_rows($run)>0){
-                exit(json_encode(array("status"=>0, "error"=>"This is a duplicate ISBN number.")));
+            if(mysqli_num_rows($run) > 0){
+                $updateProduct = "UPDATE books SET name = '" . $name . "', author = '" . $author . "', publication_date = '" . $date . "', description = '" . $description . "', image = '" . $target ."' " 
+                        . ", trade_price = '" . $trade . "', retail_price = '" . $retail . "', quantity = '" . $quantity . "' WHERE isbn = '" . $isbn . "'";
+                
+                if (mysqli_query($conn, $updateProduct)) {
+                    exit(json_encode(array("status"=>0, "message"=>"The book with ISBN: " . $isbn . " has been updated.")));
+                } else {
+                    exit(json_encode(array("status"=>0, "error"=>"An error has occurred.")));
+                }
             } else {
     
                 //insert into books table
