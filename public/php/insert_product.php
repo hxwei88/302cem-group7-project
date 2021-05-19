@@ -1,5 +1,4 @@
 <?php
-
 include ('folder_path.php');
 //needs checking when hosted online
 include ('db.php');
@@ -36,24 +35,24 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     
     //Check if file already exists
     //Need to allow user to upload image with same name
-    if (file_exists($target)) {
-        exit(json_encode(array("status"=>0, "error"=>"Sorry, file already exists.")));
+    if (file_exists($target) && $image != null) {
+        exit(json_encode(array("status"=>0, "message"=>"Sorry, file already exists.")));
         $uploadOk = 0;
     }
     
     // Check file size, 10mb
     if ($_FILES["image"]["size"] > (10 * pow(1000, 2))) {
-        exit(json_encode(array("status"=>0, "error"=>"Sorry, your file is too large.")));
+        exit(json_encode(array("status"=>0, "message"=>"Sorry, your file is too large.")));
         $uploadOk = 0;
     }
     
     
     //Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
-        exit(json_encode(array("status"=>0, "error"=>"Sorry, your file was not uploaded.")));
+        exit(json_encode(array("status"=>0, "message"=>"Sorry, your file was not uploaded.")));
         // if everything is ok, try to upload file
     } else {
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+//        if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
             
             //get isbn from all rows in books table
             $dupeCheck="SELECT * FROM books where(isbn = '$isbn')";
@@ -63,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             
             //if query shows 1 or more row then display error
             if(mysqli_num_rows($run)>0){
-                exit(json_encode(array("status"=>0, "error"=>"This is a duplicate ISBN number.")));
+                exit(json_encode(array("status"=>0, "message"=>"This is a duplicate ISBN number.")));
             } else {
     
                 //insert into books table
@@ -76,13 +75,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 if (mysqli_query($conn, $newProduct)) {
                     exit(json_encode(array("status"=>0, "message"=>"Product Successfully added.")));
                 } else {
-                    exit(json_encode(array("status"=>0, "error"=>"An error has occurred.")));
+                    exit(json_encode(array("status"=>0, "message"=>"An error has occurred.")));
                 }
             }
             
-        } else {
-            exit(json_encode(array("status"=>0, "error"=>"Sorry, there was an error uploading your file")));
-        }
+//        } else {
+//            exit(json_encode(array("status"=>0, "message"=>"Sorry, there was an error uploading your file")));
+//        }
     }
 }
 ?>

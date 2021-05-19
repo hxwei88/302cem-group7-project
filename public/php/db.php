@@ -10,7 +10,7 @@
 
     //if connection failed directly return with error message
     if(mysqli_connect_errno()){
-        exit(json_encode(array("status"=>0, "error"=>mysqli_connect_error)));
+        exit(json_encode(array("status"=>0, "message"=>mysqli_connect_error)));
     }
 //    else {
 //        echo array(status=>1);
