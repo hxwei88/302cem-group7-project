@@ -47,24 +47,39 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $uploadOk = 0;
     }
     
+    
     //Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
         exit(json_encode(array("status"=>0, "error"=>"Sorry, your file was not uploaded.")));
         // if everything is ok, try to upload file
     } else {
         if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
-            //insert into books table
-            $newProduct = "INSERT INTO books (isbn, name, author, publication_date, description, image, trade_price, retail_price, quantity) VALUES "
-                    . "('$isbn', '$name', '$author', '$date','$description', '$target', '$trade', '$retail', '$quantity')";
-
-            //Move uploaded file to specified location, /public/resources/images/ in this case, location specified in $target.
-            (move_uploaded_file($_FILES['image']['tmp_name'], $target));
-
-            if (mysqli_query($conn, $newProduct)) {
-                exit(json_encode(array("status"=>0, "message"=>"Product Successfully added.")));
+            
+            //get isbn from all rows in books table
+            $dupeCheck="SELECT * FROM books where(isbn = '$isbn')";
+            
+            //run query
+            $run=mysqli_query($conn,$dupeCheck);
+            
+            //if query shows 1 or more row then display error
+            if(mysqli_num_rows($run)>0){
+                exit(json_encode(array("status"=>0, "error"=>"This is a duplicate ISBN number.")));
             } else {
-                exit(json_encode(array("status"=>0, "error"=>"Product ID already exists!")));
+    
+                //insert into books table
+                $newProduct = "INSERT INTO books (isbn, name, author, publication_date, description, image, trade_price, retail_price, quantity) VALUES "
+                        . "('$isbn', '$name', '$author', '$date','$description', '$target', '$trade', '$retail', '$quantity')";
+
+                //Move uploaded file to specified location, /public/resources/images/ in this case, location specified in $target.
+                (move_uploaded_file($_FILES['image']['tmp_name'], $target));
+
+                if (mysqli_query($conn, $newProduct)) {
+                    exit(json_encode(array("status"=>0, "message"=>"Product Successfully added.")));
+                } else {
+                    exit(json_encode(array("status"=>0, "error"=>"An error has occurred.")));
+                }
             }
+            
         } else {
             exit(json_encode(array("status"=>0, "error"=>"Sorry, there was an error uploading your file")));
         }
