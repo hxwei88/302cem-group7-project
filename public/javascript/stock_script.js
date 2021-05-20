@@ -14,7 +14,7 @@ function append_stock_display(result) {
         
         html += '<div class="col-3 py-2 mb-3">' +
                     '<div class="card h-100">' +
-                        '<img class="card-img-top" src="' + image + '" alt="' + image + '">' +
+                        '<img class="card-img-top" style="height: 200px; width: 100%;" src="' + image + '" alt="' + image + '">' +
                         '<div class="card-body">' +
                             '<h5 class="card-title">' + item.name + '</h5>' +
                         '</div>' +
