@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 (move_uploaded_file($_FILES['image']['tmp_name'], $target));
 
                 if (mysqli_query($conn, $newProduct)) {
-                    exit(json_encode(array("status"=>0, "message"=>"Product Successfully added.")));
+                    exit(json_encode(array("status"=>1, "message"=>"Product Successfully added.")));
                 } else {
                     exit(json_encode(array("status"=>0, "message"=>"An error has occurred.")));
                 }

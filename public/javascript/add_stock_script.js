@@ -30,6 +30,7 @@ function initialize_slider_value()
 
 function submit_add_stock (event) {
     event.preventDefault();
+    var swal = loading("Loading","Loading");
     
     $.ajax({
         type: 'post',
@@ -39,7 +40,15 @@ function submit_add_stock (event) {
         cache: false,
         processData:false,
         success: function(result) {
-            alert(result); 
+            result = JSON.parse(result);
+            loadingcomplete(swal)
+            
+            if (result.status == 1) {
+                loadingsuccess(swal,"Success", true);
+            } else {
+                loadingfailure("fail", "fail", true)
+            }
+            
         }
     });
 

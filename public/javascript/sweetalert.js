@@ -49,12 +49,13 @@ function loadingcomplete(swal) {
     swal.close();
 }
 
-function loadingsuccess(swal, title) {
-    loadingcomplete(swal);
+function loadingsuccess(title, message, escape) {
     Swal.fire({
         icon: 'success',
         title: title,
+        text: message,
         showConfirmButton: false,
+        allowOutsideClick: escape,
         timer: 1500
     });
 }
