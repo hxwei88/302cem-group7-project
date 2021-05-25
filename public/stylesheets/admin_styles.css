@@ -10269,3 +10269,21 @@ body {
 .sb-sidenav-light .sb-sidenav-footer {
   background-color: #e9ecef;
 }
+
+
+.col-sm-6.border-right {
+    text-align: center;
+    padding: 30px;
+}
+
+div#details{
+    margin-bottom: 50px;
+}
+
+
+
+
+.row.right {
+    text-align: right;
+    padding-top: 25px;
+}
