@@ -16,6 +16,7 @@ function append_stock_display(result) {
                 '<img class="card-img-top" style="height: 200px; width: 100%;" src="' + image + '" alt="' + image + '">' +
                 '<div class="card-body" style = "text-align:center;">' +
                 '<h5 class="card-title">' + item.name + '</h5>' +
+                //beh si fan
                 '<button type="button" class="btn btn-success" value = ' + item.isbn + ' onclick ="detailpage(this.value)">Details</button>' +
                 '</div>' +
                 '</div>' +
