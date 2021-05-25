@@ -26,6 +26,37 @@
             </form>
         </div>
         <div id="stock_display" class="mb-5"></div>
+<!--        beh sifan-->
+        <div id = "details"  style ="display:none;">
+            <div class  ="card">
+                <div class=" row ">
+                    <div class = "col-sm-6 border-right ">
+                        <img class = "img-detail" id="details-img" />
+                    </div>
+                    <div class = "col-sm-6 " style = "padding-left:unset;">
+                        <div class="card-header"><h3>ISBN : <span id="detail-isbn"></span></h3></div>
+                        <div class="card-body">
+                            <h5 class="card-title">NAME: <span id="detail-name"></span></h5>
+                            <p class="card-text ">
+                                <b>Author: </b><span id="detail-author"></span><br>
+                                <b>Trade Price: RM</b><span id="detail-tp"></span><br>
+                                <b>Retail Price: RM</b><span id="detail-rp"></span><br>
+                                <b>Quantity: </b><span id="detail-quantity"></span><br>
+                                <b>Publication Date: </b><span id="detail-date"></span><br>
+                                <b>Description: </b><span id="detail-des"></span><br>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row right">
+                <div class = "col-sm-12  ">
+                    <button type="button" class="btn btn-info" onclick="back()">Back</button>
+                </div>
+            </div>
+        </div>
+
     </div>
 </main>
 <!-- local script -->
