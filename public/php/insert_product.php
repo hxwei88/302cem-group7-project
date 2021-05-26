@@ -16,7 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $quantity = $_POST['quantity_input'];
 
     //specify upload location for image file, still need file type verfication.
-    $target = "../resources/images/" . basename($name.'_'.$image);
+    $ext = substr($image, strripos($image, '.'));
+    
+    $target = "../resources/images/" . basename($name . $ext);
 
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target, PATHINFO_EXTENSION));
