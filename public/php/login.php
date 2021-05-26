@@ -1,4 +1,4 @@
-<?php
+    <?php
     include ('folder_path.php');
     //needs checking when hosted online
     include $views_path.'default_header.html';
@@ -15,11 +15,19 @@
 
         if($result == 1){
             $_SESSION['username'] = $username;
-
-        echo "<div class='alert' style='text-align:center;'>
-            Username or password is correct
-            </div>";
-            //header("location: index.php");
+            
+            //fetch row using $sql query, fetch role col and put into $role
+            while($row = mysqli_fetch_array($query)){
+                $role = $row['role'];               
+            }
+            
+            if($role=='admin'){
+                //redirect to admin.php
+                header("location: ../php/admin.php");
+            }else{
+                //temp homepage for customers
+                header("location: ../php/homepage.php");
+            }
         }
         else 
         {

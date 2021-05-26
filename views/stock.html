@@ -1,4 +1,7 @@
-<main id="stock">
+<div class="spinner-border text-primary m-auto" role="status" id="stock_spinner">
+    <span class="sr-only">Loading...</span>
+</div>
+<main id="stock" style='display: none'>
     <div class="container-fluid">
         <h1 class="mt-4">Stocks</h1>
         <ol class="breadcrumb mb-4">
@@ -12,38 +15,49 @@
                                     .
                                 </div>
                             </div>-->
-        <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table mr-1"></i>
-                Stock
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
-                            </tr>
-                        </thead>
+        <div class="row mb-4">
+            <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" id='stock_search_form'>
+                <div class="input-group">
+                    <input id="stock_search" name="stock_search" class="form-control" type="text" placeholder="Search for books..." aria-label="Search" aria-describedby="basic-addon2"/>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div id="stock_display" class="mb-5"></div>
+<!--        beh sifan-->
+        <div id = "details"  style ="display:none;">
+            <div class  ="card">
+                <div class=" row ">
+                    <div class = "col-sm-6 border-right ">
+                        <img class = "img-detail" id="details-img" />
+                    </div>
+                    <div class = "col-sm-6 " style = "padding-left:unset;">
+                        <div class="card-header"><h3>ISBN : <span id="detail-isbn"></span></h3></div>
+                        <div class="card-body">
+                            <h5 class="card-title">NAME: <span id="detail-name"></span></h5>
+                            <p class="card-text ">
+                                <b>Author: </b><span id="detail-author"></span><br>
+                                <b>Trade Price: RM</b><span id="detail-tp"></span><br>
+                                <b>Retail Price: RM</b><span id="detail-rp"></span><br>
+                                <b>Quantity: </b><span id="detail-quantity"></span><br>
+                                <b>Publication Date: </b><span id="detail-date"></span><br>
+                                <b>Description: </b><span id="detail-des"></span><br>
+                            </p>
 
-                        <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row right">
+                <div class = "col-sm-12  ">
+                    <button type="button" class="btn btn-info" onclick="back()">Back</button>
                 </div>
             </div>
         </div>
+
     </div>
 </main>
+<!-- local script -->
+<script type="text/javaScript" src="/302cem-group7-project/public/javascript/stock_script.js"></script>

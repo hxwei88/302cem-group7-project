@@ -1,5 +1,4 @@
 <?php
-
 include ('folder_path.php');
 //needs checking when hosted online
 include ('db.php');
@@ -43,17 +42,17 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     
     // Check file size, 10mb
     if ($_FILES["image"]["size"] > (10 * pow(1000, 2))) {
-        exit(json_encode(array("status"=>0, "error"=>"Sorry, your file is too large.")));
+        exit(json_encode(array("status"=>0, "message"=>"Sorry, your file is too large.")));
         $uploadOk = 0;
     }
     
     
     //Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
-        exit(json_encode(array("status"=>0, "error"=>"Sorry, your file was not uploaded.")));
+        exit(json_encode(array("status"=>0, "message"=>"Sorry, your file was not uploaded.")));
         // if everything is ok, try to upload file
     } else {
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+//        if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
             
             //get isbn from all rows in books table
             $isbnCheck = "SELECT * FROM books WHERE(isbn = '$isbn')";
@@ -67,12 +66,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         . ", trade_price = '" . $trade . "', retail_price = '" . $retail . "', quantity = '" . $quantity . "' WHERE isbn = '" . $isbn . "'";
                 
                 if (mysqli_query($conn, $updateProduct)) {
-                    exit(json_encode(array("status"=>0, "message"=>"The book with ISBN: " . $isbn . " has been updated.")));
+                    exit(json_encode(array("status"=>1, "message"=>"The book with ISBN: " . $isbn . " has been updated.")));
                 } else {
                     exit(json_encode(array("status"=>0, "error"=>"An error has occurred.")));
                 }
             } else {
-    
                 //insert into books table
                 $newProduct = "INSERT INTO books (isbn, name, author, publication_date, description, image, trade_price, retail_price, quantity) VALUES "
                         . "('$isbn', '$name', '$author', '$date','$description', '$target', '$trade', '$retail', '$quantity')";
@@ -81,15 +79,15 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                 (move_uploaded_file($_FILES['image']['tmp_name'], $target));
 
                 if (mysqli_query($conn, $newProduct)) {
-                    exit(json_encode(array("status"=>0, "message"=>"Product Successfully added.")));
+                    exit(json_encode(array("status"=>1, "message"=>"Product Successfully added.")));
                 } else {
-                    exit(json_encode(array("status"=>0, "error"=>"An error has occurred.")));
+                    exit(json_encode(array("status"=>0, "message"=>"An error has occurred.")));
                 }
             }
             
-        } else {
-            exit(json_encode(array("status"=>0, "error"=>"Sorry, there was an error uploading your file")));
-        }
+//        } else {
+//            exit(json_encode(array("status"=>0, "message"=>"Sorry, there was an error uploading your file")));
+//        }
     }
 }
 ?>
