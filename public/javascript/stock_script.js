@@ -16,9 +16,9 @@ function append_stock_display(result) {
                 '<img class="card-img-top" style="height: 325px; width: 80%; margin: auto; border-radius: 2%" src="' + image + '" alt="' + image + '">' +
                 '<div class="card-body" style = "text-align:center;">' +
                 '<h5 class="card-title">' + item.name + '</h5>' +
-                '<p> Authors Name </p>' +
+                '<p>' + item.isbn + '</p>' +
                 '</div>' +
-                '<button type="button" style="height: 50px; width: 80%; margin:auto; font-size:115%" class="btn btn-primary" value = ' + item.isbn + ' onclick ="detailpage(this.value)">Details</button>' +
+                '<button type="button" style="height: 50px; width: 80%; margin:auto; font-size:115%" class="btn btn-primary" value=' + item.isbn + ' onclick ="load_detail_page(this.value)">Details</button>' +
                 '</div>' +
                 '</div>';
     })
@@ -49,54 +49,18 @@ function request_book_data(data) {
     });
 }
 
+function load_detail_page(isbn) {
+    
+    $.when($('#layoutSidenav_content').fadeOut('fast')).done(function () {
+        $('#layoutSidenav_content').load('/302cem-group7-project/views/stock_detail.html', function () {
+            load_book_detail(isbn);
+        }).fadeIn();
+    });
+}
+
 $('#stock_search_form').submit(function (event) {
     event.preventDefault();
     request_book_data(new FormData($("#stock_search_form")[0]))
 })
 
 request_book_data();
-
-
-function  detailpage(isbn) {
-
-    $('#layoutSidenav_content').load('/302cem-group7-project/views/stock_detail.html', function () {
-            if(html_script == "add_stock.html")
-            {
-                initialize_slider_value();
-            }
-        }).fadeIn();
-    
-    $.ajax({
-        type: 'get',
-        url: '/302cem-group7-project/public/php/detail_product.php?isbn='+isbn,
-        success: function (result) {
-            
-                   console.log(result);
-               if (result != null){
-            
-                   document.getElementById("detail-isbn").innerHTML = result.isbn;
-                   document.getElementById("detail-name").innerHTML = result.name;
-                   document.getElementById("detail-author").innerHTML = result.author;
-                   document.getElementById("detail-des").innerHTML = result.description;
-                   document.getElementById("detail-tp").innerHTML = result.trade_price;
-                   document.getElementById("detail-quantity").innerHTML = result.quantity;
-                   document.getElementById("detail-date").innerHTML = result.publication_date;
-                   document.getElementById("detail-rp").innerHTML = result.retail_price;
-                   document.getElementById("details-img").src = result.image;
-               }
-
-        }
-    });
-    
-
-}
-
-function  back() {
-    $('#layoutSidenav_content').load('/302cem-group7-project/views/stock.html', function () {
-            if(html_script == "add_stock.html")
-            {
-                initialize_slider_value();
-            }
-        }).fadeIn();
-
-}
