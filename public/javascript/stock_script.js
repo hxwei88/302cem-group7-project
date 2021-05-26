@@ -13,11 +13,12 @@ function append_stock_display(result) {
 
         html += '<div class="col-3 py-2 mb-3">' +
                 '<div class="card h-100">' +
-                '<img class="card-img-top" style="height: 200px; width: 100%;" src="' + image + '" alt="' + image + '">' +
+                '<img class="card-img-top" style="height: 325px; width: 80%; margin: auto; border-radius: 2%" src="' + image + '" alt="' + image + '">' +
                 '<div class="card-body" style = "text-align:center;">' +
                 '<h5 class="card-title">' + item.name + '</h5>' +
+                '<p> Authors Name </p>' +
                 '</div>' +
-                '<button type="button" style="height: 50px; width: 100%; font-size:115%" class="btn btn-info" value = ' + item.isbn + ' onclick ="detailpage(this.value)">Details</button>' +
+                '<button type="button" style="height: 50px; width: 80%; margin: auto; font-size:115%" class="btn btn-primary" value = ' + item.isbn + ' onclick ="detailpage(this.value)">Details</button>' +
                 '</div>' +
                 '</div>';
     })
