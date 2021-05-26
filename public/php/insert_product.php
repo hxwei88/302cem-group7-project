@@ -16,7 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $quantity = $_POST['quantity_input'];
 
     //specify upload location for image file, still need file type verfication.
-    $target = "../resources/images/" . basename($image);
+    $ext = substr($image, strripos($image, '.'));
+    
+    $target = "../resources/images/" . basename($name . $ext);
 
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target, PATHINFO_EXTENSION));
@@ -64,6 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if(mysqli_num_rows($run) > 0){
                 $updateProduct = "UPDATE books SET name = '" . $name . "', author = '" . $author . "', publication_date = '" . $date . "', description = '" . $description . "', image = '" . $target ."' " 
                         . ", trade_price = '" . $trade . "', retail_price = '" . $retail . "', quantity = '" . $quantity . "' WHERE isbn = '" . $isbn . "'";
+                
+                (move_uploaded_file($_FILES['image']['tmp_name'], $target));
                 
                 if (mysqli_query($conn, $updateProduct)) {
                     exit(json_encode(array("status"=>1, "message"=>"The book with ISBN: " . $isbn . " has been updated.")));
