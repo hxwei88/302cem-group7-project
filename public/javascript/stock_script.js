@@ -58,10 +58,13 @@ request_book_data();
 
 
 function  detailpage(isbn) {
-    document.getElementById("stock_display").style.display = "none";  //hide
-    document.getElementById("details").style.display = "block";
 
-
+    $('#layoutSidenav_content').load('/302cem-group7-project/views/stock_detail.html', function () {
+            if(html_script == "add_stock.html")
+            {
+                initialize_slider_value();
+            }
+        }).fadeIn();
     
     $.ajax({
         type: 'get',
@@ -84,11 +87,16 @@ function  detailpage(isbn) {
 
         }
     });
+    
 
 }
 
 function  back() {
-    document.getElementById("stock_display").style.display = "block";  //hide
-    document.getElementById("details").style.display = "none";
+    $('#layoutSidenav_content').load('/302cem-group7-project/views/stock.html', function () {
+            if(html_script == "add_stock.html")
+            {
+                initialize_slider_value();
+            }
+        }).fadeIn();
 
 }
