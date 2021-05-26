@@ -18,7 +18,7 @@ function append_stock_display(result) {
                 '<h5 class="card-title">' + item.name + '</h5>' +
                 '<p> Authors Name </p>' +
                 '</div>' +
-                '<button type="button" style="height: 50px; width: 80%; margin: auto; font-size:115%" class="btn btn-primary" value = ' + item.isbn + ' onclick ="detailpage(this.value)">Details</button>' +
+                '<button type="button" style="height: 50px; width: 80%; margin: auto; margin-bottom:20px; font-size:115%" class="btn btn-primary" value = ' + item.isbn + ' onclick ="detailpage(this.value)">Details</button>' +
                 '</div>' +
                 '</div>';
     })
