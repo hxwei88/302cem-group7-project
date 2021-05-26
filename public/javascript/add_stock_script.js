@@ -46,7 +46,7 @@ function submit_add_stock (event) {
             if (result.status == 1) {
                 loadingsuccess(swal,"Success", true);
             } else {
-                loadingfailure("fail", "fail", true)
+                loadingfailure("fail", result.message, true)
             }
             
         }
