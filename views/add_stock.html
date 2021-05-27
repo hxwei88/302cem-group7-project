@@ -8,12 +8,6 @@
         <div style="width:50%; padding-bottom:3%">        
             <form id="insertStockForm" onsubmit="submit_add_stock(event);" enctype="multipart/form-data">
                 <div class="form-group row">
-                    <label for="isbn_input" class="col-sm-2 col-form-label">ISBN:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="isbn_input" placeholder="ISBN" name="isbn_input" required="required">
-                    </div>
-                </div>
-                <div class="form-group row">
                     <label for="name_input" class="col-sm-2 col-form-label">Book:</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="name_input" placeholder="Book title" name="name_input" required="required">
@@ -26,9 +20,16 @@
                     </div> 
                 </div>
                 <div class="form-group row">
-                    <label for="date_input" class="col-sm-2 col-form-label">Date:</label>
+                    <label for="isbn_input" class="col-sm-2 col-form-label">ISBN:</label>
                     <div class="col-sm-10">
-                        <input type="date" id="date_input" name="date_input" class="form-control" value="2011-01-01" required="required">
+                        <input type="text" class="form-control" id="isbn_input" placeholder="ISBN" name="isbn_input" required="required" style="max-width: 50%">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="date_input" class="col-sm-2 col-form-label">Year:</label>
+                    <div class="col-sm-10">
+<!--                        <input type="number" id="datepicker" name="date_input" class="form-control" required="required"/>-->
+                        <input type="month" id="start" name="start" max="2021-12" class="form-control" required="required" style="max-width: 50%">
                     </div> 
                 </div>
                 <hr>
@@ -44,7 +45,7 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Trade price:</label>
                     <div class="col-sm-10 d-flex">
-                        <input type="range" id="tradePrice" value="50" min="1" max="100" name="trade_input" style="width:90%"
+                        <input type="range" id="tradePrice" value="1" min="1" max="400" name="trade_input" style="width:90%"
                                oninput="document.getElementById('tPrice').innerHTML = this.value" />
                         <label id="tPrice"></label>
                     </div> 
@@ -55,7 +56,7 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Retail price:</label>
                     <div class="col-sm-10 d-flex">
-                        <input type="range" id="retailPrice" value="50" min="1" max="100" name="retail_input" style="width:90%"
+                        <input type="range" id="retailPrice" value="1" min="1" max="400" name="retail_input" style="width:90%"
                                oninput="document.getElementById('rPrice').innerHTML = this.value" />
                         <label id="rPrice"></label>
                     </div> 
@@ -66,7 +67,7 @@
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Quantity:</label>
                     <div class="col-sm-10 d-flex">
-                        <input type="range" id="quantity" value="50" min="1" max="100" name="quantity_input" style="width:90%; text-align:bottom"
+                        <input type="range" id="quantity" value="1" min="1" max="400" name="quantity_input" style="width:90%; text-align:bottom"
                                oninput="document.getElementById('qNum').innerHTML = this.value" />
                         <label id="qNum"></label>
                     </div> 
