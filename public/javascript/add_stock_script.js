@@ -26,7 +26,14 @@ function initialize_slider_value()
     document.getElementById('tPrice').innerHTML = document.getElementById("tradePrice").value;
     document.getElementById('rPrice').innerHTML = document.getElementById("retailPrice").value;
     document.getElementById('qNum').innerHTML = document.getElementById("quantity").value;
+    document.getElementById('datepicker').setAttribute('min', "2021");
 }
+
+$("#datepicker").datepicker({
+    format: " yyyy",
+    viewMode: "years", 
+    minViewMode: "years",
+});
 
 function submit_add_stock (event) {
     event.preventDefault();
