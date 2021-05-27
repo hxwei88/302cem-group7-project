@@ -30,7 +30,7 @@ function initialize_slider_value()
 
 function submit_add_stock (event) {
     event.preventDefault();
-    var swal = loading("Loading","Loading");
+    var swal = loading("Adding Book...","This will take a moment...");
     
     $.ajax({
         type: 'post',
@@ -44,11 +44,10 @@ function submit_add_stock (event) {
             loadingcomplete(swal)
             
             if (result.status == 1) {
-                loadingsuccess(swal,"Success", true);
+                loadingsuccess("Success!","Book added successfully!", true);
             } else {
-                loadingfailure("fail", result.message, true)
-            }
-            
+                loadingfailure("Error", result.message, true)
+            }  
         }
     });
 
