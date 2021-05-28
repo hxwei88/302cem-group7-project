@@ -10,7 +10,25 @@ function error(title, message) {
      icon: 'error',
      title: title,
      text: message
-   })   
+   })  
+}
+
+
+
+//caution alert
+function caution(title, message) {
+    Swal.fire({
+     icon: 'error',
+     title: title,
+     text: message,
+     confirmButtonText: `Okay`,
+     denyButtonText: `Cancel`
+    }).then((result) => {
+        if (result.isConfirmed) {
+          return true;
+        } else
+          return false;
+    })
 }
 
 //success alert
