@@ -17,6 +17,7 @@ function append_stock_display(result) {
                 '<div class="card-body" style = "text-align:center;">' +
                 '<h5 class="card-title">' + item.name + '</h5>' +
                 '<p>' + item.isbn + '</p>' +
+                '<p>' + item.publication_date + '</p>' +
                 '</div>' +
                 '<button type="button" style="height: 50px; width: 85%; margin:auto; font-size:115%; margin-bottom:20px;" class="btn btn-primary" value=' + item.isbn + ' onclick ="load_detail_page(this.value)">Details</button>' +
                 '</div>' +
@@ -50,7 +51,7 @@ function request_book_data(data) {
 }
 
 function load_detail_page(isbn) {
-    
+
     $.when($('#layoutSidenav_content').fadeOut('fast')).done(function () {
         $('#layoutSidenav_content').load('/302cem-group7-project/views/stock_detail.html', function () {
             load_book_detail(isbn);
