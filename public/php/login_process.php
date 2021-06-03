@@ -1,5 +1,4 @@
 <?php
-
     include ('folder_path.php');
     include ('db.php');
 
