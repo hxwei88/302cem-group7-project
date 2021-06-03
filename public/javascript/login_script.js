@@ -14,6 +14,7 @@ function login(event){
                 error("Login Failed!", "Username or password is incorrect!");
             } else {
                if (result.message == "admin") {
+                   
                    window.location.replace("../php/admin.php");
                } else {
                    window.location.replace("../php/homepage.php");
