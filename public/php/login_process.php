@@ -12,6 +12,8 @@
         $result = mysqli_num_rows($query);
 
         if($result == 1){
+            //CHANGE TO COOKIE
+            session_start();
             $_SESSION['username'] = $username;
             
             //fetch row using $sql query, fetch role col and put into $role
