@@ -38,25 +38,22 @@ function submit_add_stock(event) {
     event.preventDefault();
     var swal = loading("Checking ISBN...", "This will take a moment...");
 
-
     $.ajax({
         type: 'post',
         cache: false,
-        url: '/302cem-group7-project/public/php/check_isbn.php',
+        url: '/302cem-group7-project/public/php/add_stock_check.php',
         data: {
             isbn: $("#isbn_input").val()
         },
         success: function (result) {
-            console.log(result);
             if (result == '1') {
-
                 caution('Update Stock', 'Do you want to update this stock?').then((result) => {
                     if (result.isConfirmed) {
 
                         var swal = loading("Updating Book...", "This will take a moment...");
                         $.ajax({
                             type: 'post',
-                            url: '/302cem-group7-project/public/php/insert_product.php',
+                            url: '/302cem-group7-project/public/php/add_stock.php',
                             data: new FormData($("#insertStockForm")[0]),
                             contentType: false,
                             cache: false,
@@ -71,18 +68,12 @@ function submit_add_stock(event) {
                                 }
                             }
                         });
-                    } else {
-                        info('No', 'No updating book');
                     }
-
                 })
-
-
             } else {
-
                 $.ajax({
                     type: 'post',
-                    url: '/302cem-group7-project/public/php/insert_product.php',
+                    url: '/302cem-group7-project/public/php/add_stock.php',
                     data: new FormData($("#insertStockForm")[0]),
                     contentType: false,
                     cache: false,
@@ -97,14 +88,13 @@ function submit_add_stock(event) {
                         }
                     }
                 });
-
             }
         }
     });
 //    var submit_data = { isbn_input: isbn, name_input: name, author_input: author, date_input: date,
 //        description_input: desc, image: img, tradePrice: tradePrice, retailPrice: retailPrice, quantity: quantity };
 //    
-//     $.post( "/302cem-group7-project/public/php/insert_product.php", submit_data, function( data ) {
+//     $.post( "/302cem-group7-project/public/php/add_stock.php", submit_data, function( data ) {
 //         console.log(submit_data);
 //          console.log(data);
 //          if ( data != null ){
