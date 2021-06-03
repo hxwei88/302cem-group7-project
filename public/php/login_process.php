@@ -4,16 +4,18 @@
 
     if($_SERVER['REQUEST_METHOD'] == "POST")
     {
-        $username=mysqli_real_escape_string($conn, $_POST['name']);
+        $username = mysqli_real_escape_string($conn, $_POST['name']);
         $password=mysqli_real_escape_string($conn, $_POST['password']);
+        
         //$password = md5($password);
         $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
         $query = mysqli_query($conn, $sql);
         $result = mysqli_num_rows($query);
 
         if($result == 1){
-            $_SESSION['username'] = $username;
-          
+            //coockie one day
+            setcookie("user", $username, time() + (86400 * 30), "/");
+            
             //fetch row using $sql query, fetch role col and put into $role
             while($row = mysqli_fetch_array($query)){
                 $role = $row['role'];               

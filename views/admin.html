@@ -52,8 +52,9 @@
                 </div>
 
                 <div class="sb-sidenav-footer">
-                    <div class="small">Logged in as:        
-                        <b><?php echo $_SESSION['username']; ?></b>
+                    <div class="small">Logged in as:
+                        <!-- CHANGE TO COOKIE -->
+                        <b><?php echo $_COOKIE["user"]; ?></b>
                     </div>
                 </div>
             </nav>
