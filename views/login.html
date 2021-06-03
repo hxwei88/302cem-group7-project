@@ -7,7 +7,7 @@
         <hr>
 
                 <!-- login form -->
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <form onsubmit="login(event)" method="POST" id="login_form">
             <div class="form-group">
                 <label for="nameinput">Username</label>
                 <input type="text" class="form-control" id="nameinput" name="name" placeholder="Enter your username" 
@@ -18,7 +18,9 @@
                     <input type="password" class="form-control" id="passwordinput" name="password"
                         placeholder="Enter your password" style="width:300px; margin:auto;">
             </div>
-            <input type="submit" name="submit" value="Login"><br />
+            <button class="btn btn-primary" type="submit" name="submit">Login</button><br />
         </form>
     </section>
 </main>
+
+<script type="text/javaScript" src="/302cem-group7-project/public/javascript/login_script.js"></script>

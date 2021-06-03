@@ -10287,3 +10287,13 @@ div#details{
     text-align: right;
     padding-top: 25px;
 }
+
+.ui-datepicker-calendar {
+   display: none;
+}
+.ui-datepicker-month {
+   display: none;
+}
+.ui-datepicker-next,.ui-datepicker-prev {
+  display:none;
+}

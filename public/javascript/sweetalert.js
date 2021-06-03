@@ -7,28 +7,44 @@
 //error alert
 function error(title, message) {
     Swal.fire({
-     icon: 'error',
-     title: title,
-     text: message
-   })   
+        icon: 'error',
+        title: title,
+        text: message
+    })
+}
+
+
+
+//caution alert
+function caution(title, message) {
+    var swal = Swal.fire({
+        icon: 'warning',
+        title: title,
+        text: message,
+        showDenyButton: true,
+        confirmButtonText: `Okay`,
+        denyButtonText: `Cancel`
+    })
+
+    return swal;
 }
 
 //success alert
 function success(title, message) {
     Swal.fire({
-     icon: 'success',
-     title: title,
-     text: message
-   })   
+        icon: 'success',
+        title: title,
+        text: message
+    })
 }
 
 //info alert
 function info(title, message) {
     Swal.fire({
-     icon: 'info',
-     title: title,
-     text: message
-   })   
+        icon: 'info',
+        title: title,
+        text: message
+    })
 }
 
 //loading alert
