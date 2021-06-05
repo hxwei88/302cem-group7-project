@@ -1,5 +1,5 @@
 function display(){
-    
+    $("#display_books").html('');
     var html = '<div class="card h-100">';
     
     html+= 'Product image'+
@@ -18,7 +18,7 @@ function display(){
                             '<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>'+
                         '</div>';
     html += '</div>'    
-    $("#display_books").append("<p>Hello hello</p>");
+    $("#display_books").append(html);
 }
 
 display();
