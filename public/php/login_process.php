@@ -12,7 +12,7 @@
         $result = mysqli_num_rows($query);
 
         if($result == 1){
-            $_SESSION['username'] = $username;
+            $_SESSION['username'] = "tes";
             
             //fetch row using $sql query, fetch role col and put into $role
             while($row = mysqli_fetch_array($query)){
