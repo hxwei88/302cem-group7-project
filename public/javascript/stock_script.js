@@ -29,7 +29,7 @@ function append_stock_display(result) {
 }
 
 function request_book_data(data) {
-    $.when($('#stock').fadeOut('fast')).done(function () {
+    $.when($('#stock').fadeOut('fast')).done(function () { 
         $("#stock_spinner").fadeIn('fast');
     })
 
