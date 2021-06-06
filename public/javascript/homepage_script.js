@@ -13,12 +13,17 @@ function display(data) {
 
         html += '<div class="col-3 py-2 mb-3">' +
                 '<div class="card h-100">' +
-                '<img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />' +
+                '<img class="card-img-top" src=" ' + 
+                item.image + 
+                '" alt="..." />' +
                 '<div class="card-body p-4">' +
                 '<div class="text-center">' +
-                item.name +
-                '<h5 class="fw-bolder">Fancy Product</h5>' +
-                '$40.00 - $80.00' +
+                item.author +
+                '<h5 class="fw-bolder">' + 
+                item.name + 
+                '</h5>' +
+                'RM' +
+                item.retail_price + 
                 '</div>' +
                 '</div>' +
                 '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">' +
