@@ -13,7 +13,7 @@ function display(data) {
 
         html += '<div class="col-3 py-2 mb-3">' +
                 '<div class="card h-100">' +
-                '<img class="card-img-top" src=" ' + 
+                '<img class="card-img-top" style="height: 325px; width: 85%; margin: auto; border-radius: 2%" src=" ' + 
                 item.image + 
                 '" alt="..." />' +
                 '<div class="card-body p-4">' +
