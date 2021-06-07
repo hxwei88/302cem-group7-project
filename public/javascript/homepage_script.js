@@ -32,6 +32,7 @@ function display(data) {
                 '<input type="hidden" name="product_isbn" value="' + item.isbn + '">'+
                 '<input type="submit" value="Add To Cart">' +
                 '</form>'+
+                '<button type="button" class="btn btn-primary" value=' + item.isbn + ' onclick ="add_to_cart(this.value)">Add to Cart</button>' +
                 '</div>' +
                 '</div>' +
                 '</div>';
