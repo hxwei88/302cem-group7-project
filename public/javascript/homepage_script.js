@@ -27,7 +27,11 @@ function display(data) {
                 '</div>' +
                 '</div>' +
                 '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">' +
-                '<div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">View options</a></div>' +
+                '<form action="cart.php" method="post">'+
+                '<input type="hidden" name="quantity" value="1">'+
+                '<input type="hidden" name="product_isbn" value="' + item.isbn + '">'+
+                '<input type="submit" value="Add To Cart">' +
+                '</form>'+
                 '</div>' +
                 '</div>' +
                 '</div>';
