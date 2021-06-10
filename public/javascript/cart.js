@@ -44,7 +44,8 @@ function add_to_cart(book) {
 //    localStorage.setItem('totalincart', totalincart.toString());
 
     document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
-
+    
+    window.location.replace("../php/cart_page.php");
 }
 
 function check_cart_item(isbn, item) {
@@ -116,8 +117,12 @@ function display_test() {
 
     }
     //html +='<br><br><button type=button value="Update Cart" >Update cart</button>';
-    html += '<br><br><input type=button value="Checkout"></button>';
+    html += '<br><br><button type="button" value="Continue Shopping" onclick="redirectHomepage()">Continue Shopping</button><input type=button value="Checkout"></button>';
     $("#testcart").append(html);
+}
+
+function redirectHomepage(){
+    window.location.replace("../php/homepage.php");
 }
 
 
