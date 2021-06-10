@@ -10,7 +10,8 @@ function display(data) {
         {
             var image = item.image;
         }
-
+        console.log(JSON.stringify(item))
+        var x = JSON.stringify(item);
         html += '<div class="col-3 py-2 mb-3">' +
                 '<div class="card h-100">' +
                 '<img class="card-img-top" style="height: 325px; width: 85%; margin: auto; border-radius: 2%" src=" ' + 
@@ -33,7 +34,7 @@ function display(data) {
                 '<input type="submit" class="btn btn-primary" style="margin-bottom: 20px" value="Add To Cart (Session Array)">' +
                 '<button type="button" class="btn btn-primary" value=' + item.isbn + ' onclick ="add_to_cart_ajax(this.value)">Add to Cart AJAX</button>' +
                 '</form>'+
-                '<button type="button" class="btn btn-primary" value=' + item.isbn + ' onclick ="add_to_cart(this.value)">Add to Cart</button>' +
+                '<button type="button" class="btn btn-primary" value=' + item.isbn + ' onclick =\'add_to_cart('+ JSON.stringify(item) +')\'>Add to Cart</button>' +
                 '</div>' +
                 '</div>' +
                 '</div>';
