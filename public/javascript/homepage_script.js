@@ -27,11 +27,13 @@ function display(data) {
                 '</div>' +
                 '</div>' +
                 '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">' +
-                '<form action="cart.php" method="post">'+
-                '<input type="hidden" name="quantity" value="1">'+
-                '<input type="hidden" name="product_isbn" value="' + item.isbn + '">'+
+                '<form action="cart.php" method="post" id ="test">'+
+                '<input id = "quantity" type="hidden" name="quantity" value="1">'+
+                '<input id = "isbn" type="hidden" name="product_isbn" value="' + item.isbn + '">'+
                 '<input type="submit" value="Add To Cart">' +
+                '<button type="button" class="btn btn-primary" value=' + item.isbn + ' onclick ="add_to_cart_ajax(this.value)">Add to Cart AJAX</button>' +
                 '</form>'+
+                '<button type="button" class="btn btn-primary" value=' + item.isbn + ' onclick ="add_to_cart(this.value)">Add to Cart</button>' +
                 '</div>' +
                 '</div>' +
                 '</div>';
@@ -59,3 +61,17 @@ function request_book_data(data) {
     });
 }
 request_book_data();
+
+function add_to_cart_ajax(isbn){
+   var swal = loading("Cart", "Adding in to cart...");
+
+    console.log(isbn);
+    $.ajax({
+        type: 'post',
+        url: '/302cem-group7-project/public/php/cart.php',
+        data: {'product_isbn' : isbn, 'quantity' : document.getElementById('quantity').value},
+        success: function (result) {
+            loadingsuccess("Success!", "Book added into Cart!", true);
+        }
+    });
+}
