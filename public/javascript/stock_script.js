@@ -13,7 +13,7 @@ function append_stock_display(result) {
 
         html += '<div class="col-3 py-2 mb-3">' +
                 '<div class="card h-100">' +
-                '<img class="card-img-top" style="height: 325px; width: 85%; margin: auto; border-radius: 2%" src="' + image + '" alt="' + image + '">' +
+                '<img class="card-img-top" style="height: 400px; width: 100%; margin: auto; border-radius: 2%" src="' + image + '" alt="' + image + '">' +
                 '<div class="card-body" style = "text-align:center;">' +
                 '<h5 class="card-title">' + item.name + '</h5>' +
                 '<p>' + item.isbn + '</p>' +
