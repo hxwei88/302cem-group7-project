@@ -19,7 +19,7 @@ function append_stock_display(result) {
                 '<p>' + item.isbn + '</p>' +
                 '<p>' + item.publication_date + '</p>' +
                 '</div>' +
-                '<button type="button" style="height: 50px; width: 85%; margin:auto; font-size:115%; margin-bottom:20px;" class="btn btn-primary" value="' + item.isbn + '" onclick =\'load_detail_page(this.value)\'>Details</button>' +
+                '<button type="button" style="height: 50px; width: 85%; margin:auto; font-size:115%; margin-bottom:20px;" class="btn btn-primary" value="' + item.isbn + '" onclick ="load_detail_page(this.value)">Details</button>' +
                 '</div>' +
                 '</div>';
     })

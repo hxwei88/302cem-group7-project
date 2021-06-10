@@ -10,7 +10,7 @@ var item = JSON.parse(localStorage.getItem('cart'));
 if (JSON.parse(localStorage.getItem('cart')) != null) {
     var i;
     for (i = 0; i < item.length; i++) {
-        cart.push({isbn: item[i].isbn, quantity: item[i].quantity, price :item[i].price, og_quantity:item[i].og_quantity});
+        cart.push({isbn: item[i].isbn, quantity: item[i].quantity, price: item[i].price, og_quantity: item[i].og_quantity});
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -44,57 +44,86 @@ function add_to_cart(book) {
 //    localStorage.setItem('totalincart', totalincart.toString());
 
     document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
-
+    
+    window.location.replace("../php/cart_page.php");
 }
 
 function check_cart_item(isbn, item) {
     var i;
     for (i = 0; i < item.length; i++) {
-        if (isbn == item[i].isbn) {
-            item[i].quantity = item[i].quantity + 1;
-            cart[i] = {isbn: isbn, quantity: item[i].quantity, price: item[i].price, og_quantity: item[i].og_quantity};
+        if (item[i].quantity < item[i].og_quantity) {
+            if (isbn == item[i].isbn) {
+                item[i].quantity = item[i].quantity + 1;
+                cart[i] = {isbn: isbn, quantity: item[i].quantity, price: item[i].price, og_quantity: item[i].og_quantity};
+                return true;
+            }
+        } else {
             return true;
         }
     }
 }
 
-function update_quantity(quantity_select, isbn){
+function update_quantity(quantity_select, isbn) {
     var item_update = JSON.parse(localStorage.getItem('cart'));
+    totalincart = parseInt(localStorage.getItem('totalincart'));
     var i;
-    for (i = 0; i < item_update.length; i++) {
-        if (isbn == item_update[i].isbn) {
-            item_update[i].quantity = quantity_select;
-            cart[i] = {isbn: isbn, quantity: item_update[i].quantity, price: item_update[i].price, og_quantity: item_update[i].og_quantity};
+    console.log(item_update);
+
+    if (quantity_select == 0) {
+        cart.splice(i, 1);
+        totalincart = totalincart - 1;
+        localStorage.setItem('totalincart', totalincart.toString());
+    } else {
+        for (i = 0; i < item_update.length; i++) {
+            if (isbn == item_update[i].isbn) {
+                item_update[i].quantity = quantity_select;
+                cart[i] = {isbn: isbn, quantity: item_update[i].quantity, price: item_update[i].price, og_quantity: item_update[i].og_quantity};
+            }
         }
     }
+
     localStorage.setItem('cart', JSON.stringify(cart));
+    document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
+    display_test();
 }
 
 function display_test() {
     $("#testcart").html('');
 
     item = JSON.parse(localStorage.getItem('cart'));
-    
+    console.log("test");
+    console.log(JSON.parse(localStorage.getItem('cart')));
+
     var html = '';
     var i;
+    var max;
     for (i = 0; i < item.length; i++) {
-        
-        html += '<hr><p>ISBN:' + item[i].isbn +'</p><p>Price: RM'+ item[i].price + '<br>';
+        max = item[i].og_quantity;
+
+        html += '<hr><p>ISBN:' + item[i].isbn + '</p><p>Price: RM' + item[i].price + '<br>';
         //html += '<input type="number" id="quantity" min="0" max="'+item[i].og_quantity+'" placeholder="'+ item[i].quantity +'">';
-        html += '<div class="form-group">'+
-                '<label for="quantity">Select Quantity</label>'+
-                '<select class="form-control" id="quantity_select" onchange="update_quantity(this.value, '+item[i].isbn+')">';
-                for(var j = 1; j <= item[i].og_quantity; j++){
-                    html+='<option value="'+ j +'">'+ j +'</option>';
-                }
-        html+= '</select>'+
-            '</div>';
-                
+        html += '<div class="form-group">' +
+                '<label for="quantity">Select Quantity</label>' +
+                '<select class="form-control" id="quantity_select" onchange="update_quantity(this.value,\'' + item[i].isbn + '\')">';
+
+        for (var j = 0; j <= item[i].og_quantity; j++) {
+            if (j == item[i].quantity) {
+                html += '<option selected="selected" value="' + j + '">' + j + '</option>';
+            } else
+                html += '<option value="' + j + '">' + j + '</option>';
+        }
+        html += '</select>' +
+                '</div>';
+
     }
     //html +='<br><br><button type=button value="Update Cart" >Update cart</button>';
-    html +='<br><br><input type=button value="Checkout"></button>';
+    html += '<br><br><button type="button" value="Continue Shopping" onclick="redirectHomepage()">Continue Shopping</button><input type=button value="Checkout"></button>';
     $("#testcart").append(html);
 }
 
+function redirectHomepage(){
+    window.location.replace("../php/homepage.php");
+}
 
-  display_test();
+
+display_test();

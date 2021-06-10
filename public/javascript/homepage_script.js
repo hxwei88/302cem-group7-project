@@ -31,8 +31,6 @@ function display(data) {
                 '<form action="cart.php" method="post" id ="test">'+
                 '<input id = "quantity" type="hidden" name="quantity" value="1">'+
                 '<input id = "isbn" type="hidden" name="product_isbn" value="' + item.isbn + '">'+
-                '<input type="submit" class="btn btn-primary" style="margin-bottom: 20px" value="Add To Cart (Session Array)">' +
-                '<button type="button" class="btn btn-primary" value=' + item.isbn + ' onclick ="add_to_cart_ajax(this.value)">Add to Cart AJAX</button>' +
                 '</form>'+
                 '<button type="button" class="btn btn-primary" value=' + item.isbn + ' onclick =\'add_to_cart('+ JSON.stringify(item) +')\'>Add to Cart</button>' +
                 '</div>' +
