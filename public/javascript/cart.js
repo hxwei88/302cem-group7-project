@@ -19,7 +19,7 @@ function add_to_cart(isbn) {
     // set total product number in cart
     localStorage.setItem('totalincart', totalincart.toString());
     item = JSON.parse(localStorage.getItem('cart'));
-    totalincart = parseInt(localStorage.getItem('totalincart'));
+    totalincart = parseInt(localStorage.getItem('totalincart'));    
 
 
     if (item != null) {
@@ -54,4 +54,21 @@ function check_cart_item(isbn, item) {
     }
 }
 
+function display_test() {
+    $("#testcart").html('');
 
+    item = JSON.parse(localStorage.getItem('cart'));
+    
+        var html = '';
+    var i;
+    for (i = 0; i < item.length; i++) {
+        
+             html += '<p>' + item[i].isbn +'</p><br><p>'+ item[i].quantity  ;
+        
+    }
+    
+    $("#testcart").append(html);
+}
+
+
+display_test();
