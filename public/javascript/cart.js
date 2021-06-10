@@ -54,4 +54,21 @@ function check_cart_item(isbn, item) {
     }
 }
 
+function display_test() {
+    $("#testcart").html('');
 
+    item = JSON.parse(localStorage.getItem('cart'));
+    
+        var html = '';
+    var i;
+    for (i = 0; i < item.length; i++) {
+        
+             html += '<p>' + item[i].isbn +'</p><br><p>'+ item[i].quantity  ;
+        
+    }
+    
+    $("#testcart").append(html);
+}
+
+
+display_test();
