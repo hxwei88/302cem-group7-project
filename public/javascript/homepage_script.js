@@ -1,3 +1,28 @@
+function getcookie(){
+    //trim and separate all cookies as js object
+    var cookies = document.cookie
+            .split(';')
+            .map(cookie => cookie.split('='))
+            .reduce((accumulator, [key, value]) =>
+                ({...accumulator, [key.trim()]: decodeURIComponent(value)}),
+                {});
+
+    //put cookie user into variable and return
+    var cookie = cookies.user;
+    return cookie;
+}
+
+function cookieexist(){
+    //get cookie
+    var cookie = getcookie()
+    
+    if(cookie === undefined){
+        return false;
+    }else{
+        return true;
+    }
+}
+
 function display(data) {
     $("#display_books").html('');
     var html = '<div class="row">';
@@ -31,9 +56,17 @@ function display(data) {
                 '<form action="cart.php" method="post" id ="test">'+
                 '<input id = "quantity" type="hidden" name="quantity" value="1">'+
                 '<input id = "isbn" type="hidden" name="product_isbn" value="' + item.isbn + '">'+
-                '</form>'+
-                '<button type="button" class="btn btn-primary" value=' + item.isbn + ' onclick =\'add_to_cart('+ JSON.stringify(item) +')\'>Add to Cart</button>' +
-                '</div>' +
+                '</form>';
+                //if cookie exists then enable button
+                if(cookieexist()== true){
+                    html+='<button type="button" class="btn btn-primary" value=' + item.isbn + ' onclick =\'add_to_cart('+ JSON.stringify(item) +')\'>Add to Cart</button>' ;
+                }
+                
+                //if cookie doesnt exist, disable button
+                if(cookieexist()== false){
+                    html+='<button type="button" class="btn btn-secondary btn-lg" disabled>Please login</button>' ;
+                }
+          html+='</div>' +
                 '</div>' +
                 '</div>';
     })
