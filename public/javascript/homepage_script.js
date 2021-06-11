@@ -64,7 +64,7 @@ function display(data) {
                 
                 //if cookie doesnt exist, disable button
                 if(cookieexist()== false){
-                    html+='<button type="button" class="btn btn-secondary btn-lg" disabled>Please login</button>' ;
+                    html+='<button type="button" class="btn btn-primary" onclick="cookieredirect()">Add to Cart</button>' ;
                 }
           html+='</div>' +
                 '</div>' +
