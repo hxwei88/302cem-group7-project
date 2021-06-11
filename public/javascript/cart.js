@@ -161,4 +161,8 @@ function cookieexist(){
     }
 }
 
+function cookieredirect(){
+    window.location.replace("../php/login.php");
+}
+
 display_test();
