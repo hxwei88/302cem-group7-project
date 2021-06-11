@@ -125,5 +125,40 @@ function redirectHomepage(){
     window.location.replace("../php/homepage.php");
 }
 
+function getcookie(){
+    //trim and separate all cookies as js object
+    var cookies = document.cookie
+            .split(';')
+            .map(cookie => cookie.split('='))
+            .reduce((accumulator, [key, value]) =>
+                ({...accumulator, [key.trim()]: decodeURIComponent(value)}),
+                {});
+
+    //put cookie user into variable and return
+    var cookie = cookies.user;
+    return cookie;
+}
+
+function checkcookie(){
+    //get cookie
+    var cookie = getcookie()
+    
+    if(cookie === undefined){
+        window.location.replace("../php/login.php");
+    }else{
+        window.location.replace("../php/cart_page.php");
+    }
+}
+
+function cookieexist(){
+    //get cookie
+    var cookie = getcookie()
+    
+    if(cookie === undefined){
+        return false;
+    }else{
+        return true;
+    }
+}
 
 display_test();
