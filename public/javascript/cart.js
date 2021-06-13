@@ -101,25 +101,25 @@ function display_test() {
     for (i = 0; i < item.length; i++) {
         max = item[i].og_quantity;
 
-        html += '<br><div class="col-sm-6 border-right " style="padding-left:70px;">' + 
+        html += '<div style="padding-top:20px;">' + 
                 '<div class="card">' +
-                '<div class="row">' +
-                '<div style="position:relative; width:10% float:left;">' +
+                '<div class="row" style="padding:10px 5px 10px 5px;">' +
+                '<div class="col-sm-1" style="margin: auto;">' +
                 '<input type="checkbox" id="' + item[i].isbn + '"/>' +
                 '</div>' +
-                '<div style="width: 45%; float:left;">' +
+                '<div class="col-sm-6">' +
                 '<img class = "img-detail" id="details-img" src="' + item[i].image + '" alt="..." style="position: relative; height: 100%; width: 100%; margin-left: 10px; border-radius: 2%">' +
                 '</div>' +
-                '<div class = "col-sm-6" style="width: 45%; float:left;>' +
-                '<div class="card-body">' +
+                '<div class = "col-sm-5" style="padding-top: 30px;">' +
+                '<div>' +
                 '<h5 class="card-title">' + item[i].name + '</h5>' +
                 '<p>ISBN: ' + item[i].isbn + '</p>' +
                 '<p>Price: RM' + item[i].price + '</p>';
 //                '<hr><p>ISBN:' + item[i].isbn + '</p><p>Price: RM' + item[i].price + '<br>';
         //html += '<input type="number" id="quantity" min="0" max="'+item[i].og_quantity+'" placeholder="'+ item[i].quantity +'">';
-        html += '<div class="form-group">' +
-                '<label for="quantity">Select Quantity</label>' +
-                '<select class="form-control" id="quantity_select" onchange="update_quantity(this.value,\'' + item[i].isbn + '\')">';
+        html += '<div class="input-group mb-3">' +
+                '<label class="input-group-text" for="quantity_select">Select Quantity</label>' +
+                '<select class="custom-select" id="quantity_select" onchange="update_quantity(this.value,\'' + item[i].isbn + '\')">';
 
         for (var j = 0; j <= item[i].og_quantity; j++) {
             if (j == item[i].quantity) {
@@ -139,8 +139,8 @@ function display_test() {
 
     }
     //html +='<br><br><button type=button value="Update Cart" >Update cart</button>';
-    html += '<br><br><p style="padding-left:70px;">Total Price: RM' + totalPrice + '</p><br>' + 
-            '<p style="padding-left:70px;"><button type="button" value="Continue Shopping" onclick="redirectHomepage()">Continue Shopping</button><input type=button value="Checkout"></button></p>';
+    html += '<br><br><p>Total Price: RM' + totalPrice + '</p><br>' + 
+            '<p><button type="button" value="Continue Shopping" onclick="redirectHomepage()">Continue Shopping</button><input type=button value="Checkout"></button></p>';
     $("#testcart").append(html);
 }
 
