@@ -140,7 +140,9 @@ function display_test() {
     }
     //html +='<br><br><button type=button value="Update Cart" >Update cart</button>';
     html += '<br><br><p>Total Price: RM' + totalPrice + '</p><br>' + 
-            '<p><button class="btn btn-primary"  type="button" value="Continue Shopping" onclick="redirectHomepage()">Continue Shopping</button><input class="btn btn-primary"  type=button value="Checkout"></button></p>';
+            '<div style="display:flex; justify-content:flex-end; width:100%; padding:0;">' + 
+            '<p><button class="btn btn-primary" type="button" value="Continue Shopping" onclick="redirectHomepage()">Continue Shopping</button><input class="btn btn-primary" type=button value="Checkout"></button></p>' + 
+            '</div>';
     $("#testcart").append(html);
 }
 
