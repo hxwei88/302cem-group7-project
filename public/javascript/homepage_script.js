@@ -23,6 +23,18 @@ function cookieexist(){
     }
 }
 
+function check_cookie_exist(){
+    
+    if (cookieexist() == false){
+        $("#dropdown_menu").hide();
+        
+    }
+    
+}
+
+
+ check_cookie_exist();
+
 function display(data) {
     $("#display_books").html('');
     var html = '<div class="row">';
@@ -115,7 +127,7 @@ function add_to_cart_ajax(isbn){
 function check_login_cookie(){
     if (cookieexist() == false){
         cookieredirect();
-    }else{
-        success('Log in','You already login');
     }
 }
+
+
