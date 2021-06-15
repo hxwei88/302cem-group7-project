@@ -77,7 +77,7 @@ function display(data) {
 
 function request_book_data(data) {
 
-    $("#stock_spinner").show();
+    $("#stock_spinner_home").show();
 
     $.ajax({
         type: 'post',
@@ -89,7 +89,7 @@ function request_book_data(data) {
         success: function (result) {
             result = JSON.parse(result);
             console.log(result);
-                $("#stock_spinner").hide();
+                $("#stock_spinner_home").hide();
 
             display(result.result);
         }
