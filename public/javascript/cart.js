@@ -45,7 +45,7 @@ function add_to_cart(book) {
 
     document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
     
-    window.location.replace("../php/cart_page.php");
+    window.location = "../php/cart_page.php";
 }
 
 function check_cart_item(isbn, item) {
@@ -140,14 +140,15 @@ function display_test() {
     }
     //html +='<br><br><button type=button value="Update Cart" >Update cart</button>';
     html += '<br><br><p>Total Price: RM' + totalPrice + '</p><br>' + 
-            '<div style="display:flex; justify-content:flex-end; width:100%; padding:0;">' + 
-            '<p><button class="btn btn-primary" type="button" value="Continue Shopping" onclick="redirectHomepage()">Continue Shopping</button><input class="btn btn-primary" type=button value="Checkout"></button></p>' + 
+            '<div class="row d-flex justify-content-end">' + 
+            '<div class="col-2 d-flex justify-content-end"><button class="btn btn-primary" type="button" value="Continue Shopping" onclick="redirectHomepage()">Continue Shopping</button></div>' +
+            '<div class="col-1 d-flex justify-content-start"><button class="btn btn-primary" type="button" value="Checkout">Checkout</button></div>' + 
             '</div>';
     $("#testcart").append(html);
 }
 
 function redirectHomepage(){
-    window.location.replace("../php/homepage.php");
+    window.location = "../php/homepage.php";
 }
 
 function getcookie(){
@@ -169,9 +170,9 @@ function checkcookie(){
     var cookie = getcookie()
     
     if(cookie === undefined){
-        window.location.replace("../php/login.php");
+        window.location = "../php/login.php";
     }else{
-        window.location.replace("../php/cart_page.php");
+        window.location = "../php/cart_page.php";
     }
 }
 
@@ -187,7 +188,7 @@ function cookieexist(){
 }
 
 function cookieredirect(){
-    window.location.replace("../php/login.php");
+    window.location = "../php/login.php";
 }
 
 display_test();
