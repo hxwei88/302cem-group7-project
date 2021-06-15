@@ -23,6 +23,18 @@ function cookieexist(){
     }
 }
 
+function check_cookie_exist(){
+    
+    if (cookieexist() == false){
+        $("#dropdown_menu").hide();
+        
+    }
+    
+}
+
+
+ check_cookie_exist();
+
 function display(data) {
     $("#display_books").html('');
     var html = '<div class="row">';
@@ -77,6 +89,7 @@ function display(data) {
 
 function request_book_data(data) {
 
+    $("#stock_spinner_home").show();
 
     $.ajax({
         type: 'post',
@@ -88,6 +101,8 @@ function request_book_data(data) {
         success: function (result) {
             result = JSON.parse(result);
             console.log(result);
+                $("#stock_spinner_home").hide();
+
             display(result.result);
         }
     });
@@ -107,3 +122,12 @@ function add_to_cart_ajax(isbn){
         }
     });
 }
+
+
+function check_login_cookie(){
+    if (cookieexist() == false){
+        cookieredirect();
+    }
+}
+
+
