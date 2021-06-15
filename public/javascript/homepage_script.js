@@ -77,6 +77,7 @@ function display(data) {
 
 function request_book_data(data) {
 
+    $("#stock_spinner").show();
 
     $.ajax({
         type: 'post',
@@ -88,6 +89,8 @@ function request_book_data(data) {
         success: function (result) {
             result = JSON.parse(result);
             console.log(result);
+                $("#stock_spinner").hide();
+
             display(result.result);
         }
     });
@@ -106,4 +109,13 @@ function add_to_cart_ajax(isbn){
             loadingsuccess("Success!", "Book added into Cart!", true);
         }
     });
+}
+
+
+function check_login_cookie(){
+    if (cookieexist() == false){
+        cookieredirect();
+    }else{
+        success('Log in','You already login');
+    }
 }
