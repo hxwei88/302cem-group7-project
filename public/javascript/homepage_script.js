@@ -37,7 +37,10 @@ function check_cookie_exist(){
 
 function display(data) {
     $("#display_books").html('');
-    var html = '<div class="row">';
+    var html = '<div class="row justify-content-start">' +
+                '<h1>Books</h1>   ' + 
+            '</div>' +
+            '<div class="row">';
     data.forEach(function (item, index, arr) {
 
         if (item.image.substring(item.image.lastIndexOf('/') + 1) == "")
@@ -53,7 +56,7 @@ function display(data) {
                 '<div class="card h-100">' +
                 '<img class="card-img-top" style="height: 400px; width: 100%; margin: auto; border-radius: 2%" src=" ' + 
                 item.image + 
-                '" alt="..." />' +
+                '" alt="..." onerror="this.src=\'../resources/images/default_book.png\'"/>' +
                 '<div class="card-body p-4">' +
                 '<div class="text-center">' +
                 item.author +
@@ -101,7 +104,9 @@ function request_book_data(data) {
         success: function (result) {
             result = JSON.parse(result);
             console.log(result);
-                $("#stock_spinner_home").hide();
+            $.when($('#stock_spinner_home').fadeOut('fast')).done(function () {
+                $("#display_books").fadeIn('slow');
+            });
 
             display(result.result);
         }

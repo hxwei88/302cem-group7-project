@@ -1,11 +1,18 @@
 
-    <div class="container">
-        <div id="testcart" style="margin-bottom: 30px">
-
+    <div class="container pt-1 pb-2">
+        <div class="row d-flex mt-3 mb-3">
+        <div class="col-10 d-flex justify-content-start"><button class="btn btn-primary btn-lg" type="button" value="Continue Shopping" onclick="redirectHomepage()"><i class="fas fa-cart-plus me-2"></i>Continue Shopping</button></div>
+        <div id="checkout_btn" class="col-2 d-flex justify-content-end"><button class="btn btn-dark btn-lg" type="button" value="Checkout"><i class="fas fa-hand-holding-usd me-2"></i>Checkout</button></div>
+        </div>
+        <div id="cart" style="margin-bottom: 30px">
+        
+        </div>
+        <div id="cart_item_none_title" class="mt-5 mb-5 d-flex justify-content-xxl-center d-none">
+            <h1>Nothing to display.</h1>
         </div>
     </div>
     <!-- Footer-->
-    <footer class="py-5 bg-dark">
+    <footer class="py-2 bg-dark fixed-bottom">
         <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
     </footer>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>

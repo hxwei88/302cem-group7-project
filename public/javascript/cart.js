@@ -84,11 +84,11 @@ function update_quantity(quantity_select, isbn) {
 
     localStorage.setItem('cart', JSON.stringify(cart));
     document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
-    display_test();
+    display_cart();
 }
 
-function display_test() {
-    $("#testcart").html('');
+function display_cart() {
+    $("#cart").html('');
 
     item = JSON.parse(localStorage.getItem('cart'));
     console.log("test");
@@ -98,53 +98,60 @@ function display_test() {
     var i;
     var max;
     var totalPrice = 0;
-    for (i = 0; i < item.length; i++) {
-        max = item[i].og_quantity;
+    if(item.length > 0)
+    {
+        for (i = 0; i < item.length; i++) {
+            max = item[i].og_quantity;
 
-        html += '<div style="padding-top:20px;">' + 
-                '<div class="card">' +
-                '<div class="row" style="padding:10px 5px 10px 5px;">' +
-                '<div class="col-sm-1" style="margin: auto; display:flex; justify-content: center; align-items: center;">' +
-                '<input class="form-check-input" type="checkbox" id="' + item[i].isbn + '" style="width: 20px; height: 20px;"/>' +
-                '</div>' +
-                '<div class="col-sm-6">' +
-                '<img class = "img-detail" id="details-img" src="' + item[i].image + '" alt="..." style="; height: 200px; width: 600px; margin-left: 10px; border-radius: 2%">' +
-                '</div>' +
-                '<div class = "col-sm-5" style="padding-top: 30px;">' +
-                '<div>' +
-                '<h5 class="card-title">' + item[i].name + '</h5>' +
-                '<p class="card-text">ISBN: ' + item[i].isbn + '</p>' +
-                '<p class="card-text">Price: RM' + item[i].price + '</p>';
-//                '<hr><p>ISBN:' + item[i].isbn + '</p><p>Price: RM' + item[i].price + '<br>';
-        //html += '<input type="number" id="quantity" min="0" max="'+item[i].og_quantity+'" placeholder="'+ item[i].quantity +'">';
-        html += '<div class="input-group mb-3">' +
-                '<label class="input-group-text" style="width: 130px;" for="quantity_select">Select Quantity</label>' +
-                '<select class="custom-select-lg" style="width: 130px;" id="quantity_select" onchange="update_quantity(this.value,\'' + item[i].isbn + '\')">';
+            html += '<div class="card-group">' + 
+                    '<div class="card h-100 mb-3">' +
+                    '<div class="row" style="padding:10px 5px 10px 5px;">' +
+                    '<div class="col-sm-1" style="margin: auto; display:flex; justify-content: center; align-items: center;">' +
+                    '<input class="form-check-input" type="checkbox" id="' + item[i].isbn + '" style="height:auto; width: 20px; height: 20px;"/>' +
+                    '</div>' +
+                    '<div class="col-sm-4">' +
+                    '<img class = "img-detail" id="details-img" src="' + item[i].image + '" alt="..." style="width: 250px; margin-left: 10px; border-radius: 2%" onerror="this.src=\'../resources/images/default_book.png\'">' +
+                    '</div>' +
+                    '<div class = "col-sm-7 mt-3">' +
+                    '<div>' +
+                    '<h2 class="card-title">' + item[i].name + '</h2>' +
+                    '<p class="card-text">ISBN: ' + item[i].isbn + '</p>' +
+                    '<p class="card-text">Unit Price: RM' + item[i].price + '</p>' +
+                    '<p class="card-text">Total Price: RM' + item[i].price * item[i].quantity + '</p>';
+    //                '<hr><p>ISBN:' + item[i].isbn + '</p><p>Price: RM' + item[i].price + '<br>';
+            //html += '<input type="number" id="quantity" min="0" max="'+item[i].og_quantity+'" placeholder="'+ item[i].quantity +'">';
+            html += '<div class="input-group mb-3">' +
+                    '<label class="input-group-text" style="width: 100px !important;" for="quantity_select">Quantity</label>' +
+                    '<select class="form-select" style="width: 130px;" id="quantity_select" onchange="update_quantity(this.value,\'' + item[i].isbn + '\')">';
 
-        for (var j = 0; j <= item[i].og_quantity; j++) {
-            if (j == item[i].quantity) {
-                totalPrice += j * item[i].price;
-                html += '<option selected="selected" value="' + j + '">' + j + '</option>';
-            } else{
-                html += '<option value="' + j + '">' + j + '</option>';
+            for (var j = 0; j <= item[i].og_quantity; j++) {
+                if (j == item[i].quantity) {
+                    totalPrice += j * item[i].price;
+                    html += '<option selected="selected" value="' + j + '">' + j + '</option>';
+                } else{
+                    html += '<option value="' + j + '">' + j + '</option>';
+                }
             }
+            html += '</select><br>' +
+                    '</div>' +
+                    '</div>' + 
+                    '</div>' + 
+                    '</div>' + 
+                    '</div>' + 
+                    '</div>';
         }
-        html += '</select><br>' +
-                '</div>' +
-                '</div>' + 
-                '</div>' + 
-                '</div>' + 
-                '</div>' + 
-                '</div>';
-
+        $("#checkout_btn").removeClass("d-none");
     }
+    else
+    {
+        $("#cart_item_none_title").removeClass("d-none");
+        $("#checkout_btn").addClass("d-none");
+    }
+    
     //html +='<br><br><button type=button value="Update Cart" >Update cart</button>';
-    html += '<br><br><p>Total Price: RM' + totalPrice + '</p><br>' + 
-            '<div class="row d-flex justify-content-end">' + 
-            '<div class="col-2 d-flex justify-content-end"><button class="btn btn-primary" type="button" value="Continue Shopping" onclick="redirectHomepage()">Continue Shopping</button></div>' +
-            '<div class="col-1 d-flex justify-content-start"><button class="btn btn-primary" type="button" value="Checkout">Checkout</button></div>' + 
-            '</div>';
-    $("#testcart").append(html);
+    html += //'<br><br><p>Total Price: RM' + totalPrice + '</p><br>' + 
+    
+    $("#cart").append(html);
 }
 
 function redirectHomepage(){
@@ -191,4 +198,4 @@ function cookieredirect(){
     window.location = "../php/login.php";
 }
 
-display_test();
+display_cart();
