@@ -88,7 +88,7 @@ function update_quantity(quantity_select, isbn) {
 }
 
 function display_cart() {
-    $("#testcart").html('');
+    $("#cart").html('');
 
     item = JSON.parse(localStorage.getItem('cart'));
     console.log("test");
@@ -103,25 +103,26 @@ function display_cart() {
         for (i = 0; i < item.length; i++) {
             max = item[i].og_quantity;
 
-            html += '<div class="mt-5">' + 
-                    '<div class="card">' +
+            html += '<div class="card-group">' + 
+                    '<div class="card h-100 mb-3">' +
                     '<div class="row" style="padding:10px 5px 10px 5px;">' +
                     '<div class="col-sm-1" style="margin: auto; display:flex; justify-content: center; align-items: center;">' +
-                    '<input class="form-check-input" type="checkbox" id="' + item[i].isbn + '" style="width: 20px; height: 20px;"/>' +
+                    '<input class="form-check-input" type="checkbox" id="' + item[i].isbn + '" style="height:auto; width: 20px; height: 20px;"/>' +
                     '</div>' +
-                    '<div class="col-sm-6">' +
-                    '<img class = "img-detail" id="details-img" src="' + item[i].image + '" alt="..." style="; height: 200px; width: 600px; margin-left: 10px; border-radius: 2%">' +
+                    '<div class="col-sm-4">' +
+                    '<img class = "img-detail" id="details-img" src="' + item[i].image + '" alt="..." style="width: 250px; margin-left: 10px; border-radius: 2%" onerror="this.src=\'../resources/images/default_book.png\'">' +
                     '</div>' +
-                    '<div class = "col-sm-5" style="padding-top: 30px;">' +
+                    '<div class = "col-sm-7 mt-3">' +
                     '<div>' +
-                    '<h5 class="card-title">' + item[i].name + '</h5>' +
+                    '<h2 class="card-title">' + item[i].name + '</h2>' +
                     '<p class="card-text">ISBN: ' + item[i].isbn + '</p>' +
-                    '<p class="card-text">Unit Price: RM' + item[i].price + '</p>';
+                    '<p class="card-text">Unit Price: RM' + item[i].price + '</p>' +
+                    '<p class="card-text">Total Price: RM' + item[i].price * item[i].quantity + '</p>';
     //                '<hr><p>ISBN:' + item[i].isbn + '</p><p>Price: RM' + item[i].price + '<br>';
             //html += '<input type="number" id="quantity" min="0" max="'+item[i].og_quantity+'" placeholder="'+ item[i].quantity +'">';
             html += '<div class="input-group mb-3">' +
-                    '<label class="input-group-text" style="width: 130px;" for="quantity_select">Select Quantity</label>' +
-                    '<select class="custom-select-lg" style="width: 130px;" id="quantity_select" onchange="update_quantity(this.value,\'' + item[i].isbn + '\')">';
+                    '<label class="input-group-text" style="width: 100px !important;" for="quantity_select">Quantity</label>' +
+                    '<select class="form-select" style="width: 130px;" id="quantity_select" onchange="update_quantity(this.value,\'' + item[i].isbn + '\')">';
 
             for (var j = 0; j <= item[i].og_quantity; j++) {
                 if (j == item[i].quantity) {
@@ -138,9 +139,8 @@ function display_cart() {
                     '</div>' + 
                     '</div>' + 
                     '</div>';
-            
-            $("#checkout_btn").removeClass("d-none");
         }
+        $("#checkout_btn").removeClass("d-none");
     }
     else
     {
@@ -151,7 +151,7 @@ function display_cart() {
     //html +='<br><br><button type=button value="Update Cart" >Update cart</button>';
     html += //'<br><br><p>Total Price: RM' + totalPrice + '</p><br>' + 
     
-    $("#testcart").append(html);
+    $("#cart").append(html);
 }
 
 function redirectHomepage(){

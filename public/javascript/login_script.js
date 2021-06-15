@@ -23,3 +23,5 @@ function login(event){
         }
     });
 }
+
+document.title = "Login";
