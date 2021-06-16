@@ -1,4 +1,4 @@
-
+localStorage.removeItem('checkoutcart');
 var cart = new Array();
 var totalincart = 0;
 if (localStorage.getItem('totalincart') != null) {
@@ -14,7 +14,11 @@ if (JSON.parse(localStorage.getItem('cart')) != null) {
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));
+} else {
+    $("#cart_item_none_title").removeClass("d-none");
+    $("#checkout_btn").addClass("d-none");
 }
+
 function add_to_cart(book) {
 
     //set total product number in cart
@@ -107,7 +111,7 @@ function display_cart() {
                     '<div class="card h-100 mb-3">' +
                     '<div class="row" style="padding:10px 5px 10px 5px;">' +
                     '<div class="col-sm-1" style="margin: auto; display:flex; justify-content: center; align-items: center;">' +
-                    '<input class="form-check-input" type="checkbox" id="' + item[i].isbn + '" style="height:auto; width: 20px; height: 20px;"/>' +
+                    '<input class="form-check-input" type="checkbox" onchange =\'checkoutcheckbox('+ i +',this.value,'+ JSON.stringify(item[i]) +')\' id="' + item[i].isbn + '" style="height:auto; width: 20px; height: 20px;"/ value="' + item[i].isbn + '">' +
                     '</div>' +
                     '<div class="col-sm-4">' +
                     '<img class = "img-detail" id="details-img" src="' + item[i].image + '" alt="..." style="width: 250px; margin-left: 10px; border-radius: 2%" onerror="this.src=\'../resources/images/default_book.png\'">' +
@@ -156,6 +160,14 @@ function display_cart() {
 
 function redirectHomepage(){
     window.location = "../php/homepage.php";
+}
+
+function redirectCheckout(){
+    if (JSON.parse(localStorage.getItem('checkoutcart')) != null && JSON.parse(localStorage.getItem('checkoutcart')) != 0) {
+        window.location = "/302cem-group7-project/public/php/checkout_page.php";
+    } else {
+        caution("Checkout Empty!","No item is selected to be checked out.");
+    }
 }
 
 function getcookie(){
