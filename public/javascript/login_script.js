@@ -15,11 +15,13 @@ function login(event){
             } else {
                if (result.message == "admin") {
                    
-                   window.location.replace("../php/admin.php");
+                   window.location = "../php/admin.php";
                } else {
-                   window.location.replace("../php/homepage.php");
+                   window.location = "../php/homepage.php";
                }
             }
         }
     });
 }
+
+document.title = "Login";

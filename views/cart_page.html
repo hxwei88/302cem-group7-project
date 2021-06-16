@@ -1,50 +1,18 @@
 
-<body>
-    <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#!">Tis' A Bookstore</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#!">All Products</a></li>
-                            <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                            <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <button class="btn btn-outline-dark" type="submit">
-                        <i class="bi-cart-fill me-1"></i>
-                        Cart
-                        <span id ='totalincart' class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                    </button>
-                </form>
-            </div>
+    <div class="container pt-1 pb-2">
+        <div class="row d-flex mt-3 mb-3">
+        <div class="col-10 d-flex justify-content-start"><button class="btn btn-primary btn-lg" type="button" value="Continue Shopping" onclick="redirectHomepage()"><i class="fas fa-cart-plus me-2"></i>Continue Shopping</button></div>
+        <div id="checkout_btn" class="col-2 d-flex justify-content-end"><button class="btn btn-dark btn-lg" type="button" value="Checkout"><i class="fas fa-hand-holding-usd me-2"></i>Checkout</button></div>
         </div>
-    </nav>
-    <!-- Header-->
-    <header class="bg-dark py-5">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">Tis' A Bookstore</h1>
-                <p class="lead fw-normal text-white-50 mb-0">Tis' nothing but a bookstore</p>
-            </div>
+        <div id="cart" style="margin-bottom: 30px">
+        
         </div>
-    </header>
-    <div class="container">
-        <div id="testcart" style="margin-bottom: 30px">
-
+        <div id="cart_item_none_title" class="mt-5 mb-5 d-flex justify-content-xxl-center d-none">
+            <h1>Nothing to display.</h1>
         </div>
     </div>
     <!-- Footer-->
-    <footer class="py-5 bg-dark">
+    <footer class="py-2 bg-dark fixed-bottom">
         <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
     </footer>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
