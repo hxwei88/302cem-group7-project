@@ -85,3 +85,13 @@ function loadingfailure(title, message, escape) {
     });
     return swal;
 }
+
+//success temp
+function tempcheckoutswal(title, message) {
+    var swal = Swal.fire({
+        icon: 'success',
+        title: title,
+        text: message
+    })
+    return swal;
+}
