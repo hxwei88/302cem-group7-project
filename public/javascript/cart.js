@@ -71,7 +71,7 @@ function update_quantity(quantity_select, isbn) {
     var item_update = JSON.parse(localStorage.getItem('cart'));
     totalincart = parseInt(localStorage.getItem('totalincart'));
     var i;
-    console.log(item_update);
+    console.log(quantity_select);
 
     if (quantity_select == 0) {
         cart.splice(i, 1);
@@ -81,7 +81,7 @@ function update_quantity(quantity_select, isbn) {
         for (i = 0; i < item_update.length; i++) {
             if (isbn == item_update[i].isbn) {
                 item_update[i].quantity = quantity_select;
-                cart[i] = {isbn: isbn, name: item[i].name, image: item[i].image, quantity: item_update[i].quantity, price: item_update[i].price, og_quantity: item_update[i].og_quantity};
+                cart[i] = {isbn: isbn, name: item_update[i].name, image: item_update[i].image, quantity: item_update[i].quantity, price: item_update[i].price, og_quantity: item_update[i].og_quantity};
             }
         }
     }
