@@ -52,6 +52,7 @@ function display(data) {
         }
         console.log(JSON.stringify(item))
         var x = JSON.stringify(item);
+        var pass_this = item.isbn.toString();
         html += '<div class="col-3 py-2 mb-3">' +
                 '<div class="card h-100">' +
                 '<img class="card-img-top" style="height: 400px; width: 100%; margin: auto; border-radius: 2%" src=" ' +
@@ -64,14 +65,16 @@ function display(data) {
                 item.name +
                 '</h5>' +
                 'RM' +
-                item.retail_price +
+                item.retail_price +"<br>"+
+                'Quantity: '+ item.quantity+
                 '</div>' +
                 '</div>' +
                 '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">' +
-                '<form action="cart.php" method="post" id ="test">' +
-                '<input id = "quantity" type="hidden" name="quantity" value="1">' +
-                '<input id = "isbn" type="hidden" name="product_isbn" value="' + item.isbn + '">' +
-                '</form>';
+                '<button type="button" style="margin-right:5px" class="btn btn-primary" value="'+ pass_this +'"onclick="redirect_bookdetail(this.value)">View details</button>';
+//                '<form action="cart.php" method="post" id ="test">' 
+//                '<input id = "quantity" type="hidden" name="quantity" value="1">' +
+//                '<input id = "isbn" type="hidden" name="product_isbn" value="' + item.isbn + '">' +
+//                '</form>';
         //if cookie exists then enable button
         if (cookieexist() == true) {
             html += '<button type="button" class="btn btn-primary" value=' + item.isbn + ' onclick =\'add_to_cart(' + JSON.stringify(item) + ')\'>Add to Cart</button>';

@@ -10787,3 +10787,22 @@ textarea.form-control-lg {
 .card-footer.p-4.pt-0.border-top-0.bg-transparent{
     text-align: center;
 }
+
+/*CSS for book detail page*/
+.bookDetail_body{
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.bookDetail-btn{
+    width:40% !important;
+}
+
+span.bookDetail-text {
+    font-weight: bold;
+}
+
+.bookDetail-body{
+    margin-top:5%;
+}
+
