@@ -28,18 +28,31 @@ console.log("isbn from url: "+g_isbn);
 function display_book_details(result) {
     $("#stock_display").html('');
     var html = '';
+    var i = 1;
 
     result.forEach(function (item, index, arr) {
         //if the retrieved isbn from books table matches the url isbn value
         if(item.isbn == g_isbn){
-            html += '<p><span class="bookDetail-text">Item Name: </span> '+item.name+'<br>'+
-                    '<span class="bookDetail-text">Item isbn: </span> '+item.isbn+'<br>'+                   
-                    '<span class="bookDetail-text">Item Quantity: </span> '+item.quantity+' available<br>'+
-                    '<span class="bookDetail-text">Item Price: RM </span> '+item.retail_price+'<br>'+
-                    '<span class="bookDetail-text">Author Name</span> '+item.author+'<br>'+
-                    '<span class="bookDetail-text">Publication Date</span> '+item.publication_date+'<br>'+
-                    '<span class="bookDetail-text">Item Description: </span> '+item.description+'</p>';
-
+            html += '<h2><span class="bookDetail-text"> '+item.name+'</span></h2>'+
+                    '<p><span class="bookDetail-text">By '+item.author+'</span></p><br>'+
+                    '<hr>'+
+                    '<p><span class="bookDetail-text">RM  '+item.retail_price+'</span><br></p>'+
+                    '<p>'+item.description+'</p>'+
+                    '<button type="button" class="btn btn-primary bookDetail-more-btn" data-toggle="collapse" data-target="#more">View more info</button>'+
+                    '<div id="more" class="collapse">'+
+                        '<p><span class="bookDetail-text">Item isbn: </span> '+item.isbn+'<br>'+                   
+                        '<span class="bookDetail-text">Item Quantity: </span> '+item.quantity+' available<br>'+
+                        '<span class="bookDetail-text">Publication Date</span> '+item.publication_date+'<br>'+
+                    '</div>'+  
+                    '<hr>'+
+                    '<div class="input-group my-2">'+
+                    '<label class="input-group-text" style="width: 100px !important;" for"select_quantity">Quantity</label>'+
+                    '<select class="form-select" style="width:130px" id="select_quantity">';
+                    for(i = 1; i <= item.quantity; i++){
+                        html+='<option value="'+ i +'">'+ i +'</option>';
+                    }
+                    html+='</select>'+
+                          '</div>';
         }
     });
 
@@ -56,12 +69,12 @@ function display_book_btn(result) {
         if(item.isbn == g_isbn){
                     //if cookie exists then enable button
                     if (cookieexist() == true) {
-                        html += '<button type="button" class="btn btn-primary btn-md" value=' + item.isbn + ' onclick =\'add_to_cart(' + JSON.stringify(item) + ')\'>Add to Cart</button>';
+                        html += '<button type="button" style="width:200px" class="btn btn-primary btn-md" value=' + item.isbn + ' onclick =\'add_to_cart_detail(' + JSON.stringify(item) + ')\'>Add to Cart</button>';
                     }
 
                     //if cookie doesnt exist, disable button
                     if (cookieexist() == false) {
-                        html += '<button type="button" class="btn btn-primary btn-md" onclick="cookieredirect()">Add to Cart</button>';
+                        html += '<button type="button" style="width:200px" class="btn btn-primary btn-md" onclick="cookieredirect()">Add to Cart</button>';
                     }
         }
     });
@@ -103,10 +116,10 @@ function request_book_data(data) {
     $.ajax({
         type: 'post',
         url: '/302cem-group7-project/public/php/stock.php',
-        data: data,
-        contentType: false,
-        cache: false,
-        processData: false,
+//        data: data,
+//        contentType: false,
+//        cache: false,
+//        processData: false,
         success: function (result) {
             result = JSON.parse(result);
             console.log(result);

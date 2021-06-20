@@ -10806,3 +10806,12 @@ span.bookDetail-text {
     margin-top:5%;
 }
 
+.bookDetail-img-box{
+    border: black solid 1px
+}
+
+.bookDetail-more-btn{
+    width: 200px;
+    margin-left: 12px;
+    margin-bottom: 20px;
+}
