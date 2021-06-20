@@ -19,7 +19,9 @@
             
             //fetch row using $sql query, fetch role col and put into $role
             while($row = mysqli_fetch_array($query)){
-                $role = $row['role'];               
+                $role = $row['role'];
+                $id = $row['userid'];
+                setcookie("userid", $id, time() + (86400 * 30), "/");
             }
             
             if($role=='admin'){
