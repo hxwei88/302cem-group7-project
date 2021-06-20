@@ -43,4 +43,37 @@ function tempcheckoutsuccess(title, message) {
             
 }
 
+function invoiceEmail() {
+//    console.log(document.getElementById('email').value)
+//    var tempParams = {
+//        to_name: document.getElementById('email').value
+//    };
+//    
+//    emailjs.send('service_xj1fdor','template_4u9p29c', tempParams).then(function(res){
+//        console.log("success",res.status);
+//    })
+}
+
+function updateAddress(event) {
+    event.preventDefault();
+    var swal = loading("Adding Address...", "Please Wait");
+    $.ajax({
+        type: 'post',
+        url: '/302cem-group7-project/public/php/checkout_add_address.php',
+        data: new FormData($("#modalAddress")[0]),
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function (result) {
+            result = JSON.parse(result)
+            loadingcomplete(swal);
+            if (result.status == 1) {
+                loadingsuccess("Address Added Successfully!","Thank You For Waiting",true)
+            } else {
+                loadingfailure("Address Failed To Add!","Please Try Again",false)
+            }
+        }
+    });
+}
+
 displayCheckoutList();
