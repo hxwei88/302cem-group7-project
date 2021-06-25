@@ -38,7 +38,7 @@ function display_book_details(result) {
                     '<hr>'+
                     '<p><span class="bookDetail-text">RM  '+item.retail_price+'</span><br></p>'+
                     '<p>'+item.description+'</p>'+
-                    '<button type="button" class="btn btn-primary bookDetail-more-btn" data-toggle="collapse" data-target="#more">View more info</button>'+
+                    '<button type="button" class="btn btn-primary bookDetail-more-btn" data-toggle="collapse" data-target="#more"><i class="fas fa-search me-3"></i>View more info</button>'+
                     '<div id="more" class="collapse">'+
                         '<p><span class="bookDetail-text">Item isbn: </span> '+item.isbn+'<br>'+                   
                         '<span class="bookDetail-text">Item Quantity: </span> '+item.quantity+' available<br>'+
@@ -69,12 +69,12 @@ function display_book_btn(result) {
         if(item.isbn == g_isbn){
                     //if cookie exists then enable button
                     if (cookieexist() == true) {
-                        html += '<button type="button" style="width:200px" class="btn btn-primary btn-md" value=' + item.isbn + ' onclick =\'add_to_cart_detail(' + JSON.stringify(item) + ')\'>Add to Cart</button>';
+                        html += '<button type="button" style="width:200px" class="btn btn-primary btn-md" value=' + item.isbn + ' onclick =\'add_to_cart_detail(' + JSON.stringify(item) + ')\'><i class="fas fa-cart-plus me-3"></i>Add to Cart</button>';
                     }
 
                     //if cookie doesnt exist, disable button
                     if (cookieexist() == false) {
-                        html += '<button type="button" style="width:200px" class="btn btn-primary btn-md" onclick="cookieredirect()">Add to Cart</button>';
+                        html += '<button type="button" style="width:200px" class="btn btn-primary btn-md" onclick="cookieredirect()"><i class="fas fa-cart-plus me-3"></i>Add to Cart</button>';
                     }
         }
     });

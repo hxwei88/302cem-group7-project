@@ -72,17 +72,17 @@ function display(data) {
                 '</div>' +
                 '</div>' +
                 '<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">' +
-                '<button type="button" style="margin-right:5px" class="btn btn-primary" value="'+ pass_this +'"onclick="redirect_bookdetail(this.value)">View details</button>';
+                '<button type="button" style="margin-right:5px" class="btn btn-primary" value="'+ pass_this +'"onclick="redirect_bookdetail(this.value)"><i class="fas fa-search me-2"></i>View Details</button>';
 
         //if cookie exists then enable button
         if (cookieexist() == true) {
            
-            html += '<button type="button" class="btn btn-primary" value=' + item.isbn + ' onclick =\'add_to_cart(' + JSON.stringify(item) + ')\'>Add to Cart</button>';
+            html += '<button type="button" class="btn btn-primary" value=' + item.isbn + ' onclick =\'add_to_cart(' + JSON.stringify(item) + ')\'><i class="fas fa-cart-plus me-2"></i>Add to Cart</button>';
         }
 
         //if cookie doesnt exist, disable button
         if (cookieexist() == false) {
-            html += '<button type="button" class="btn btn-primary" onclick="cookieredirect()">Add to Cart</button>';
+            html += '<button type="button" class="btn btn-primary" onclick="cookieredirect()"><i class="fas fa-cart-plus me-2"></i>Add to Cart</button>';
         }
         html += '</div>' +
                 '</div>' +
