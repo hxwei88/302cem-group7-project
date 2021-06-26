@@ -1,5 +1,18 @@
 localStorage.removeItem('checkoutcart');
 
+var checkoutcart = new Array();
+
+function checkoutcheckbox(index, booknumber, book) {  
+  var x = document.getElementById(booknumber).checked;
+    if (x == true){
+        checkoutcart.push({name: book.name, quantity: book.quantity, price: book.price,});
+        localStorage.setItem('checkoutcart', JSON.stringify(checkoutcart));
+    }else{
+        checkoutcart.splice(index, 1);
+        localStorage.setItem('checkoutcart', JSON.stringify(checkoutcart));
+   }
+}
+
 function update_quantity(quantity_select, isbn) {
     var item_update = JSON.parse(localStorage.getItem('cart'));
     totalincart = parseInt(localStorage.getItem('totalincart'));

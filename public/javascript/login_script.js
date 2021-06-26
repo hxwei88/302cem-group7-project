@@ -2,7 +2,7 @@ function login(event){
     event.preventDefault();
     $.ajax({
         type: 'post',
-        url: '/302cem-group7-project/public/php/login_process.php',
+        url: '/302cem-group7-project/public/php/login.php',
         data: new FormData($("#login_form")[0]),
         contentType: false,
         cache: false,
@@ -15,7 +15,7 @@ function login(event){
             } else {
                if (result.message == "admin") {
                    
-                   window.location = "../php/admin.php";
+                   window.location = "../php/admin_page.php";
                } else {
                    window.location = "../php/homepage.php";
                }

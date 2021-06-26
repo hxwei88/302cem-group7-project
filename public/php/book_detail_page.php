@@ -2,4 +2,5 @@
     include 'folder_path.php';
     include $views_path.'public_header.html'; 
     include $views_path.'book_detail.html'; 
+    include $views_path.'public_footer.html'; 
 ?>

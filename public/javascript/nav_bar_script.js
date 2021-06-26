@@ -19,6 +19,14 @@ if (JSON.parse(localStorage.getItem('cart')) != null) {
     $("#checkout_btn").addClass("d-none");
 }
 
+function logout() {
+    localStorage.removeItem('checkoutcart');
+    localStorage.removeItem('cart');
+    localStorage.removeItem('totalincart');
+    document.cookie = 'user' + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    window.location.replace("../php/homepage.php");
+}
+
 //add to cart button from book details page
 function add_to_cart_detail(book) {
     
@@ -137,8 +145,10 @@ function checkcookie(){
     //get cookie
     var cookie = getcookie()
     
+    console.log(cookie);
+    
     if(cookie === undefined){
-        window.location = "../php/login.php";
+        window.location = "../php/login_page.php";
     }else{
         window.location = "../php/cart_page.php";
     }
@@ -156,7 +166,14 @@ function cookieexist(){
 }
 
 function cookieredirect(){
-    window.location = "../php/login.php";
+    window.location = "../php/login_page.php";
 }
+
+function check_login_cookie() {
+    if (cookieexist() == false) {
+        cookieredirect();
+    }
+}
+
 
 

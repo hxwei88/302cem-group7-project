@@ -1,22 +1,22 @@
 <main style="background-color:#007bff; padding-top:100px; padding-bottom:100px;">
-   <!-- Create css class for section class login -->
+    <!-- Create css class for section class login -->
     <section class="login"
-        style="width:400px; background-color:white; border:1px black solid; margin-left:auto; margin-right:auto;padding-left:50px;
-                padding-right:50px; padding-top:100px; padding-bottom:100px">
+             style="width:400px; background-color:white; border:1px black solid; margin-left:auto; margin-right:auto;padding-left:50px;
+             padding-right:50px; padding-top:100px; padding-bottom:100px">
         <h1 style="text-align:center;">Login</h1>
         <hr>
 
-                <!-- login form -->
-                <form onsubmit="login(event)" method="POST" id="login_form">
+        <!-- login form -->
+        <form onsubmit="login(event)" method="POST" id="login_form">
             <div class="form-group">
                 <label for="nameinput">Username</label>
                 <input type="text" class="form-control" id="nameinput" name="name" placeholder="Enter your username" 
-                                style="width:300px; margin:auto;">
+                       style="width:300px; margin:auto;">
             </div>
             <div class="form-group">
                 <label for="passwordinput">Password</label>
-                    <input type="password" class="form-control" id="passwordinput" name="password"
-                        placeholder="Enter your password" style="width:300px; margin:auto;">
+                <input type="password" class="form-control" id="passwordinput" name="password"
+                       placeholder="Enter your password" style="width:300px; margin:auto;">
             </div>
             <button class="btn btn-primary" type="submit" name="submit">Login</button><br />
         </form>
