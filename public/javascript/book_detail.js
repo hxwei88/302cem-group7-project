@@ -1,8 +1,3 @@
-function redirect_bookdetail(isbn){
-    //redirect and put isbn value in url
-    window.location = '../php/book_detail.php?isbn=' + isbn;
-}
-
 function redirect_to_homepage(){
     //redirect and put isbn value in url
     window.location = '../php/homepage.php';
