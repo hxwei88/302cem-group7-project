@@ -23,6 +23,8 @@ function update_quantity(quantity_select, isbn) {
         cart.splice(i, 1);
         totalincart = totalincart - 1;
         localStorage.setItem('totalincart', totalincart.toString());
+        localStorage.setItem('cart', JSON.stringify(cart));
+        update_to_database();
     } else {
         for (i = 0; i < item_update.length; i++) {
             if (isbn == item_update[i].isbn) {
@@ -30,9 +32,9 @@ function update_quantity(quantity_select, isbn) {
                 cart[i] = {isbn: isbn, name: item_update[i].name, image: item_update[i].image, quantity: item_update[i].quantity, price: item_update[i].price, og_quantity: item_update[i].og_quantity};
             }
         }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        update_to_database();
     }
-
-    localStorage.setItem('cart', JSON.stringify(cart));
     document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
     display_cart();
 }
