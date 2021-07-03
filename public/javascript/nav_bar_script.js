@@ -1,6 +1,41 @@
 
 var cart = new Array();
 var totalincart = 0;
+
+function check_user_database() {
+    $.ajax({
+        type: 'post',
+        url: '/302cem-group7-project/public/php/check_user_cart.php',
+        success: function (result) {
+
+            var data = JSON.parse(result);
+            var product = JSON.parse(data['product']);
+
+            if (cookieexist() == true) {
+                if (item == null) {
+                    var i;
+                    for (i = 0; i < product.length; i++) {
+                        cart.push({isbn: product[i].isbn, name: product[i].name, image: product[i].image, quantity: product[i].quantity, price: product[i].price, og_quantity: product[i].og_quantity});
+                    }
+
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                }
+
+                if (localStorage.getItem('totalincart') == null) {
+                    totalincart = data['totalincart'];
+                    localStorage.setItem('totalincart', totalincart.toString());
+                    document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
+                    totalincart = parseInt(localStorage.getItem('totalincart'));
+                }
+            }
+        }
+    });
+
+}
+
+
+check_user_database();
+
 if (localStorage.getItem('totalincart') != null) {
     document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
     totalincart = parseInt(localStorage.getItem('totalincart'));
@@ -66,7 +101,7 @@ function add_to_cart_detail(book) {
 
     document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
 
-    //  window.location = "../php/cart_page.php";
+    window.location = "../php/cart_page.php";
 }
 
 function add_to_cart(book) {
@@ -102,7 +137,7 @@ function add_to_cart(book) {
 
     document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
 
-    //  window.location = "../php/cart_page.php";
+    window.location = "../php/cart_page.php";
 }
 
 
@@ -208,37 +243,3 @@ function update_to_database() {
     });
 
 }
-
-function check_user_database() {
-    $.ajax({
-        type: 'post',
-        url: '/302cem-group7-project/public/php/check_user_cart.php',
-        success: function (result) {
-
-            var data = JSON.parse(result);
-            var product = JSON.parse(data['product']);
-
-            if (cookieexist() == true) {
-                if (item == null) {
-                    var i;
-                    for (i = 0; i < product.length; i++) {
-                        cart.push({isbn: product[i].isbn, name: product[i].name, image: product[i].image, quantity: product[i].quantity, price: product[i].price, og_quantity: product[i].og_quantity});
-                    }
-
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                }
-
-                if (localStorage.getItem('totalincart') == null) {
-                    totalincart = data['totalincart'];
-                    localStorage.setItem('totalincart', totalincart.toString());
-                    document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
-                    totalincart = parseInt(localStorage.getItem('totalincart'));
-                }
-            }
-        }
-    });
-
-}
-
-
-check_user_database();
