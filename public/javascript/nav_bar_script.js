@@ -77,7 +77,7 @@ function add_to_cart(book) {
 
 
     if (item != null) {
-
+        
         //if cart is not empty, and if book doesnt exist in cart
         if (check_cart_item(book.isbn, item) != true) {
             cart.push({isbn: book.isbn, name: book.name, image: book.image, quantity: 1, price: book.retail_price, og_quantity: book.quantity});
@@ -87,14 +87,14 @@ function add_to_cart(book) {
         }
         //same book already exists in cart
         localStorage.setItem('cart', JSON.stringify(cart));
-        //update_to_database();
+        update_to_database();
     } else {
         //no book in cart, added new book
         cart.push({isbn: book.isbn, name: book.name, image: book.image, quantity: 1, price: book.retail_price, og_quantity: book.quantity});
         localStorage.setItem('cart', JSON.stringify(cart));
         totalincart = totalincart + 1;
         localStorage.setItem('totalincart', totalincart.toString());
-        //add_to_database();
+        add_to_database();
 
     }
 //    totalincart = totalincart + 1;
@@ -102,7 +102,7 @@ function add_to_cart(book) {
 
     document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
 
-    //  window.location = "../php/cart_page.php";
+      window.location = "../php/cart_page.php";
 }
 
 
@@ -116,9 +116,7 @@ function check_cart_item(isbn, item) {
                 cart[i] = {isbn: isbn, name: item[i].name, image: item[i].image, quantity: item[i].quantity, price: item[i].price, og_quantity: item[i].og_quantity};
                 return true;
             }
-        } else {
-            return true;
-        }
+        }  
     }
 }
 
