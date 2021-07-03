@@ -87,14 +87,14 @@ function add_to_cart(book) {
         }
         //same book already exists in cart
         localStorage.setItem('cart', JSON.stringify(cart));
-        update_to_database();
+        //update_to_database();
     } else {
         //no book in cart, added new book
         cart.push({isbn: book.isbn, name: book.name, image: book.image, quantity: 1, price: book.retail_price, og_quantity: book.quantity});
         localStorage.setItem('cart', JSON.stringify(cart));
         totalincart = totalincart + 1;
         localStorage.setItem('totalincart', totalincart.toString());
-        add_to_database();
+        //add_to_database();
 
     }
 //    totalincart = totalincart + 1;
