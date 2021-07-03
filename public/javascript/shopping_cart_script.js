@@ -13,10 +13,9 @@ function checkoutcheckbox(index, booknumber, book) {
    }
 }
 
-function update_quantity(quantity_select, isbn) {
+function update_quantity(quantity_select, isbn, i) {
     var item_update = JSON.parse(localStorage.getItem('cart'));
     totalincart = parseInt(localStorage.getItem('totalincart'));
-    var i;
     console.log(quantity_select);
 
     if (quantity_select == 0) {
@@ -35,6 +34,19 @@ function update_quantity(quantity_select, isbn) {
         localStorage.setItem('cart', JSON.stringify(cart));
         update_to_database();
     }
+    document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
+    display_cart();
+}
+
+function remove_item(i) {
+    totalincart = parseInt(localStorage.getItem('totalincart'));
+    
+    cart.splice(i, 1);
+    totalincart = totalincart - 1;
+    localStorage.setItem('totalincart', totalincart.toString());
+    localStorage.setItem('cart', JSON.stringify(cart));
+    update_to_database();
+    
     document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
     display_cart();
 }
@@ -74,7 +86,7 @@ function display_cart() {
             //html += '<input type="number" id="quantity" min="0" max="'+item[i].og_quantity+'" placeholder="'+ item[i].quantity +'">';
             html += '<div class="input-group mb-3">' +
                     '<label class="input-group-text" style="width: 100px !important;" for="quantity_select">Quantity</label>' +
-                    '<select class="form-select" style="width: 130px;" id="quantity_select" onchange="update_quantity(this.value,\'' + item[i].isbn + '\')">';
+                    '<select class="form-select" style="width: 130px;" id="quantity_select" onchange="update_quantity(this.value,\'' + item[i].isbn + '\', \'' + i + '\')">';
 
             for (var j = 0; j <= item[i].og_quantity; j++) {
                 if (j == item[i].quantity) {
@@ -86,6 +98,7 @@ function display_cart() {
             }
             html += '</select><br>' +
                     '</div>' +
+                    '<button type="button" class="btn btn-danger" onclick="remove_item(\'' + i + '\')">Remove</button>' + 
                     '</div>' + 
                     '</div>' + 
                     '</div>' + 
