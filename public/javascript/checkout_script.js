@@ -55,8 +55,8 @@ function checkout() {
     localStorage.setItem('cart', JSON.stringify(cart));
     document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
     alert(localStorage.getItem('cart'));
-  //  update_to_database();
-  //  update_order_history();
+    update_to_database();
+    update_order_history();
     localStorage.removeItem('checkoutcart');
 }
 

@@ -6,7 +6,7 @@ if (JSON.parse(localStorage.getItem('checkoutcart')) != null) {
     var i;
     var item = JSON.parse(localStorage.getItem('checkoutcart'))
     for (i = 0; i < item.length; i++) {
-        checkoutcart.push({name: item[i].name, quantity: item[i].quantity, price: item[i].price, });
+        checkoutcart.push({isbn: item[i].isbn, name: item[i].name, quantity: item[i].quantity, price: item[i].price, });
     }
 
     localStorage.setItem('checkoutcart', JSON.stringify(checkoutcart));
