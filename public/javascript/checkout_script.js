@@ -2,19 +2,19 @@
 //    localStorage.removeItem('checkoutcart');
 //}
 
-function displayCheckoutList(){
+function displayCheckoutList() {
     $("#checkoutbookdiv").html('');
     item = JSON.parse(localStorage.getItem('checkoutcart'));
     var totalprice = 0;
     var html = '';
     for (i = 0; i < item.length; i++) {
         //html += '<div class="d-flex justify-content-between"><span class="item" id="bookname" style="display:inline-block; width:200px; white-space:nowrap; overflow: hidden !important; text-overflow: ellipsis;">' + item[i].name + '</span><span class="price" id="bookprice">' + item[i].price + '</span></div>';
-        html += '<div class="row d-flex justify-content-between mb-2"><div class="col-8"><span class="item" id="bookname">' + item[i].name + '</span></div><div class="col-4" style="text-align:right;"><span class="price" id="bookprice">' + "RM " + item[i].price*item[i].quantity + '</span></div></div>';
-        totalprice += item[i].price*item[i].quantity;
+        html += '<div class="row d-flex justify-content-between mb-2"><div class="col-8"><span class="item" id="bookname">' + item[i].name + '</span></div><div class="col-4" style="text-align:right;"><span class="price" id="bookprice">' + "RM " + item[i].price * item[i].quantity + '</span></div></div>';
+        totalprice += item[i].price * item[i].quantity;
     }
-     $("#checkoutbookdiv").append(html);
-     document.getElementById("totalpriceincheckout").innerHTML = "RM " + totalprice;
-     
+    $("#checkoutbookdiv").append(html);
+    document.getElementById("totalpriceincheckout").innerHTML = "RM " + totalprice;
+
 }
 
 //this is temporary
@@ -23,34 +23,41 @@ function tempcheckoutsuccess(title, message) {
     localStorage.removeItem('cart');
     localStorage.removeItem('totalincart');
     tempcheckoutswal(title, message).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location = "../php/homepage.php";
-                    } else
-                        window.location = "../php/homepage.php";
+        if (result.isConfirmed) {
+            window.location = "../php/homepage.php";
+        } else
+            window.location = "../php/homepage.php";
     });
-            
+
 }
 
-function checkout(){
+function checkout() {
     var inCart = JSON.parse(localStorage.getItem('cart'));
     var checkoutCart = JSON.parse(localStorage.getItem('checkoutcart'));
     totalincart = parseInt(localStorage.getItem('totalincart'));
     
-    for(var i = 0; i < inCart.length; i++)
+   
+
+    for (var i = inCart.length-1; i >= 0; i--)
     {
-        for(var j = 0; j < checkoutCart.length; j++)
+        for (var j = 0; j < checkoutCart.length; j++)
         {
-            alert(JSON.stringify(checkoutCart[j]));
-            if(inCart[i].name == checkoutCart[j].name){
+
+            if (inCart[i].isbn == checkoutCart[j].isbn) {
                 cart.splice(i, 1);
                 totalincart = totalincart - 1;
-                localStorage.setItem('totalincart', totalincart.toString());
-                localStorage.setItem('cart', JSON.stringify(cart));
-                document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
-                update_to_database();
+              
             }
         }
     }
+    
+    localStorage.setItem('totalincart', totalincart.toString());
+    localStorage.setItem('cart', JSON.stringify(cart));
+    document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
+    alert(localStorage.getItem('cart'));
+    update_to_database();
+    update_order_history();
+    localStorage.removeItem('checkoutcart');
 }
 
 function invoiceEmail() {
@@ -78,19 +85,19 @@ function updateAddress(event) {
             result = JSON.parse(result)
             loadingcomplete(swal);
             if (result.status == 1) {
-                loadingsuccess("Address Added Successfully!","Thank You For Waiting",true)
+                loadingsuccess("Address Added Successfully!", "Thank You For Waiting", true)
             } else {
-                loadingfailure("Address Failed To Add!","Please Try Again",false)
+                loadingfailure("Address Failed To Add!", "Please Try Again", false)
             }
         }
     });
 }
 
 function request_user_data() {
-    $.when($('#stock').fadeOut('fast')).done(function () { 
+    $.when($('#stock').fadeOut('fast')).done(function () {
         $("#stock_spinner").fadeIn('fast');
     })
-    
+
     //if user has address it will auto input else will prompt modal
     $.ajax({
         type: 'post',
@@ -110,3 +117,16 @@ function request_user_data() {
 request_user_data();
 
 displayCheckoutList();
+
+function update_order_history() {
+    var checkout_item = localStorage.getItem('checkoutcart');
+    $.ajax({
+        type: 'post',
+        data: {'orderDetail': checkout_item},
+        url: '/302cem-group7-project/public/php/add_order_history.php',
+        success: function (result) {
+            alert(result);
+        }
+    });
+
+}

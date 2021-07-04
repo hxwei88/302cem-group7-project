@@ -86,10 +86,12 @@ function add_to_cart_detail(book) {
             totalincart = totalincart + 1;
             localStorage.setItem('totalincart', totalincart.toString());
             localStorage.setItem('cart', JSON.stringify(cart));
+            update_to_database();
         } else {
             //same book already exists in cart
             update_from_detail(book.isbn, item, select_quantity)
             localStorage.setItem('cart', JSON.stringify(cart));
+            update_to_database();
         }
     } else {
         //no book in cart, added new book
@@ -97,6 +99,7 @@ function add_to_cart_detail(book) {
         localStorage.setItem('cart', JSON.stringify(cart));
         totalincart = totalincart + 1;
         localStorage.setItem('totalincart', totalincart.toString());
+        add_to_database();
     }
 
     document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
@@ -112,7 +115,7 @@ function add_to_cart(book) {
 
 
     if (item != null) {
-
+        
         //if cart is not empty, and if book doesnt exist in cart
         if (check_cart_item(book.isbn, item) != true) {
             cart.push({isbn: book.isbn, name: book.name, image: book.image, quantity: 1, price: book.retail_price, og_quantity: book.quantity});
@@ -151,9 +154,7 @@ function check_cart_item(isbn, item) {
                 cart[i] = {isbn: isbn, name: item[i].name, image: item[i].image, quantity: item[i].quantity, price: item[i].price, og_quantity: item[i].og_quantity};
                 return true;
             }
-        } else {
-            return true;
-        }
+        }  
     }
 }
 
