@@ -35,24 +35,28 @@ function checkout() {
     var inCart = JSON.parse(localStorage.getItem('cart'));
     var checkoutCart = JSON.parse(localStorage.getItem('checkoutcart'));
     totalincart = parseInt(localStorage.getItem('totalincart'));
+    
+   
 
-    for (var i = 0; i < checkoutCart.length; i++)
+    for (var i = inCart.length-1; i >= 0; i--)
     {
-        for (var j = 0; j < inCart.length; j++)
+        for (var j = 0; j < checkoutCart.length; j++)
         {
 
-            if (inCart[j].name == checkoutCart[i].name) {
-                cart.splice(j, 1);
+            if (inCart[i].isbn == checkoutCart[j].isbn) {
+                cart.splice(i, 1);
                 totalincart = totalincart - 1;
               
             }
         }
     }
+    
     localStorage.setItem('totalincart', totalincart.toString());
     localStorage.setItem('cart', JSON.stringify(cart));
     document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
-    update_to_database();
-    update_order_history();
+    alert(localStorage.getItem('cart'));
+  //  update_to_database();
+  //  update_order_history();
     localStorage.removeItem('checkoutcart');
 }
 
