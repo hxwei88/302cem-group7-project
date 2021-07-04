@@ -47,11 +47,14 @@ function checkout(){
                 localStorage.setItem('totalincart', totalincart.toString());
                 localStorage.setItem('cart', JSON.stringify(cart));
                 document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
-                update_to_database();
-                update_order_history();
+             
             }
         }
     }
+    
+    update_to_database();
+    update_order_history();
+    localStorage.removeItem('checkoutcart');
 }
 
 function invoiceEmail() {
