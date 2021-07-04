@@ -15,7 +15,7 @@ if (JSON.parse(localStorage.getItem('checkoutcart')) != null) {
 function checkoutcheckbox(index, booknumber, book) {
     var x = document.getElementById(booknumber).checked;
     if (x == true) {
-        checkoutcart.push({name: book.name, quantity: book.quantity, price: book.price, });
+        checkoutcart.push({isbn: book.isbn, name: book.name, quantity: book.quantity, price: book.price, });
         localStorage.setItem('checkoutcart', JSON.stringify(checkoutcart));
     } else {
         var checkoutItem = JSON.parse(localStorage.getItem('checkoutcart'));
