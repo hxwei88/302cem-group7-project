@@ -1,11 +1,19 @@
-    <body class="bookDetail-body">
+
+<body class="bookDetail-body">
+
     <div class="row">
         <div class="col-2 mx-5 my-2" style="margin-left:10%!important">
             <button type="button" class="btn btn-primary" onclick="redirect_to_homepage()"><i class="fas fa-arrow-circle-left me-2"></i>Return to homepage</button>
         </div>
         <div class="col-10"></div>
     </div>
-    <div class="row mb-5">
+    <div class="row" id="detail_spinner">
+        <div class="spinner-border text-primary m-auto" role="status" >
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <div class="row mb-5" id="book_detail_display" style="display:none">
+
         <div class="col-6 px-5">
             <div id="display_books_img" class="row mx-5 my-4 p-3 ">
 
@@ -23,10 +31,11 @@
         </div>
     </div>
 
-        
-<!-- Footer-->
-<!--<footer class="py-2 bg-dark mt-auto fixed-bottom">
-    <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
-</footer>-->
-<!--Local Script-->
-<script type="text/javaScript" src="/302cem-group7-project/public/javascript/book_detail.js"></script>
+
+
+    <!-- Footer-->
+    <!--<footer class="py-2 bg-dark mt-auto fixed-bottom">
+        <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
+    </footer>-->
+    <!--Local Script-->
+    <script type="text/javaScript" src="/302cem-group7-project/public/javascript/book_detail.js"></script>

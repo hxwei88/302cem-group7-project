@@ -6,14 +6,24 @@
             <li class="breadcrumb-item active">Order History</li>
         </ol>
 
-        <div style="padding-left:1%">
-            <div class="row">
+
+
+        <div class="container-fluid">
+            <div class="row d-flex justify-content-end">
+                <button type="button" class="btn btn-primary" id="table-view" onClick="show_table()" style="margin-right:15px"><i class="fas fa-table me-2" style="margin-right:10px"></i>Table View</button>
+                <button type="button" class="btn btn-primary" id="card-view" onClick="show_card()"><i class="far fa-window-maximize me-2" style="margin-right:10px"></i>Card View</button>
+            </div>
+            <div class="row mt-3 mb-5">
+                <div class="spinner-border text-primary m-auto" role="status" id="history_spinner">
+                    <span class="sr-only">Loading...</span>
+                </div>
                 <div id="history_display">
-                    
+
                 </div>
             </div>
         </div>
     </div>
+    
 </main>
 
 
