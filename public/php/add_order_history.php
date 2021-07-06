@@ -5,7 +5,10 @@ include ('db.php');
 $getDate = date("Y-m-d");
 
 $orderDetail = $_POST['orderDetail'];
-$query1 = "INSERT INTO history (orderDetail, userid, date) VALUES ( '".$orderDetail."', '".$_COOKIE["userid"]."', '".$getDate."' )";
+$fname = $_POST['fname'];
+$email = $_POST['email'];
+
+$query1 = "INSERT INTO history (orderDetail, userid, date, username, email) VALUES ( '".$orderDetail."', '".$_COOKIE["userid"]."', '".$getDate."', '".$fname."', '".$email."')";
 $query2 = mysqli_query($conn, $query1);
 
 //$sql = "SELECT * FROM history";
