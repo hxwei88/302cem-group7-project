@@ -87,6 +87,8 @@ function display_history(result) {
     $("#history_display").append(html);
 }
 
+
+
 function request_history_data(data) {
     $.ajax({
         type: 'post',
