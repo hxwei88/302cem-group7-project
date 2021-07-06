@@ -239,7 +239,7 @@ function update_to_database() {
         data: {'product': cart_item, 'totalincart': total_in_cart},
         url: '/302cem-group7-project/public/php/update_cart.php',
         success: function (result) {
-            alert(result);
+            //alert(result);
         }
     });
 
