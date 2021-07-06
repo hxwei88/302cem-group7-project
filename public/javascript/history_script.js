@@ -1,4 +1,6 @@
-
+$(document).ready( function () {
+    $('#exampletable2').DataTable();
+} );
 //function display_history(result) {
 //    $("#history_display").html('');
 //    var html = '';
