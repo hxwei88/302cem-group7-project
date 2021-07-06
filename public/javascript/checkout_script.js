@@ -121,11 +121,12 @@ displayCheckoutList();
 function update_order_history() {
     var fname = document.getElementById("fname").value; 
     var email = document.getElementById("email").value; 
+    var address = document.getElementById("adr").value; 
     var checkout_item = localStorage.getItem('checkoutcart');
 
     $.ajax({
         type: 'post',
-        data: {'orderDetail': checkout_item, 'fname': fname, 'email': email},
+        data: {'orderDetail': checkout_item, 'fname': fname, 'email': email, 'address': address},
         url: '/302cem-group7-project/public/php/add_order_history.php',
         success: function (result) {
             alert(result);
