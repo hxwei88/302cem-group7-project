@@ -4,13 +4,16 @@ include ('db.php');
 
 //$getDate = date("Y-m-d");
 
+date_default_timezone_set("Asia/Kuala_Lumpur");
+$getDate = date('Y-m-d H:i:s', time());
+
 $orderDetail = $_POST['orderDetail'];
 $fname = $_POST['fname'];
 $email = $_POST['email'];
 $address = $_POST['address'];
 
 //$query1 = "INSERT INTO history (orderDetail, userid, date, username, email) VALUES ( '".$orderDetail."', '".$_COOKIE["userid"]."', '".$getDate."', '".$fname."', '".$email."')";
-$query1 = "INSERT INTO history (orderDetail, userid, username, email, address) VALUES ( '".$orderDetail."', '".$_COOKIE["userid"]."', '".$fname."', '".$email."', '".$address."')";
+$query1 = "INSERT INTO history (orderDetail, userid, date, username, email, address) VALUES ( '".$orderDetail."', '".$_COOKIE["userid"]."', '".$getDate."', '".$fname."', '".$email."', '".$address."')";
 
 $query2 = mysqli_query($conn, $query1);
 

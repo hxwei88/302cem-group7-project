@@ -108,6 +108,9 @@ html+="";
 }
 
 function request_book_data(data) {
+    $.when($('#book_detail_display').fadeOut('fast')).done(function () {
+        $("#detail_spinner").fadeIn('fast');
+    })
     $.ajax({
         type: 'post',
         url: '/302cem-group7-project/public/php/stock.php',
@@ -121,6 +124,9 @@ function request_book_data(data) {
             display_book_details(result.result);
             display_book_btn(result.result);
             display_book_img(result.result);
+             $.when($('#detail_spinner').fadeOut('fast')).done(function () {
+                $("#book_detail_display").fadeIn('fast');
+            })
         }
     });
 }
