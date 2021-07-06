@@ -10297,3 +10297,11 @@ div#details{
 .ui-datepicker-next,.ui-datepicker-prev {
   display:none;
 }
+
+.history-card{
+    width:500px;
+}
+
+.history-button{
+    margin-left:30%;
+}
