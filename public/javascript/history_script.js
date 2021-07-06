@@ -90,7 +90,7 @@ function display_history(result) {
 function request_history_data(data) {
     $.ajax({
         type: 'post',
-        url: '/302cem-group7-project/public/php/getHistory.php',
+        url: '/302cem-group7-project/public/php/history.php',
         success: function (result) {
             result = JSON.parse(result);
             console.log(result);
