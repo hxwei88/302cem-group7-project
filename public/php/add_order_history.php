@@ -1,28 +1,40 @@
-<?php 
-include ('folder_path.php');
-include ('db.php');
+<?php
+class Add_Order_History
+{   
+    public function main() {
+        include ('folder_path.php');
+        include ('db.php');
 
-//$getDate = date("Y-m-d");
+        //$getDate = date("Y-m-d");
 
-date_default_timezone_set("Asia/Kuala_Lumpur");
-$getDate = date('Y-m-d H:i:s', time());
+        date_default_timezone_set("Asia/Kuala_Lumpur");
+        $getDate = date('Y-m-d H:i:s', time());
 
-$orderDetail = $_POST['orderDetail'];
-$fname = $_POST['fname'];
-$email = $_POST['email'];
-$address = $_POST['address'];
+        $orderDetail = $_POST['orderDetail'];
+        $fname = $_POST['fname'];
+        $email = $_POST['email'];
+        $address = $_POST['address'];
 
-//$query1 = "INSERT INTO history (orderDetail, userid, date, username, email) VALUES ( '".$orderDetail."', '".$_COOKIE["userid"]."', '".$getDate."', '".$fname."', '".$email."')";
-$query1 = "INSERT INTO history (orderDetail, userid, date, username, email, address) VALUES ( '".$orderDetail."', '".$_COOKIE["userid"]."', '".$getDate."', '".$fname."', '".$email."', '".$address."')";
+        //$query1 = "INSERT INTO history (orderDetail, userid, date, username, email) VALUES ( '".$orderDetail."', '".$_COOKIE["userid"]."', '".$getDate."', '".$fname."', '".$email."')";
+        $query1 = "INSERT INTO history (orderDetail, userid, date, username, email, address) VALUES ( '".$orderDetail."', '".$_COOKIE["userid"]."', '".$getDate."', '".$fname."', '".$email."', '".$address."')";
 
-$query2 = mysqli_query($conn, $query1);
+        $query2 = mysqli_query($conn, $query1);
 
-//$sql = "SELECT * FROM history";
-//$query = mysqli_query($conn, $sql);
-//
-//$test = json_encode($query->fetch_assoc());
+        //$sql = "SELECT * FROM history";
+        //$query = mysqli_query($conn, $sql);
+        //
+        //$test = json_encode($query->fetch_assoc());
 
+        if($query2)
+        {
+            echo json_encode(array("status"=>1, "message"=>"Order added."));
+        }
+        else {
+            echo json_encode(array("status"=>0, "message"=>"An error has occured."));
+        }
+    }
+}
 
-echo $query2;
-
+$add_order_history = new Add_Order_History();
+$add_order_history->main();
 ?>
