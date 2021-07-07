@@ -46,10 +46,11 @@ function submit_add_stock(event) {
             isbn: $("#isbn_input").val()
         },
         success: function (result) {
-            if (result == '1') {
+            result = JSON.parse(result);
+            if (result.status == '1') {
                 caution('Update Stock', 'Do you want to update this stock?').then((result) => {
                     if (result.isConfirmed) {
-
+                        console.log("add book")
                         var swal = loading("Updating Book...", "This will take a moment...");
                         $.ajax({
                             type: 'post',
@@ -62,7 +63,7 @@ function submit_add_stock(event) {
                                 result = JSON.parse(result);
 
                                 if (result.status == 1) {
-                                    loadingsuccess("Success!", "Book added successfully!", true);
+                                    loadingsuccess("Success!", "Book updated successfully!", true);
                                 } else {
                                     loadingfailure("Error", result.message, true)
                                 }
@@ -81,6 +82,7 @@ function submit_add_stock(event) {
                     success: function (result) {
                         result = JSON.parse(result);
 
+                        console.log("add book")
                         if (result.status == 1) {
                             loadingsuccess("Success!", "Book added successfully!", true);
                         } else {

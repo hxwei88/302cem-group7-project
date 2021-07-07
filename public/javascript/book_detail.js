@@ -31,13 +31,13 @@ function display_book_details(result) {
             html += '<h2><span class="bookDetail-text"> ' + item.name + '</span></h2>' +
                     '<p><span class="bookDetail-text">By ' + item.author + '</span></p><br>' +
                     '<hr>' +
-                    '<p><span class="bookDetail-text">RM  ' + item.retail_price + '</span><br></p>' +
+                    '<p><span class="bookDetail-text">RM ' + item.retail_price + '</span><br></p>' +
                     '<p>' + item.description + '</p>' +
                     '<button type="button" class="btn btn-primary bookDetail-more-btn" data-toggle="collapse" data-target="#more"><i class="fas fa-search me-3"></i>View more info</button>' +
                     '<div id="more" class="collapse">' +
-                    '<p><span class="bookDetail-text">Item isbn: </span> ' + item.isbn + '<br>' +
-                    '<span class="bookDetail-text">Item Quantity: </span> ' + item.quantity + ' available<br>' +
-                    '<span class="bookDetail-text">Publication Date</span> ' + item.publication_date + '<br>' +
+                    '<p><span class="bookDetail-text">ISBN: </span> ' + item.isbn + '<br>' +
+                    '<span class="bookDetail-text">Quantity: </span> ' + item.quantity + '<br>' +
+                    '<span class="bookDetail-text">Publication Date: </span> ' + item.publication_date + '<br>' +
                     '</div>' +
                     '<hr>' +
                     '<div class="input-group my-2">' +

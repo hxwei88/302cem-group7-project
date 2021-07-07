@@ -9,11 +9,11 @@ class Add_Stock {
         //if ($_SERVER['REQUEST_METHOD'] == "POST") {
             //assign variable from ajax
             $image = $_FILES['image']['name'];
-            $isbn = $_POST['isbn_input'];
-            $name = $_POST['name_input'];
-            $author = $_POST['author_input'];
+            $isbn = addslashes($_POST['isbn_input']);
+            $name = addslashes($_POST['name_input']);
+            $author = addslashes($_POST['author_input']);
             $date = $_POST['date_input'];
-            $description = $_POST['description_input'];
+            $description = addslashes($_POST['description_input']);
             $trade = $_POST['trade_input'];
             $retail = $_POST['retail_input'];
             $quantity = $_POST['quantity_input'];
