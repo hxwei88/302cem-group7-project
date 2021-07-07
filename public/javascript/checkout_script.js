@@ -51,13 +51,8 @@ function checkout() {
         }
     }
     
-    localStorage.setItem('totalincart', totalincart.toString());
-    localStorage.setItem('cart', JSON.stringify(cart));
-    document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
     alert(localStorage.getItem('cart'));
-    update_to_database();
     update_order_history();
-    localStorage.removeItem('checkoutcart');
 }
 
 function invoiceEmail() {
@@ -129,7 +124,10 @@ function update_order_history() {
         data: {'orderDetail': checkout_item, 'fname': fname, 'email': email, 'address': address},
         url: '/302cem-group7-project/public/php/add_order_history.php',
         success: function (result) {
-            alert(result);
+            localStorage.setItem('totalincart', totalincart.toString());
+            localStorage.setItem('cart', JSON.stringify(cart));
+            document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
+            update_to_database();
         }
     });
 

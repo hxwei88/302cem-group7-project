@@ -16,7 +16,7 @@ class unit_test_exampleTest extends PHPUnit\Framework\TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp(): void {
-        $this->object = new Calculator;
+        $this->object = new Calculator(25);
     }
 
     /**
@@ -32,10 +32,23 @@ class unit_test_exampleTest extends PHPUnit\Framework\TestCase {
      * @todo   Implement testAdd().
      */
     public function testAdd() {
+        $_POST = array('test'=>25, 'test2'=>25);
         // Remove the following lines when you implement this test.
-        $expected = '50';
+        $expected = json_encode(array('value'=>50, 'status'=>1));
         $this->expectOutputString($expected);
-        $this->object->add(25, 25);
+        $response = $this->object->add(25, 25);
+        
+//        $this->assertJsonStringEqualsJsonString(
+//            $response,
+//            json_encode(array('value'=>50, 'status'=>1))
+//        );
+//        $this->post('/302cem-group7-project/public/php/unit_test_example.php', [
+//            'test' => 25
+//        ]);
+//
+//        $res_array = (array)json_decode($this->response->content(), true);
+//
+//        $this->assertArrayHasKey('status', $res_array);
     }
 
 }
