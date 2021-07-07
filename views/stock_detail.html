@@ -3,30 +3,95 @@
 </div>
 <main id="stock_detail" class="container" style="margin-top: 60px; display: none;">
     <div id = "details">
+        <div class="row left mb-3">
+            <div class = "col-sm-12">
+                <button type="button" class="btn btn-primary" onclick="nav_back()"><i class="fa fa-arrow-circle-left" style="margin-right: 5px" aria-hidden="true"></i>Back</button>
+            </div>
+        </div>
         <div class  ="card">
             <div class=" row ">
                 <div class = "col-sm-6 border-right ">
-                    <img class = "img-detail" id="details-img" style="height: 500px; width: 80%; border-radius: 2%"/>
+                    <img class = "img-detail" id="details-img" style="height: 500px; width: 80%; border-radius: 2%" onerror="this.src=\'../resources/images/default_book.png\'"/>
                 </div>
                 <div class = "col-sm-6">
                     <div class="card-body">
-                            <h1><span id="detail-name"></span></h1>
-                            <div id="detail-author" style="margin-bottom: 30px"></div><br>
-                            <div style="line-height: 50px">
-                                <b>Trade Price:</b> RM<span id="detail-tp"></span><br>
-                                <b>Retail Price:</b> RM<span id="detail-rp"></span><br>
-                                <b>Quantity:</b> <span id="detail-quantity"></span> in stock<br>
-                                <b>Publication Date:</b> <span id="detail-date"></span><br>
-                                <b>ISBN:</b> <span id="detail-isbn"></span><br>
-                                <b>Description:</b> <span id="detail-des"></span><br>
+                        <h1><span id="detail-name"></span></h1>
+                        <div id="detail-author" style="margin-bottom: 20px"></div><br>
+
+                        <!--                        <div style="line-height: 50px">
+                                                    <b>Trade Price:</b> RM<span id="detail-tp"></span><br>
+                                                    <b>Retail Price:</b> RM<span id="detail-rp"></span><br>
+                                                    <b>Publication Date:</b> <span id="detail-date"></span><br>
+                                                    <b>ISBN:</b> <span id="detail-isbn"></span><br>
+                                                    <b>Description:</b> <span id="detail-des"></span><br>
+                                                </div>-->
+                        <form id="stock_detail_form" style="line-height: 50px" onsubmit="update_book(event)">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: white; width:155px"><b>Name:</b></span>
+                                </div>
+                                <input type="text" class="form-control" name="detail-name-input" id="detail-name-input">
                             </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: white; width:155px"><b>Author:</b></span>
+                                </div>
+                                <input type="text" class="form-control" name="detail-author-input" id="detail-author-input">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: white; width:155px"><b>Trade Price (RM):</b></span>
+                                </div>
+                                <input type="number"  class="form-control" name="detail-tp" onchange="validate_number(this, 2)" step="any" id="detail-tp" min="0" max="99999" >
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: white; width:155px"><b>Retail Price (RM):</b></span>
+                                </div>
+                                <input type="number" class="form-control" name="detail-rp" onchange="validate_number(this, 2)" step="any" id="detail-rp" min="0" max="99999">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: white; width:155px"><b>Quantity:</b></span>
+                                </div>
+                                <input type="number" class="form-control" name="detail-quantity" id="detail-quantity" onchange="validate_number(this, 0)" step="1" min="0" max="9999" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: white; width:155px"><b>Publication Date:</b></span>
+                                </div>
+                                <input type="month" name="detail-date" id="detail-date" class="form-control">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: white; width:155px"><b>ISBN:</b></span>
+                                </div>
+                                <input type="text" class="form-control" name="detail-isbn" id="detail-isbn">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="background-color: white; width:155px"><b>Image:</b></span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="detail-image" name="detail-image" accept=".jpg,.png,.jpeg" onchange="upload_validation(this)" >
+                                    <label class="custom-file-label" id="detail-imageID" for="image">Select image</label>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="align-items:flex-start; background-color: white; width:155px"><b>Description:</b></span>
+                                </div>
+                                <textarea class="form-control" name="detail-des" id="detail-des" style="min-height:200px; resize: none;"></textarea>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-edit" style="margin-right: 5px" aria-hidden="true"></i>Save</button>
+                            </div>
+                            
+<!--                            For updating-->
+                            <input type="text" class="form-control" name="old_isbn" id="old_isbn" hidden>
+                        </form>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row right">
-            <div class = "col-sm-12  ">
-                <button type="button" class="btn btn-primary" onclick="nav_back()">Back</button>
             </div>
         </div>
     </div>

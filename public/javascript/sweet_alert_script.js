@@ -66,7 +66,7 @@ function loadingcomplete(swal) {
 }
 
 function loadingsuccess(title, message, escape) {
-    Swal.fire({
+    var swal = Swal.fire({
         icon: 'success',
         title: title,
         text: message,
@@ -74,6 +74,8 @@ function loadingsuccess(title, message, escape) {
         allowOutsideClick: escape,
         timer: 1500
     });
+    
+    return swal;
 }
 
 function loadingfailure(title, message, escape) {
@@ -81,7 +83,8 @@ function loadingfailure(title, message, escape) {
         icon: 'error',
         title: title,
         text: message,
-        allowOutsideClick: escape
+        allowOutsideClick: escape,
+        timer: 1500
     });
     return swal;
 }

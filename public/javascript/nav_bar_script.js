@@ -9,23 +9,26 @@ function check_user_database() {
         success: function (result) {
 
             var data = JSON.parse(result);
-            var product = JSON.parse(data['product']);
+            if(data != null)
+            {
+                var product = JSON.parse(data['product']);
 
-            if (cookieexist() == true) {
-                if (item == null) {
-                    var i;
-                    for (i = 0; i < product.length; i++) {
-                        cart.push({isbn: product[i].isbn, name: product[i].name, image: product[i].image, quantity: product[i].quantity, price: product[i].price, og_quantity: product[i].og_quantity});
+                if (cookieexist() == true) {
+                    if (item == null) {
+                        var i;
+                        for (i = 0; i < product.length; i++) {
+                            cart.push({isbn: product[i].isbn, name: product[i].name, image: product[i].image, quantity: product[i].quantity, price: product[i].price, og_quantity: product[i].og_quantity});
+                        }
+
+                        localStorage.setItem('cart', JSON.stringify(cart));
                     }
 
-                    localStorage.setItem('cart', JSON.stringify(cart));
-                }
-
-                if (localStorage.getItem('totalincart') == null) {
-                    totalincart = data['totalincart'];
-                    localStorage.setItem('totalincart', totalincart.toString());
-                    document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
-                    totalincart = parseInt(localStorage.getItem('totalincart'));
+                    if (localStorage.getItem('totalincart') == null) {
+                        totalincart = data['totalincart'];
+                        localStorage.setItem('totalincart', totalincart.toString());
+                        document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
+                        totalincart = parseInt(localStorage.getItem('totalincart'));
+                    }
                 }
             }
         }
