@@ -25,7 +25,7 @@ class Stock
     }
 }
 
-//$stock = new Stock();
-//$stock->main();
+$stock = new Stock();
+$stock->main();
 ?>
 
