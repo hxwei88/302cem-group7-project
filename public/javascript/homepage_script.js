@@ -76,9 +76,13 @@ function display(data) {
 
         //if cookie exists then enable button
         if (cookieexist() == true) {
-           
+           if (item.quantity > 0){
             html += '<button type="button" class="btn btn-primary" value=' + item.isbn + ' onclick =\'add_to_cart(' + JSON.stringify(item) + ')\'><i class="fas fa-cart-plus me-2"></i>Add to Cart</button>';
+            }else{
+            html += '<button type="button" class="btn btn-primary" value=' + item.isbn + ' onclick =\'add_to_cart(' + JSON.stringify(item) + ')\' disabled><i class="fas fa-cart-plus me-2"></i>Add to Cart</button>';
+            }
         }
+        
 
         //if cookie doesnt exist, disable button
         if (cookieexist() == false) {
