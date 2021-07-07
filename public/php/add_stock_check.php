@@ -18,9 +18,9 @@ class Add_Stock_Check {
         $run = mysqli_query($conn, $isbnCheck);
 
         if (mysqli_num_rows($run) > 0) {
-            echo json_encode(array("status" => 1, "message" => "Successfully checked for stock"));
+            echo json_encode(array("status" => 1, "message" => "Book added present in database"));
         }else{
-            echo json_encode(array("status" => 0, "message" => "An error occured"));
+            echo json_encode(array("status" => 0, "message" => "Book added not present in database"));
         }
 //        
 //        if (mysqli_num_rows($run) > 0) {        
