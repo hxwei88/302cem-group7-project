@@ -86,6 +86,8 @@ function updateAddress(event) {
             } else {
                 loadingfailure("Address Failed To Add!", "Please Try Again", false)
             }
+            //need to close the modal
+            //need to autofill the address
         }
     });
 }

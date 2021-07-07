@@ -4,10 +4,11 @@ class Checkout_User_Profile {
 
     public function main() {
         include ('folder_path.php');
-        include ('db.php');
+        include_once ('db.php');
 
         $query = "SELECT address FROM users WHERE userid = '" . $_COOKIE["userid"] . "'";
 
+        global $conn;
         $result = mysqli_query($conn, $query);
 
         $queryresult = $result->fetch_all(MYSQLI_ASSOC);
@@ -28,7 +29,7 @@ class Checkout_User_Profile {
     }
 }
 
-//$checkout_user_profile = new Checkout_User_Profile();
-//$checkout_user_profile->main();
+$checkout_user_profile = new Checkout_User_Profile();
+$checkout_user_profile->main();
 
 ?>

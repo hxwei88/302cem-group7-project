@@ -1,10 +1,11 @@
 <?php
     session_start();
     include ('folder_path.php');
-    include ('db.php');
+    include_once ('db.php');
 
     if($_SERVER['REQUEST_METHOD'] == "POST")
     {
+        global $conn;
         $username = mysqli_real_escape_string($conn, $_POST['name']);
         $password=mysqli_real_escape_string($conn, $_POST['password']);
         

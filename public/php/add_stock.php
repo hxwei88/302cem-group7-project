@@ -4,7 +4,7 @@ class Add_Stock {
     public function main() {
         include ('folder_path.php');
         //needs checking when hosted online
-        include ('db.php');
+        include_once ('db.php');
       
         //if ($_SERVER['REQUEST_METHOD'] == "POST") {
             //assign variable from ajax
@@ -17,6 +17,7 @@ class Add_Stock {
             $trade = $_POST['trade_input'];
             $retail = $_POST['retail_input'];
             $quantity = $_POST['quantity_input'];
+            global $conn;
 
             //specify upload location for image file, still need file type verfication.
             $ext = substr($image, strripos($image, '.'));

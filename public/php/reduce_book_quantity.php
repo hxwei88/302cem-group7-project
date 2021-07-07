@@ -1,6 +1,6 @@
 <?php 
 include ('folder_path.php');
-include ('db.php');
+include_once ('db.php');
 
 $json = array();
 
@@ -13,6 +13,7 @@ for ($x = 0; $x < $size; $x++) {
   $totalbook = $product[$x]->og_quantity - $product[$x]->quantity;
   echo '          tesdt        ';
   echo $totalbook;
+  global $conn;
   
   $query1 = "UPDATE books SET quantity = '" . $totalbook . "'  WHERE isbn = '" . $product[$x]->isbn . "'";
   $query = mysqli_query($conn, $query1);

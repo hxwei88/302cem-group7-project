@@ -4,8 +4,10 @@ class Add_To_Cart {
 
     public function main() {
         include ('folder_path.php');
-        include ('db.php');
+        include_once ('db.php');
 
+        global $conn;
+        
         $product = $_POST['product'];
         $totalincart = $_POST['totalincart'];
         $query1 = "INSERT INTO cart (product, userid, totalincart) VALUES ( '" . $product . "', '" . $_COOKIE["userid"] . "', '" . $totalincart . "' )";
