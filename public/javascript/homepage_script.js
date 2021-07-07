@@ -117,6 +117,7 @@ function request_book_data(data) {
 }
 request_book_data();
 
+//unused
 function add_to_cart_ajax(isbn) {
     var swal = loading("Cart", "Adding in to cart...");
 
