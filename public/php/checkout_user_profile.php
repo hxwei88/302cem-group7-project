@@ -1,16 +1,34 @@
 <?php
-include ('folder_path.php');
-include ('db.php');
 
-$query = "SELECT address FROM users WHERE userid = '".$_COOKIE["userid"]."'";
+class Checkout_User_Profile {
 
-$result = mysqli_query($conn, $query);
+    public function main() {
+        include ('folder_path.php');
+        include ('db.php');
 
-$queryresult = $result->fetch_all(MYSQLI_ASSOC);
+        $query = "SELECT address FROM users WHERE userid = '" . $_COOKIE["userid"] . "'";
 
-if ($queryresult[0]["address"]!="") {
-    exit(json_encode(array("status"=>1, "message"=>"Search Result Returned.", "result"=>$queryresult)));
-} else {
-    exit(json_encode(array("status"=>0, "message"=>"An error has occurred.")));
+        $result = mysqli_query($conn, $query);
+
+        $queryresult = $result->fetch_all(MYSQLI_ASSOC);
+        
+        if(count($queryresult) > 0 )
+        {
+            if ($queryresult[0]["address"] != "") {
+                echo(json_encode(array("status" => 1, "message" => "Search Result Returned.", "result" => $queryresult)));
+                return true;
+            } else {
+                echo(json_encode(array("status" => 0, "message" => "User address doesn't exist.")));
+            }
+        }
+        else
+        {
+            echo(json_encode(array("status" => 0, "message" => "User doesn't exist.")));
+        }
+    }
 }
+
+//$checkout_user_profile = new Checkout_User_Profile();
+//$checkout_user_profile->main();
+
 ?>

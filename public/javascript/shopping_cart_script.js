@@ -6,7 +6,7 @@ if (JSON.parse(localStorage.getItem('checkoutcart')) != null) {
     var i;
     var item = JSON.parse(localStorage.getItem('checkoutcart'))
     for (i = 0; i < item.length; i++) {
-        checkoutcart.push({isbn: item[i].isbn, name: item[i].name, quantity: item[i].quantity, price: item[i].price, });
+        checkoutcart.push({isbn: item[i].isbn, name: item[i].name, quantity: item[i].quantity, price: item[i].price, og_quantity:item[i].og_quantity});
     }
 
     localStorage.setItem('checkoutcart', JSON.stringify(checkoutcart));
@@ -15,7 +15,7 @@ if (JSON.parse(localStorage.getItem('checkoutcart')) != null) {
 function checkoutcheckbox(index, booknumber, book) {
     var x = document.getElementById(booknumber).checked;
     if (x == true) {
-        checkoutcart.push({isbn: book.isbn, name: book.name, quantity: book.quantity, price: book.price, });
+        checkoutcart.push({isbn: book.isbn, name: book.name, quantity: book.quantity, price: book.price, og_quantity:book.og_quantity });
         localStorage.setItem('checkoutcart', JSON.stringify(checkoutcart));
     } else {
         var checkoutItem = JSON.parse(localStorage.getItem('checkoutcart'));

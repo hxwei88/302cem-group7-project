@@ -1,13 +1,11 @@
 <?php
-
 class Add_Stock {
 
     public function main() {
         include ('folder_path.php');
         //needs checking when hosted online
         include ('db.php');
-        
-        
+      
         //if ($_SERVER['REQUEST_METHOD'] == "POST") {
             //assign variable from ajax
             $image = $_FILES['image']['name'];
@@ -103,5 +101,4 @@ class Add_Stock {
 
 $add_stock = new Add_Stock();
 $add_stock->main();
-
 ?>

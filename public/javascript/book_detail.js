@@ -1,23 +1,23 @@
-function redirect_to_homepage(){
+function redirect_to_homepage() {
     //redirect and put isbn value in url
     window.location = '../php/homepage.php';
 }
 
 //function to retrieve the isbn value from url
-var urlParam = function(name, w){
+var urlParam = function (name, w) {
     w = w || window;
-    var rx = new RegExp('[\&|\?]'+name+'=([^\&\#]+)'),
-        val = w.location.search.match(rx);
-    return !val ? '':val[1];
+    var rx = new RegExp('[\&|\?]' + name + '=([^\&\#]+)'),
+            val = w.location.search.match(rx);
+    return !val ? '' : val[1];
 }
 
 //call retrieve data from url function
 var g_isbn = urlParam('isbn');
 
 //replace all white space(%20) with whitespace
-g_isbn = g_isbn.replace(/%20/g,' ');
+g_isbn = g_isbn.replace(/%20/g, ' ');
 
-console.log("isbn from url: "+g_isbn);
+console.log("isbn from url: " + g_isbn);
 
 //display book details, isbn, description, price, and available quantity
 function display_book_details(result) {
@@ -27,27 +27,27 @@ function display_book_details(result) {
 
     result.forEach(function (item, index, arr) {
         //if the retrieved isbn from books table matches the url isbn value
-        if(item.isbn == g_isbn){
-            html += '<h2><span class="bookDetail-text"> '+item.name+'</span></h2>'+
-                    '<p><span class="bookDetail-text">By '+item.author+'</span></p><br>'+
-                    '<hr>'+
-                    '<p><span class="bookDetail-text">RM  '+item.retail_price+'</span><br></p>'+
-                    '<p>'+item.description+'</p>'+
-                    '<button type="button" class="btn btn-primary bookDetail-more-btn" data-toggle="collapse" data-target="#more"><i class="fas fa-search me-3"></i>View more info</button>'+
-                    '<div id="more" class="collapse">'+
-                        '<p><span class="bookDetail-text">Item isbn: </span> '+item.isbn+'<br>'+                   
-                        '<span class="bookDetail-text">Item Quantity: </span> '+item.quantity+' available<br>'+
-                        '<span class="bookDetail-text">Publication Date</span> '+item.publication_date+'<br>'+
-                    '</div>'+  
-                    '<hr>'+
-                    '<div class="input-group my-2">'+
-                    '<label class="input-group-text" style="width: 100px !important;" for"select_quantity">Quantity</label>'+
+        if (item.isbn == g_isbn) {
+            html += '<h2><span class="bookDetail-text"> ' + item.name + '</span></h2>' +
+                    '<p><span class="bookDetail-text">By ' + item.author + '</span></p><br>' +
+                    '<hr>' +
+                    '<p><span class="bookDetail-text">RM  ' + item.retail_price + '</span><br></p>' +
+                    '<p>' + item.description + '</p>' +
+                    '<button type="button" class="btn btn-primary bookDetail-more-btn" data-toggle="collapse" data-target="#more"><i class="fas fa-search me-3"></i>View more info</button>' +
+                    '<div id="more" class="collapse">' +
+                    '<p><span class="bookDetail-text">Item isbn: </span> ' + item.isbn + '<br>' +
+                    '<span class="bookDetail-text">Item Quantity: </span> ' + item.quantity + ' available<br>' +
+                    '<span class="bookDetail-text">Publication Date</span> ' + item.publication_date + '<br>' +
+                    '</div>' +
+                    '<hr>' +
+                    '<div class="input-group my-2">' +
+                    '<label class="input-group-text" style="width: 100px !important;" for"select_quantity">Quantity</label>' +
                     '<select class="form-select" style="width:130px" id="select_quantity">';
-                    for(i = 1; i <= item.quantity; i++){
-                        html+='<option value="'+ i +'">'+ i +'</option>';
-                    }
-                    html+='</select>'+
-                          '</div>';
+            for (i = 1; i <= item.quantity; i++) {
+                html += '<option value="' + i + '">' + i + '</option>';
+            }
+            html += '</select>' +
+                    '</div>';
         }
     });
 
@@ -61,16 +61,20 @@ function display_book_btn(result) {
     var html = '';
 
     result.forEach(function (item, index, arr) {
-        if(item.isbn == g_isbn){
-                    //if cookie exists then enable button
-                    if (cookieexist() == true) {
-                        html += '<button type="button" style="width:200px" class="btn btn-primary btn-md" value=' + item.isbn + ' onclick =\'add_to_cart_detail(' + JSON.stringify(item) + ')\'><i class="fas fa-cart-plus me-3"></i>Add to Cart</button>';
-                    }
+        if (item.isbn == g_isbn) {
+            //if cookie exists then enable button
+            if (cookieexist() == true) {
+                if (item.isbn > 0) {
+                    html += '<button type="button" style="width:200px" class="btn btn-primary btn-md" value=' + item.isbn + ' onclick =\'add_to_cart_detail(' + JSON.stringify(item) + ')\'><i class="fas fa-cart-plus me-3"></i>Add to Cart</button>';
+                }else{
+                    html += '<button type="button" style="width:200px" class="btn btn-primary btn-md" value=' + item.isbn + ' onclick =\'add_to_cart_detail(' + JSON.stringify(item) + ')\' disabled><i class="fas fa-cart-plus me-3"></i>Add to Cart</button>'; 
+                }
+            }
 
-                    //if cookie doesnt exist, disable button
-                    if (cookieexist() == false) {
-                        html += '<button type="button" style="width:200px" class="btn btn-primary btn-md" onclick="cookieredirect()"><i class="fas fa-cart-plus me-3"></i>Add to Cart</button>';
-                    }
+            //if cookie doesnt exist, disable button
+            if (cookieexist() == false) {
+                html += '<button type="button" style="width:200px" class="btn btn-primary btn-md" onclick="cookieredirect()"><i class="fas fa-cart-plus me-3"></i>Add to Cart</button>';
+            }
         }
     });
 
@@ -85,7 +89,7 @@ function display_book_img(result) {
     var html = '';
 
     result.forEach(function (item, index, arr) {
-        
+
         if (item.image.substring(item.image.lastIndexOf('/') + 1) == "")
         {
             var image = "../resources/images/default_book.png";
@@ -93,13 +97,13 @@ function display_book_img(result) {
         {
             var image = item.image;
         }
-        
-        if(item.isbn == g_isbn){
-              html+='<img class="card-img-top" style="height: 500px; width: 65%; margin: auto; border-radius: 2%" src=" ' +
-                item.image +
-                '" alt="..." onerror="this.src=\'../resources/images/default_book.png\'"/>' ;
 
-html+="";
+        if (item.isbn == g_isbn) {
+            html += '<img class="card-img-top" style="height: 500px; width: 65%; margin: auto; border-radius: 2%" src=" ' +
+                    item.image +
+                    '" alt="..." onerror="this.src=\'../resources/images/default_book.png\'"/>';
+
+            html += "";
         }
     });
 
@@ -124,7 +128,7 @@ function request_book_data(data) {
             display_book_details(result.result);
             display_book_btn(result.result);
             display_book_img(result.result);
-             $.when($('#detail_spinner').fadeOut('fast')).done(function () {
+            $.when($('#detail_spinner').fadeOut('fast')).done(function () {
                 $("#book_detail_display").fadeIn('fast');
             })
         }
