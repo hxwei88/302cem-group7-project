@@ -4,8 +4,9 @@ class Check_User_Cart {
 
     public function main() {
         include ('folder_path.php');
-        include ('db.php');
+        include_once ('db.php');
 
+        global $conn;
         $sql = "SELECT * FROM cart WHERE userid = '" . $_COOKIE["userid"] . "'";
         $query = mysqli_query($conn, $sql);
 

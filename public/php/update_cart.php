@@ -1,11 +1,12 @@
 <?php
 
 include ('folder_path.php');
-include ('db.php');
+include_once ('db.php');
 
 $product = $_POST['product'];
 $totalincart = $_POST['totalincart'];
 $data = json_decode($product, true);
+global $conn;
 if ( $data != null){
 $query1 = "UPDATE cart SET product = '" . $product . "', totalincart = '" . $totalincart . "'  WHERE userid = '" . $_COOKIE["userid"] . "'";
 $query2 = mysqli_query($conn, $query1);

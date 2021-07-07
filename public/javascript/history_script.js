@@ -163,6 +163,7 @@ function request_history_data(btn_id) {
         type: 'post',
         url: '/302cem-group7-project/public/php/history.php',
         success: function (result) {
+            console.log("history result: " + result);
             result = JSON.parse(result);
             console.log(result);
             if (btn_id == "table-view") {

@@ -3,7 +3,7 @@ class Add_Order_History
 {   
     public function main() {
         include ('folder_path.php');
-        include ('db.php');
+        include_once ('db.php');
 
         //$getDate = date("Y-m-d");
 
@@ -14,6 +14,7 @@ class Add_Order_History
         $fname = $_POST['fname'];
         $email = $_POST['email'];
         $address = $_POST['address'];
+        global $conn;
 
         //$query1 = "INSERT INTO history (orderDetail, userid, date, username, email) VALUES ( '".$orderDetail."', '".$_COOKIE["userid"]."', '".$getDate."', '".$fname."', '".$email."')";
         $query1 = "INSERT INTO history (orderDetail, userid, date, username, email, address) VALUES ( '".$orderDetail."', '".$_COOKIE["userid"]."', '".$getDate."', '".$fname."', '".$email."', '".$address."')";

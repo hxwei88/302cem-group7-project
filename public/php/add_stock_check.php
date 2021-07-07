@@ -5,13 +5,15 @@ class Add_Stock_Check {
     public function main() {
         include ('folder_path.php');
         //needs checking when hosted online
-        include ('db.php');
+        include_once ('db.php');
 
         $isbn = $_POST['isbn'];
 
         //get isbn from all rows in books table
         $isbnCheck = "SELECT * FROM books WHERE isbn = '".$isbn."' ";
 
+        global $conn;
+        
         //run query
         $run = mysqli_query($conn, $isbnCheck);
 
