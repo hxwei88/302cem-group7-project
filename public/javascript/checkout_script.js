@@ -51,8 +51,10 @@ function checkout() {
         }
     }
     
-    alert(localStorage.getItem('cart'));
+
     update_order_history();
+    update_book_quantity();
+    localStorage.removeItem('checkoutcart');
 }
 
 function invoiceEmail() {
@@ -128,6 +130,18 @@ function update_order_history() {
             localStorage.setItem('cart', JSON.stringify(cart));
             document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
             update_to_database();
+        }
+    });
+
+}
+
+function update_book_quantity() {
+    var checkoutcart_item = localStorage.getItem('checkoutcart');
+    $.ajax({
+        type: 'post',
+        data: {'product': checkoutcart_item},
+        url: '/302cem-group7-project/public/php/reduce_book_quantity.php',
+        success: function (result) {
         }
     });
 
