@@ -1,13 +1,12 @@
 <?php
-
-class add_stock {
+class Add_Stock {
 
     public function main() {
         include ('folder_path.php');
-//needs checking when hosted online
+        //needs checking when hosted online
         include ('db.php');
-
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+      
+        //if ($_SERVER['REQUEST_METHOD'] == "POST") {
             //assign variable from ajax
             $image = $_FILES['image']['name'];
             $isbn = $_POST['isbn_input'];
@@ -62,7 +61,7 @@ class add_stock {
 
                 //run query
                 $run = mysqli_query($conn, $isbnCheck);
-
+                    
                 //if query shows 1 or more row then display error
                 if (mysqli_num_rows($run) > 0) {
                     $updateProduct = "UPDATE books SET name = '" . $name . "', author = '" . $author . "', publication_date = '" . $date . "', description = '" . $description . "', image = '" . $target . "' "
@@ -71,9 +70,9 @@ class add_stock {
                     (move_uploaded_file($_FILES['image']['tmp_name'], $target));
 
                     if (mysqli_query($conn, $updateProduct)) {
-                        exit(json_encode(array("status" => 1, "message" => "The book with ISBN: " . $isbn . " has been updated.")));
+                        echo json_encode(array("status" => 1, "message" => "The book with ISBN: " . $isbn . " has been updated."));
                     } else {
-                        exit(json_encode(array("status" => 0, "error" => "An error has occurred.")));
+                        echo json_encode(array("status" => 0, "error" => "An error has occurred when inserting."));
                     }
                 } else {
                     //insert into books table
@@ -82,11 +81,12 @@ class add_stock {
 
                     //Move uploaded file to specified location, /public/resources/images/ in this case, location specified in $target.
                     (move_uploaded_file($_FILES['image']['tmp_name'], $target));
-
-                    if (mysqli_query($conn, $newProduct)) {
-                        exit(json_encode(array("status" => 1, "message" => "Product Successfully added.")));
+                    
+                    
+                    if(mysqli_query($conn, $newProduct)) {
+                        echo json_encode(array("status" => 1, "message" => "Product Successfully added."));
                     } else {
-                        exit(json_encode(array("status" => 0, "message" => "An error has occurred.")));
+                        echo json_encode(array("status" => 0, "message" => "An error has occurred when updating."));
                     }
                 }
 
@@ -94,11 +94,11 @@ class add_stock {
 //            exit(json_encode(array("status"=>0, "message"=>"Sorry, there was an error uploading your file")));
 //        }
             }
-        }
+        //}
     }
 
 }
 
-$add_stock = new add_stock();
+$add_stock = new Add_Stock();
 $add_stock->main();
 ?>
