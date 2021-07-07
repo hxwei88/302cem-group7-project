@@ -9,7 +9,8 @@ function check_user_database() {
         success: function (result) {
 
             var data = JSON.parse(result);
-            var product = JSON.parse(data['product']);
+            if(data != null)
+                var product = JSON.parse(data['product']);
 
             if (cookieexist() == true) {
                 if (item == null) {

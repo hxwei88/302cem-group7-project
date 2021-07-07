@@ -107,7 +107,7 @@ function display_cart() {
                     '<h2 class="card-title">' + item[i].name + '</h2>' +
                     '<p class="card-text">ISBN: ' + item[i].isbn + '</p>' +
                     '<p class="card-text">Unit Price: RM' + item[i].price + '</p>' +
-                    '<p class="card-text">Total Price: RM' + item[i].price * item[i].quantity + '</p>';
+                    '<p class="card-text">Total Price: RM' + (item[i].price * item[i].quantity).toFixed(2) + '</p>';
             //                '<hr><p>ISBN:' + item[i].isbn + '</p><p>Price: RM' + item[i].price + '<br>';
             //html += '<input type="number" id="quantity" min="0" max="'+item[i].og_quantity+'" placeholder="'+ item[i].quantity +'">';
             html += '<div class="input-group mb-3">' +

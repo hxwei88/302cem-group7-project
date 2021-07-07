@@ -9,11 +9,11 @@ function displayCheckoutList() {
     var html = '';
     for (i = 0; i < item.length; i++) {
         //html += '<div class="d-flex justify-content-between"><span class="item" id="bookname" style="display:inline-block; width:200px; white-space:nowrap; overflow: hidden !important; text-overflow: ellipsis;">' + item[i].name + '</span><span class="price" id="bookprice">' + item[i].price + '</span></div>';
-        html += '<div class="row d-flex justify-content-between mb-2"><div class="col-8"><span class="item" id="bookname">' + item[i].name + '</span></div><div class="col-4" style="text-align:right;"><span class="price" id="bookprice">' + "RM " + item[i].price * item[i].quantity + '</span></div></div>';
+        html += '<div class="row d-flex justify-content-between mb-2"><div class="col-6"><span class="item" id="bookname">' + item[i].name + '</span></div><div class="col-6" style="text-align:right;"><span class="price" id="bookprice">' + "RM " + (item[i].price * item[i].quantity).toFixed(2) + '</span></div></div>';
         totalprice += item[i].price * item[i].quantity;
     }
     $("#checkoutbookdiv").append(html);
-    document.getElementById("totalpriceincheckout").innerHTML = "RM " + totalprice;
+    document.getElementById("totalpriceincheckout").innerHTML = "RM " + totalprice.toFixed(2);
 
 }
 
@@ -31,7 +31,8 @@ function tempcheckoutsuccess(title, message) {
 
 }
 
-function checkout() {
+function checkout(event) {
+    event.preventDefault()
     var inCart = JSON.parse(localStorage.getItem('cart'));
     var checkoutCart = JSON.parse(localStorage.getItem('checkoutcart'));
     totalincart = parseInt(localStorage.getItem('totalincart'));
@@ -53,8 +54,6 @@ function checkout() {
     
 
     update_order_history();
-    update_book_quantity();
-    localStorage.removeItem('checkoutcart');
 }
 
 function invoiceEmail() {
@@ -123,15 +122,35 @@ function update_order_history() {
     var address = document.getElementById("adr").value; 
     var checkout_item = localStorage.getItem('checkoutcart');
 
+    $swal = loading("Processing Checkout...", "Please wait a moment...")
+
     $.ajax({
         type: 'post',
         data: {'orderDetail': checkout_item, 'fname': fname, 'email': email, 'address': address},
         url: '/302cem-group7-project/public/php/add_order_history.php',
         success: function (result) {
-            localStorage.setItem('totalincart', totalincart.toString());
-            localStorage.setItem('cart', JSON.stringify(cart));
-            document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
-            update_to_database();
+            result = JSON.parse(result);
+            
+            if(result.status == 1)
+            {
+                localStorage.setItem('totalincart', totalincart.toString());
+                localStorage.setItem('cart', JSON.stringify(cart));
+                document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
+                update_to_database();
+                update_book_quantity();
+                localStorage.removeItem('checkoutcart');
+                loadingcomplete($swal);
+                loadingsuccess("Successful Checkout!", "Thank you for buying!", true).then(() => {
+                  window.location = '../php/homepage.php';  
+                });;
+            }
+            else
+            {
+                loadingcomplete($swal);
+                loadingfailure("Checkout Failed", "Please try again later.", true).then(() => {
+                  window.location = '../php/homepage.php';  
+                });
+            }
         }
     });
 

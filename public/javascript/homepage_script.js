@@ -37,10 +37,22 @@ check_cookie_exist();
 
 function display(data) {
     $("#display_books").html('');
-    var html = '<div class="row justify-content-start">' +
+    var html = '<div class="row justify-content-start mb-2">' +
             '<h1>Books</h1>   ' +
-            '</div>' +
-            '<div class="row">';
+            '</div>';
+    
+    html += '<div class="row mb-4">' +
+            '<form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0" id="homepage_stock_search_form">' +
+                '<div class="input-group">' +
+                    '<input id="stock_search" style="width:20%" name="stock_search" class="form-control" type="text" placeholder="Search for books..." aria-label="Search" aria-describedby="basic-addon2"/>' +
+                    '<div class="input-group-append">' +
+                        '<button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>' +
+                    '</div>' +
+                '</div>' +
+            '</form>' +
+        '</div>';
+
+    html += '<div class="row">';
     data.forEach(function (item, index, arr) {
 
         if (item.image.substring(item.image.lastIndexOf('/') + 1) == "")
@@ -95,12 +107,19 @@ function display(data) {
 
     html += '</div>'
     $("#display_books").append(html);
+    
+    //need to be inside
+    $('#homepage_stock_search_form').submit(function (event) {
+        event.preventDefault();
+        request_book_data(new FormData($("#homepage_stock_search_form")[0]))
+    })
 }
 
 function request_book_data(data) {
-
-    $("#stock_spinner_home").show();
-
+    $.when($('#display_books').fadeOut('fast')).done(function () { 
+        $("#stock_spinner_home").fadeIn('fast');
+    })
+    
     $.ajax({
         type: 'post',
         url: '/302cem-group7-project/public/php/stock.php',
