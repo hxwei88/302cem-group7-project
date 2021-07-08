@@ -6,7 +6,7 @@ if (JSON.parse(localStorage.getItem('checkoutcart')) != null) {
     var i;
     var item = JSON.parse(localStorage.getItem('checkoutcart'))
     for (i = 0; i < item.length; i++) {
-        checkoutcart.push({isbn: item[i].isbn, name: item[i].name, quantity: item[i].quantity, price: item[i].price, og_quantity:item[i].og_quantity});
+        checkoutcart.push({isbn: item[i].isbn, name: item[i].name, quantity: item[i].quantity, price: item[i].price, og_quantity: item[i].og_quantity});
     }
 
     localStorage.setItem('checkoutcart', JSON.stringify(checkoutcart));
@@ -15,7 +15,7 @@ if (JSON.parse(localStorage.getItem('checkoutcart')) != null) {
 function checkoutcheckbox(index, booknumber, book) {
     var x = document.getElementById(booknumber).checked;
     if (x == true) {
-        checkoutcart.push({isbn: book.isbn, name: book.name, quantity: book.quantity, price: book.price, og_quantity:book.og_quantity });
+        checkoutcart.push({isbn: book.isbn, name: book.name, quantity: book.quantity, price: book.price, og_quantity: book.og_quantity});
         localStorage.setItem('checkoutcart', JSON.stringify(checkoutcart));
     } else {
         var checkoutItem = JSON.parse(localStorage.getItem('checkoutcart'));
@@ -34,25 +34,62 @@ function checkoutcheckbox(index, booknumber, book) {
 }
 
 function update_quantity(quantity_select, isbn, i) {
+    var x = document.getElementById(booknumber).checked;
+    var checkout_item_update = JSON.parse(localStorage.getItem('checkoutcart'));
     var item_update = JSON.parse(localStorage.getItem('cart'));
     totalincart = parseInt(localStorage.getItem('totalincart'));
     console.log(quantity_select);
 
+
     if (quantity_select == 0) {
-        cart.splice(i, 1);
-        totalincart = totalincart - 1;
-        localStorage.setItem('totalincart', totalincart.toString());
-        localStorage.setItem('cart', JSON.stringify(cart));
-        update_to_database();
-    } else {
-        for (i = 0; i < item_update.length; i++) {
-            if (isbn == item_update[i].isbn) {
-                item_update[i].quantity = quantity_select;
-                cart[i] = {isbn: isbn, name: item_update[i].name, image: item_update[i].image, quantity: item_update[i].quantity, price: item_update[i].price, og_quantity: item_update[i].og_quantity};
+        if (x == true) {
+            for (var j = 0; j < checkout_item_update.length; j++) {
+                if (isbn == checkout_item_update[j].isbn) {
+                    checkoutcart.splice(j, 1);
+                }
+                cart.splice(i, 1);
+                totalincart = totalincart - 1;
+                localStorage.setItem('totalincart', totalincart.toString());
+                localStorage.setItem('cart', JSON.stringify(cart));
+                localStorage.setItem('checkoutcart', JSON.stringify(checkoutcart));
+                update_to_database();
             }
+
+        } else {
+            cart.splice(i, 1);
+            totalincart = totalincart - 1;
+            localStorage.setItem('totalincart', totalincart.toString());
+            localStorage.setItem('cart', JSON.stringify(cart));
+            update_to_database();
         }
-        localStorage.setItem('cart', JSON.stringify(cart));
-        update_to_database();
+    } else {
+        if (x == true) {
+            for (var j = 0; j < checkout_item_update.length; j++) {
+                if (isbn == checkout_item_update[j].isbn) {
+                    checkout_item_update[i].quantity = quantity_select;
+                    checkoutcart.push({isbn: checkout_item_update[i].isbn, name: checkout_item_update[i].name, quantity: checkout_item_update[i].quantity, price: checkout_item_update[i].price, og_quantity: checkout_item_update[i].og_quantity});
+                }
+            }
+            for (i = 0; i < item_update.length; i++) {
+                if (isbn == item_update[i].isbn) {
+                    item_update[i].quantity = quantity_select;
+                    checkoutcart[j] = {isbn: isbn, name: item_update[i].name, image: item_update[i].image, quantity: item_update[i].quantity, price: item_update[i].price, og_quantity: item_update[i].og_quantity};
+                }
+            }
+            localStorage.setItem('checkoutcart', JSON.stringify(checkoutcart));
+            localStorage.setItem('cart', JSON.stringify(cart));
+            update_to_database();
+        } else {
+
+            for (i = 0; i < item_update.length; i++) {
+                if (isbn == item_update[i].isbn) {
+                    item_update[i].quantity = quantity_select;
+                    checkoutcart[j] = {isbn: isbn, name: item_update[i].name, image: item_update[i].image, quantity: item_update[i].quantity, price: item_update[i].price, og_quantity: item_update[i].og_quantity};
+                }
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            update_to_database();
+        }
     }
     document.getElementById("totalincart").innerHTML = parseInt(localStorage.getItem('totalincart'));
     display_cart();
