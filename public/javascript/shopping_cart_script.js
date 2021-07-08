@@ -47,13 +47,14 @@ function update_quantity(quantity_select, isbn, i) {
                 if (isbn == checkout_item_update[j].isbn) {
                     checkoutcart.splice(j, 1);
                 }
-                cart.splice(i, 1);
-                totalincart = totalincart - 1;
-                localStorage.setItem('totalincart', totalincart.toString());
-                localStorage.setItem('cart', JSON.stringify(cart));
-                localStorage.setItem('checkoutcart', JSON.stringify(checkoutcart));
-                update_to_database();
+
             }
+            cart.splice(i, 1);
+            totalincart = totalincart - 1;
+            localStorage.setItem('totalincart', totalincart.toString());
+            localStorage.setItem('cart', JSON.stringify(cart));
+            localStorage.setItem('checkoutcart', JSON.stringify(checkoutcart));
+            update_to_database();
 
         } else {
             cart.splice(i, 1);
@@ -80,8 +81,8 @@ function update_quantity(quantity_select, isbn, i) {
             localStorage.setItem('checkoutcart', JSON.stringify(checkoutcart));
             localStorage.setItem('cart', JSON.stringify(cart));
             update_to_database();
-        } else {
 
+        } else {
             for (i = 0; i < item_update.length; i++) {
                 if (isbn == item_update[i].isbn) {
                     item_update[i].quantity = quantity_select;
@@ -96,8 +97,20 @@ function update_quantity(quantity_select, isbn, i) {
     display_cart();
 }
 
-function remove_item(i) {
+function remove_item(i, isbn) {
+    var x = document.getElementById(isbn).checked;
     totalincart = parseInt(localStorage.getItem('totalincart'));
+    var checkout_item_update = JSON.parse(localStorage.getItem('checkoutcart'));
+
+    if (x == true) {
+        for (var j = 0; j < checkout_item_update.length; j++) {
+            if (isbn == checkout_item_update[j].isbn) {
+                checkoutcart.splice(j, 1);
+            }
+
+        }
+    }
+    localStorage.setItem('checkoutcart', JSON.stringify(checkoutcart));
 
     cart.splice(i, 1);
     totalincart = totalincart - 1;
@@ -162,7 +175,7 @@ function display_cart() {
             }
             html += '</select><br>' +
                     '</div>' +
-                    '<button type="button" class="btn btn-danger" onclick="remove_item(\'' + i + '\')">Remove</button>' +
+                    '<button type="button" class="btn btn-danger" onclick="remove_item(\'' + i + '\', \'' + item[i].isbn + '\')">Remove</button>' +
                     '</div>' +
                     '</div>' +
                     '</div>' +
