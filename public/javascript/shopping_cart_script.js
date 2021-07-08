@@ -34,7 +34,7 @@ function checkoutcheckbox(index, booknumber, book) {
 }
 
 function update_quantity(quantity_select, isbn, i) {
-    var x = document.getElementById(booknumber).checked;
+    var x = document.getElementById(isbn).checked;
     var checkout_item_update = JSON.parse(localStorage.getItem('checkoutcart'));
     var item_update = JSON.parse(localStorage.getItem('cart'));
     totalincart = parseInt(localStorage.getItem('totalincart'));
@@ -66,14 +66,15 @@ function update_quantity(quantity_select, isbn, i) {
         if (x == true) {
             for (var j = 0; j < checkout_item_update.length; j++) {
                 if (isbn == checkout_item_update[j].isbn) {
-                    checkout_item_update[i].quantity = quantity_select;
-                    checkoutcart.push({isbn: checkout_item_update[i].isbn, name: checkout_item_update[i].name, quantity: checkout_item_update[i].quantity, price: checkout_item_update[i].price, og_quantity: checkout_item_update[i].og_quantity});
+                    checkout_item_update[j].quantity = quantity_select;
+                    checkoutcart[j] = {isbn: isbn, name: checkout_item_update[j].name, quantity: checkout_item_update[j].quantity, price: checkout_item_update[j].price, og_quantity: checkout_item_update[j].og_quantity};
+
                 }
             }
             for (i = 0; i < item_update.length; i++) {
                 if (isbn == item_update[i].isbn) {
                     item_update[i].quantity = quantity_select;
-                    checkoutcart[j] = {isbn: isbn, name: item_update[i].name, image: item_update[i].image, quantity: item_update[i].quantity, price: item_update[i].price, og_quantity: item_update[i].og_quantity};
+                    cart[i] = {isbn: isbn, name: item_update[i].name, image: item_update[i].image, quantity: item_update[i].quantity, price: item_update[i].price, og_quantity: item_update[i].og_quantity};
                 }
             }
             localStorage.setItem('checkoutcart', JSON.stringify(checkoutcart));
@@ -84,7 +85,7 @@ function update_quantity(quantity_select, isbn, i) {
             for (i = 0; i < item_update.length; i++) {
                 if (isbn == item_update[i].isbn) {
                     item_update[i].quantity = quantity_select;
-                    checkoutcart[j] = {isbn: isbn, name: item_update[i].name, image: item_update[i].image, quantity: item_update[i].quantity, price: item_update[i].price, og_quantity: item_update[i].og_quantity};
+                    cart[i] = {isbn: isbn, name: item_update[i].name, image: item_update[i].image, quantity: item_update[i].quantity, price: item_update[i].price, og_quantity: item_update[i].og_quantity};
                 }
             }
             localStorage.setItem('cart', JSON.stringify(cart));
