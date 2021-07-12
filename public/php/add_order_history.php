@@ -1,6 +1,7 @@
 <?php
-class Add_Order_History
-{   
+
+class Add_Order_History {
+
     public function main() {
         include ('folder_path.php');
         include_once ('db.php');
@@ -17,7 +18,7 @@ class Add_Order_History
         global $conn;
 
         //$query1 = "INSERT INTO history (orderDetail, userid, date, username, email) VALUES ( '".$orderDetail."', '".$_COOKIE["userid"]."', '".$getDate."', '".$fname."', '".$email."')";
-        $query1 = "INSERT INTO history (orderDetail, userid, date, username, email, address) VALUES ( '".$orderDetail."', '".$_COOKIE["userid"]."', '".$getDate."', '".$fname."', '".$email."', '".$address."')";
+        $query1 = "INSERT INTO history (orderDetail, userid, date, username, email, address) VALUES ( '" . $orderDetail . "', '" . $_COOKIE["userid"] . "', '" . $getDate . "', '" . $fname . "', '" . $email . "', '" . $address . "')";
 
         $query2 = mysqli_query($conn, $query1);
 
@@ -26,14 +27,19 @@ class Add_Order_History
         //
         //$test = json_encode($query->fetch_assoc());
 
-        if($query2)
-        {
-            echo json_encode(array("status"=>1, "message"=>"Order added."));
-        }
-        else {
-            echo json_encode(array("status"=>0, "message"=>"An error has occured."));
+        if ($query2) {
+//            $to = "hxwei88@gmail.com";
+//            $subject = "Test";
+//            $txt = "Hello world!";
+//
+//            $success = mail($to, $subject, $txt);
+//            echo "email: ".$success;
+            echo json_encode(array("status" => 1, "message" => "Order added."));
+        } else {
+            echo json_encode(array("status" => 0, "message" => "An error has occured."));
         }
     }
+
 }
 
 $add_order_history = new Add_Order_History();

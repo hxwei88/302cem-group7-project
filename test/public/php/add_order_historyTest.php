@@ -34,7 +34,7 @@ class add_order_historyTest extends PHPUnit\Framework\TestCase
     public function testMain()
     {
         //Setting up all the required variables
-        $_POST = array('orderDetail'=>"test", 'fname'=>"testxw", 'email'=>"testxw@gmail.com", 'address'=>"testaddr");
+        $_POST = array('orderDetail'=>'[{"isbn":"2536112536112","name":"Entanglement","quantity":"2","price":"501.20","og_quantity":"2"}]', 'fname'=>"testxw", 'email'=>"testxw@gmail.com", 'address'=>"testaddr");
         $_COOKIE = array('userid'=>1);
         
         //Assert the response
