@@ -1,25 +1,27 @@
 function load_book_detail(isbn) {
     $.ajax({
-        type: 'get',
-        url: '/302cem-group7-project/public/php/detail_product.php?isbn=' + isbn,
+        type: 'post',
+        url: '/302cem-group7-project/public/php/detail_product.php',
+        data: {'isbn': isbn},
         success: function (result) {
-            console.log(result);
+            result = JSON.parse(result);
+            result = result.result;
             if (result != null) {
-                document.getElementById("detail-isbn").value = result.isbn;
-                document.getElementById("old_isbn").value = result.isbn;
-                document.getElementById("detail-name").innerHTML = result.name;
-                document.getElementById("detail-author").innerHTML = result.author;
-                document.getElementById("detail-author-input").value = result.author;
-                document.getElementById("detail-name-input").value = result.name;
-                document.getElementById("detail-des").value = result.description;
-                document.getElementById("detail-tp").value = parseFloat(result.trade_price).toFixed(2);
-                document.getElementById("detail-quantity").value = result.quantity;
-                document.getElementById("detail-date").value = result.publication_date;
-                document.getElementById("detail-rp").value = parseFloat(result.retail_price).toFixed(2);
-                document.getElementById("details-img").src = result.image;
+                document.getElementById("detail-isbn").value = result[0].isbn;
+                document.getElementById("old_isbn").value = result[0].isbn;
+                document.getElementById("detail-name").innerHTML = result[0].name;
+                document.getElementById("detail-author").innerHTML = result[0].author;
+                document.getElementById("detail-author-input").value = result[0].author;
+                document.getElementById("detail-name-input").value = result[0].name;
+                document.getElementById("detail-des").value = result[0].description;
+                document.getElementById("detail-tp").value = parseFloat(result[0].trade_price).toFixed(2);
+                document.getElementById("detail-quantity").value = result[0].quantity;
+                document.getElementById("detail-date").value = result[0].publication_date;
+                document.getElementById("detail-rp").value = parseFloat(result[0].retail_price).toFixed(2);
+                document.getElementById("details-img").src = result[0].image;
                 
-                var n = result.image.lastIndexOf('/');
-                document.getElementById('detail-imageID').textContent = result.image.substring(n + 1);
+                var n = result[0].image.lastIndexOf('/');
+                document.getElementById('detail-imageID').textContent = result[0].image.substring(n + 1);
                 $.when($('#stock_spinner').fadeOut('fast')).done(function () {
                     $("#stock_detail").fadeIn('fast');
                 })
