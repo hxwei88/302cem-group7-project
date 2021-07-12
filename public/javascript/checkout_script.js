@@ -163,6 +163,7 @@ function update_book_quantity() {
         data: {'product': checkoutcart_item},
         url: '/302cem-group7-project/public/php/reduce_book_quantity.php',
         success: function (result) {
+            console.log();
         }
     });
 
