@@ -2,34 +2,41 @@ function append_stock_display(result) {
     $("#stock_display").html('');
     var html = '<div class="row">';
 
-    result.forEach(function (item, index, arr) {
-        if (item.image.substring(item.image.lastIndexOf('/') + 1) == "")
-        {
-            var image = "../resources/images/default_book.png";
-        } else
-        {
-            var image = item.image;
-        }
+    if (result.length > 0)
+    {
+        result.forEach(function (item, index, arr) {
+            if (item.image.substring(item.image.lastIndexOf('/') + 1) == "")
+            {
+                var image = "../resources/images/default_book.png";
+            } else
+            {
+                var image = item.image;
+            }
 
-        html += '<div class="col-3 py-2 mb-3">' +
-                '<div class="card h-100">' +
-                '<img class="card-img-top" style="height: 400px; width: 100%; margin: auto; border-radius: 2%" src="' + image + '" alt="' + image + '" onerror="this.src=\'../resources/images/default_book.png\'">' +
-                '<div class="card-body" style = "text-align:center;">' +
-                '<h5 class="card-title">' + item.name + '</h5>' +
-                '<p>' + item.isbn + '</p>' +
-                '<p>' + item.publication_date + '</p>' +
-                '</div>' +
-                '<button type="button" style="height: 50px; width: 85%; margin:auto; font-size:115%; margin-bottom:20px;" class="btn btn-primary" value="' + item.isbn + '" onclick ="load_detail_page(this.value)">Details</button>' +
-                '</div>' +
-                '</div>';
-    })
+            html += '<div class="col-3 py-2 mb-3">' +
+                    '<div class="card h-100">' +
+                    '<img class="card-img-top" style="height: 400px; width: 100%; margin: auto; border-radius: 2%" src="' + image + '" alt="' + image + '" onerror="this.src=\'../resources/images/default_book.png\'">' +
+                    '<div class="card-body" style = "text-align:center;">' +
+                    '<h5 class="card-title">' + item.name + '</h5>' +
+                    '<p>' + item.isbn + '</p>' +
+                    '<p>' + item.publication_date + '</p>' +
+                    '</div>' +
+                    '<button type="button" style="height: 50px; width: 85%; margin:auto; font-size:115%; margin-bottom:20px;" class="btn btn-primary" value="' + item.isbn + '" onclick ="load_detail_page(this.value)">Details</button>' +
+                    '</div>' +
+                    '</div>';
+        })
+    }
+    else
+    {
+        html += '<div class="container-fluid"><h1>No result displayed.</h1></div>';
+    }
 
     html += '</div>'
     $("#stock_display").append(html);
 }
 
 function request_book_data(data) {
-    $.when($('#stock').fadeOut('fast')).done(function () { 
+    $.when($('#stock').fadeOut('fast')).done(function () {
         $("#stock_spinner").fadeIn('fast');
     })
 

@@ -26,6 +26,7 @@ class login {
                     $role = $row['role'];
                     $id = $row['userid'];
                     setcookie("userid", $id, time() + (86400 * 30), "/");
+                    setcookie("role", $role, time() + (86400 * 30), "/");
                 }
 
                 if ($role == 'admin') {

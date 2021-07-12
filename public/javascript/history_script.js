@@ -1,51 +1,6 @@
-$(document).ready( function () {
+$(document).ready(function () {
     $('#exampletable2').DataTable();
-} );
-//function display_history(result) {
-//    $("#history_display").html('');
-//    var html = '';
-//    html+='<div class="accordian" id="accordion">';
-//    result.forEach(function (item) {
-//        var order = JSON.parse(item.orderDetail);
-//        var cartTotal = 0;
-//        
-//        html+='<div class="card history-card">';
-//        html+='<div class="card-header" id="heading'+item.id+'">';
-//        html+=  '<h5 class="mb-0">';
-//        html+=    '<button class="btn btn-link history-button" data-toggle="collapse" data-target="#collapse'+item.id+'" aria-expanded="false" aria-controls="collapse'+item.id+'">';
-//        html+=      'Expand Order ID: #'+item.id+'';
-//        html+=    '</button>';
-//        html+=  '</h5>';
-//        html+='</div>';
-//        
-//        html+= '<div id="collapse'+item.id+'" class="collapse" aria-labelledby="heading'+item.id+'" data-parent="#accordion">';
-//        html+= '<div class="card-body">';
-//        html +='<br><p><b>Order ID</b>: '+item.id+'';
-//        html += '<b style="padding-left:20px;">User Id</b>: '+item.userid+"<br>"+
-//                '<b>Username</b>: '+item.username+'<br>'+
-//                '<b>Email Adress</b>: '+item.email+'<br>'+
-//                '<b>Date (Y-M-D)</b>: '+item.date+"<br></p>"+
-//                '<hr>';
-//
-//        var i = 0;
-//        for(i = 0; i < order.length; i++){  
-//            var totalprice = order[i].price * order[i].quantity;
-//            html+='<b>'+order[i].name+'</b><br>'+ 
-//                '<b>Quantity</b>: '+order[i].quantity+
-//                '<span style="padding-left:20px"><b>Price Per Book</b>: RM'+order[i].price+'</span>'+
-//                '<span style="padding-left:20px"><b>Total Price</b>: RM'+totalprice+'<br><hr>';
-//            cartTotal = cartTotal + totalprice;
-//        }
-//    
-//               html+='<b>Cart total price</b>: RM'+cartTotal;
-//        html += '</div>';
-//        html +='</div>';
-//        html += '</div><br>';
-//    });
-//    html += '</div>';
-//    html += '';
-//    $("#history_display").append(html);
-//}
+});
 
 function display_history(result) {
     $("#history_display").html('');
@@ -93,52 +48,61 @@ function display_history(result) {
 function display_history_table(result) {
     $("#history_display").html('');
     var html = '';
-    html += '<table id="exampletable2" class="display"  style="width:100%; table-layout:fixed">';
-    html += '<thead>' +
-            '<tr>' +
-            '<th>Order Id</th>' +
-            '<th>User Id</th>' +
-            '<th>Username</th>' +
-            '<th>Email Address</th>' +
-            '<th>Address</th>' +
-            '<th>Date & Time</th>' +
-            '<th>Book Name</th>' +
-            '<th>Quantity</th>' +
-            '<th>Price Per Book</th>' +
-            '<th>Total Price</th>' +
-            '<th>Cart total price</th>' +
-            '</tr>' +
-            '</thead>' +
-            '<tbody>';
-    result.forEach(function (item) {
-        var order = JSON.parse(item.orderDetail);
-        var cartTotal = 0;
- 
-        for (var i = 0; i < order.length; i++) {
-            html += '<tr>' +
-                    '<td style="word-wrap:break-word;">' + item.id + '</td>' +
-                    '<td style="word-wrap:break-word;">' + item.userid + '</td>' +
-                    '<td style="word-wrap:break-word;">' + item.username + '</td>' +
-                    '<td style="word-wrap:break-word;">' + item.email + '</td>' +
-                    '<td style="word-wrap:break-word;">' + item.address + '</td>' +
-                    '<td style="word-wrap:break-word;">' + item.date + '</td>';
-            html += '<td style="word-wrap:break-word;">' + order[i].name + '</td>' +
-                    '<td style="word-wrap:break-word;">' + order[i].quantity + '</td>' +
-                    '<td style="word-wrap:break-word;">' + order[i].price + '</td>' +
-                    '<td style="word-wrap:break-word;">' + order[i].quantity * order[i].price + '</td>';
-            for (var j = 0; j < order.length; j++) {
-                cartTotal += order[j].quantity * order[j].price;
 
+    if (result.length > 0)
+    {
+        html += '<table id="exampletable2" class="display"  style="width:100%; table-layout:fixed">';
+        html += '<thead>' +
+                '<tr>' +
+                '<th>Order Id</th>' +
+                '<th>User Id</th>' +
+                '<th>Username</th>' +
+                '<th>Email Address</th>' +
+                '<th>Address</th>' +
+                '<th>Date & Time</th>' +
+                '<th>Book Name</th>' +
+                '<th>Quantity</th>' +
+                '<th>Price Per Book</th>' +
+                '<th>Total Price</th>' +
+                '<th>Cart total price</th>' +
+                '</tr>' +
+                '</thead>' +
+                '<tbody>';
+        result.forEach(function (item) {
+            var order = JSON.parse(item.orderDetail);
+            var cartTotal = 0;
+
+            for (var i = 0; i < order.length; i++) {
+                html += '<tr>' +
+                        '<td style="word-wrap:break-word;">' + item.id + '</td>' +
+                        '<td style="word-wrap:break-word;">' + item.userid + '</td>' +
+                        '<td style="word-wrap:break-word;">' + item.username + '</td>' +
+                        '<td style="word-wrap:break-word;">' + item.email + '</td>' +
+                        '<td style="word-wrap:break-word;">' + item.address + '</td>' +
+                        '<td style="word-wrap:break-word;">' + item.date + '</td>';
+                html += '<td style="word-wrap:break-word;">' + order[i].name + '</td>' +
+                        '<td style="word-wrap:break-word;">' + order[i].quantity + '</td>' +
+                        '<td style="word-wrap:break-word;">' + order[i].price + '</td>' +
+                        '<td style="word-wrap:break-word;">' + order[i].quantity * order[i].price + '</td>';
+                for (var j = 0; j < order.length; j++) {
+                    cartTotal += order[j].quantity * order[j].price;
+
+                }
+                html += '<td style="word-wrap:break-word;">' + cartTotal + '</td>';
+                cartTotal = 0;
             }
-            html += '<td style="word-wrap:break-word;">' + cartTotal + '</td>';
-            cartTotal = 0;
-        }
 
-        html += '</tr>';
-    });
+            html += '</tr>';
+        });
 
-    html += '</tbody>';
-    html += '</table>';
+        html += '</tbody>';
+        html += '</table>';
+    }
+    else
+    {
+        html += '<div class=""><h1>No result displayed.</h1></div>';
+    }
+    
     $("#history_display").append(html);
     $(document).ready(function () {
         $('#exampletable2').DataTable();
