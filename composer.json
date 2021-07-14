@@ -1,0 +1,13 @@
+{
+    "name": "vendor/302cem-group7-project",
+    "description": "Description of project 302cem-group7-project.",
+    "authors": [
+        {
+            "name": "hxwei",
+            "email": "your@email.here"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "dev-master"
+    }
+}

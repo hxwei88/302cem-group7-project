@@ -1,6 +1,30 @@
 //if (JSON.parse(localStorage.getItem('checkoutcart')) != null && JSON.parse(localStorage.getItem('checkoutcart')) != 0) {
 //    localStorage.removeItem('checkoutcart');
 //}
+validate_checkout();
+
+function validate_checkout() {
+    $.when($('#checkout_main_div').fadeOut('fast')).done(function () {
+        $("#checkout_spinner").fadeIn('fast');
+    })
+
+    var item = JSON.parse(localStorage.getItem('checkoutcart'))
+
+    if (item != null) {
+        if (item.length > 0)
+        {
+            request_user_data();
+
+            displayCheckoutList();
+        } else
+        {
+            window.location = "../php/homepage.php";
+        }
+    } else
+    {
+        window.location = "../php/homepage.php";
+    }
+}
 
 function displayCheckoutList() {
     $("#checkoutbookdiv").html('');
@@ -36,10 +60,10 @@ function checkout(event) {
     var inCart = JSON.parse(localStorage.getItem('cart'));
     var checkoutCart = JSON.parse(localStorage.getItem('checkoutcart'));
     totalincart = parseInt(localStorage.getItem('totalincart'));
-    
-   
 
-    for (var i = inCart.length-1; i >= 0; i--)
+
+
+    for (var i = inCart.length - 1; i >= 0; i--)
     {
         for (var j = 0; j < checkoutCart.length; j++)
         {
@@ -47,11 +71,11 @@ function checkout(event) {
             if (inCart[i].isbn == checkoutCart[j].isbn) {
                 cart.splice(i, 1);
                 totalincart = totalincart - 1;
-              
+
             }
         }
     }
-    
+
 
     update_order_history();
 }
@@ -92,15 +116,14 @@ function updateAddress(event) {
 }
 
 function request_user_data() {
-    $.when($('#stock').fadeOut('fast')).done(function () {
-        $("#stock_spinner").fadeIn('fast');
-    })
-
     //if user has address it will auto input else will prompt modal
     $.ajax({
         type: 'post',
         url: '/302cem-group7-project/public/php/checkout_user_profile.php',
         success: function (result) {
+            $.when($('#checkout_spinner').fadeOut('fast')).done(function () {
+                $("#checkout_main_div").fadeIn('fast');
+            })
             console.log("user profile result: " + result);
             result = JSON.parse(result)
             if (result.status == 1) {
@@ -112,14 +135,10 @@ function request_user_data() {
     });
 }
 
-request_user_data();
-
-displayCheckoutList();
-
 function update_order_history() {
-    var fname = document.getElementById("fname").value; 
-    var email = document.getElementById("email").value; 
-    var address = document.getElementById("adr").value; 
+    var fname = document.getElementById("fname").value;
+    var email = document.getElementById("email").value;
+    var address = document.getElementById("adr").value;
     var checkout_item = localStorage.getItem('checkoutcart');
 
     $swal = loading("Processing Checkout...", "Please wait a moment...")
@@ -129,9 +148,11 @@ function update_order_history() {
         data: {'orderDetail': checkout_item, 'fname': fname, 'email': email, 'address': address},
         url: '/302cem-group7-project/public/php/add_order_history.php',
         success: function (result) {
+//            console.log("email result " + result)
+//            alert(result);
             result = JSON.parse(result);
-            
-            if(result.status == 1)
+
+            if (result.status == 1)
             {
                 localStorage.setItem('totalincart', totalincart.toString());
                 localStorage.setItem('cart', JSON.stringify(cart));
@@ -141,14 +162,14 @@ function update_order_history() {
                 localStorage.removeItem('checkoutcart');
                 loadingcomplete($swal);
                 loadingsuccess("Successful Checkout!", "Thank you for buying!", true).then(() => {
-                  window.location = '../php/homepage.php';  
-                });;
-            }
-            else
+                    window.location = '../php/homepage.php';
+                });
+                ;
+            } else
             {
                 loadingcomplete($swal);
                 loadingfailure("Checkout Failed", "Please try again later.", true).then(() => {
-                  window.location = '../php/homepage.php';  
+                    window.location = '../php/homepage.php';
                 });
             }
         }
