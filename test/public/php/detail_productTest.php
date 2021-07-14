@@ -17,7 +17,7 @@ class detail_productTest extends PHPUnit\Framework\TestCase {
      * This method is called before a test is executed.
      */
     protected function setUp(): void {
-        $this->object = new detail_product;
+        $this->object = new Detail_Product;
     }
 
     /**
