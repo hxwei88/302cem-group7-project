@@ -38,7 +38,7 @@ class Add_Order_History {
 
         if ($query2) {
             $mail = new PHPMailer;
-            $mail->SMTPDebug = 3; // Enable verbose debug output
+            $mail->SMTPDebug = 0; // Enable verbose debug output
 
             $mail->isSMTP(); // Set mailer to use SMTP
             $mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
@@ -69,8 +69,9 @@ class Add_Order_History {
 
             $mail->Subject = 'Invoice #' . $invoice_id;
 
-            $mail->Body = '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-                            <div class="container">
+            $total_price = 0;
+            
+            $mail_body = '<div class="container">
                                 <div class="row">
                                     <!-- BEGIN INVOICE -->
                                     <div class="col-xs-12">
@@ -86,7 +87,7 @@ class Add_Order_History {
                                                     <div class="row">
                                                         <div class="col-xs-12">
                                                             <h2>Invoice<br>
-                                                                <span class="small">Order #1082</span></h2>
+                                                                <span class="small">Order '.$invoice_id.'</span></h2>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -94,19 +95,16 @@ class Add_Order_History {
                                                 <div class="row">
                                                     <div class="col-xs-6">
                                                         <address>
-                                                            <strong>Bill & Ship To:</strong><br>
-                                                            Twitter, Inc.<br>
-                                                            795 Folsom Ave, Suite 600<br>
-                                                            San Francisco, CA 94107<br>
-                                                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                                                            <strong>Bill & Ship To:</strong><br>'
+                                                            .$fname.'<br>'.$address.'
                                                         </address>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-xs-6 text-right">
                                                         <address>
-                                                            <strong>Order Date & Time:</strong><br>
-                                                            17/06/14
+                                                            <strong>Order Date & Time:</strong><br>'
+                                                            .$getDate.'
                                                         </address>
                                                     </div>
                                                 </div>
@@ -118,37 +116,28 @@ class Add_Order_History {
                                                                 <tr class="line">
                                                                     <td><strong>#</strong></td>
                                                                     <td class="text-center"><strong>Detail</strong></td>
+                                                                    <td class="text-right"><strong>Quantity</strong></td>
                                                                     <td class="text-right"><strong>Unit Price</strong></td>
                                                                     <td class="text-right"><strong>Subtotal Price</strong></td>
                                                                 </tr>
                                                             </thead>
-                                                            <tbody>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td><strong>Template Design</strong><br>A website template is a pre-designed webpage, or set of webpages, that anyone can modify with their own content and images to setup a website.</td>
-                                                                    <td class="text-center">15</td>
-                                                                    <td class="text-center">$75</td>
-                                                                    <td class="text-right">$1,125.00</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>2</td>
-                                                                    <td><strong>Template Development</strong><br>Web development is a broad term for the work involved in developing a web site for the Internet (World Wide Web) or an intranet (a private network).</td>
-                                                                    <td class="text-center">15</td>
-                                                                    <td class="text-center">$75</td>
-                                                                    <td class="text-right">$1,125.00</td>
-                                                                </tr>
-                                                                <tr class="line">
-                                                                    <td>3</td>
-                                                                    <td><strong>Testing</strong><br>Take measures to check the quality, performance, or reliability of (something), especially before putting it into widespread use or practice.</td>
-                                                                    <td class="text-center">2</td>
-                                                                    <td class="text-center">$75</td>
-                                                                    <td class="text-right">$150.00</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td colspan="3">
-                                                                    </td><td class="text-right"><strong>Total</strong></td>
-                                                                    <td class="text-right"><strong>$2,400.00</strong></td>
-                                                                </tr>
+                                                            <tbody>';
+                                                                for($x=0; $x < count($book_details); $x++) {
+                                                                    $total_price .= ($book_details[$x]->price * $book_details[$x]->quantity);
+                                                                    $mail_body = $mail_body . 
+                                                                    '<tr>
+                                                                        <td>'.($x+1).'</td>
+                                                                        <td><strong>'.$book_details[$x]->name.'</strong><br>'.$book_details[$x]->isbn.'</td>
+                                                                        <td class="text-center">'.$book_details[$x]->quantity.'</td>
+                                                                        <td class="text-center">RM'.$book_details[$x]->price.'</td>
+                                                                        <td class="text-right">RM'.number_format(($book_details[$x]->price * $book_details[$x]->quantity), 2).'</td>
+                                                                    </tr>';
+                                                                }
+                                                            $mail_body .= '<tr>
+                                                                <td colspan="3">
+                                                                </td><td class="text-right"><strong>Total</strong></td>
+                                                                <td class="text-right"><strong>RM'.number_format($total_price,2).'</strong></td>
+                                                            </tr>
                                                             </tbody>
                                                         </table>
                                                     </div>									
@@ -158,9 +147,9 @@ class Add_Order_History {
                                     </div>
                                     <!-- END INVOICE -->
                                 </div>
-                            </div>
-                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>';
+                            </div>';
 
+            $mail->Body = $mail_body;
             $mail->AltBody = $altbody;
 
             if (!$mail->send()) {
