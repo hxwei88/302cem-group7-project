@@ -1,8 +1,16 @@
 <?php
 
-//use PHPMailer\PHPMailer\PHPMailer;
-//use PHPMailer\PHPMailer\SMTP;
-//use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+//for testing
+require_once '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require_once '../vendor/phpmailer/phpmailer/src/SMTP.php';
+
+//for real use
+//require_once '../../vendor/phpmailer/phpmailer/src/PHPMailer.php';
+//require_once '../../vendor/phpmailer/phpmailer/src/SMTP.php';
 
 class Add_Order_History {
 
@@ -11,8 +19,6 @@ class Add_Order_History {
         include_once ('db.php');
 
         if (isset($_POST['orderDetail'])) {
-
-            require '../../vendor/autoload.php';
             $getDate = date("Y-m-d");
             date_default_timezone_set("Asia/Kuala_Lumpur");
             $getDate = date('Y-m-d H:i:s', time());

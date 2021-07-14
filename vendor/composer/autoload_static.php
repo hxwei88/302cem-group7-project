@@ -6,6 +6,20 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitc9575fe11214939c1aa6d2d12b31f27d
 {
+    public static $prefixLengthsPsr4 = array (
+        3 => 
+        array (
+            '302cem-group7-project\\' => 22,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        '302cem-group7-project\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/302cem-group7-project',
+        ),
+    );
+
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
@@ -13,6 +27,8 @@ class ComposerStaticInitc9575fe11214939c1aa6d2d12b31f27d
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc9575fe11214939c1aa6d2d12b31f27d::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc9575fe11214939c1aa6d2d12b31f27d::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInitc9575fe11214939c1aa6d2d12b31f27d::$classMap;
 
         }, null, ClassLoader::class);
