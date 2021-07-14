@@ -22,7 +22,14 @@ class Add_Stock {
             //specify upload location for image file, still need file type verfication.
             $ext = substr($image, strripos($image, '.'));
 
-            $target = "../resources/images/" . basename($name . $ext);
+            if(!empty($image))
+            {
+                $target = "../resources/images/" . basename($name . $ext);
+            }
+            else
+            {
+                $target = "../resources/images/default_book.png";
+            }
 
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target, PATHINFO_EXTENSION));
@@ -65,10 +72,18 @@ class Add_Stock {
                     
                 //if query shows 1 or more row then display error
                 if (mysqli_num_rows($run) > 0) {
-                    $updateProduct = "UPDATE books SET name = '" . $name . "', author = '" . $author . "', publication_date = '" . $date . "', description = '" . $description . "', image = '" . $target . "' "
-                            . ", trade_price = '" . $trade . "', retail_price = '" . $retail . "', quantity = '" . $quantity . "' WHERE isbn = '" . $isbn . "'";
+                    $updateProduct = "UPDATE books SET name = '" . $name . "', author = '" . $author . "', publication_date = '" . $date . "', description = '" . $description;
+                    
+                    if($target != "../resources/images/default_book.png")
+                    {
+                        $updateProduct .= "', image = '" . $target;
+                    }
+                    $updateProduct .= "', trade_price = '" . $trade . "', retail_price = '" . $retail . "', quantity = '" . $quantity . "' WHERE isbn = '" . $isbn . "'";
 
-                    (move_uploaded_file($_FILES['image']['tmp_name'], $target));
+                    if($target != "../resources/images/default_book.png")
+                    {
+                        (move_uploaded_file($_FILES['image']['tmp_name'], $target));
+                    }
 
                     if (mysqli_query($conn, $updateProduct)) {
                         echo json_encode(array("status" => 1, "message" => "The book with ISBN: " . $isbn . " has been updated."));
@@ -81,7 +96,10 @@ class Add_Stock {
                             . "('$isbn', '$name', '$author', '$date','$description', '$target', '$trade', '$retail', '$quantity')";
 
                     //Move uploaded file to specified location, /public/resources/images/ in this case, location specified in $target.
-                    (move_uploaded_file($_FILES['image']['tmp_name'], $target));
+                    if($target != "../resources/images/default_book.png")
+                    {
+                        (move_uploaded_file($_FILES['image']['tmp_name'], $target));
+                    }
                     
                     
                     if(mysqli_query($conn, $newProduct)) {

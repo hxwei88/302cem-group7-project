@@ -1,3 +1,5 @@
+var book_detail;
+
 function load_book_detail(isbn) {
     $.ajax({
         type: 'post',
@@ -5,6 +7,7 @@ function load_book_detail(isbn) {
         data: {'isbn': isbn},
         success: function (result) {
             result = JSON.parse(result);
+            book_detail = result.result;
             result = result.result;
             if (result != null) {
                 document.getElementById("detail-isbn").value = result[0].isbn;
@@ -92,6 +95,34 @@ function validate_number(element, decimal) {
     {
         $(element).val(0);
     }
+}
+
+function delete_book()
+{
+    caution("Deleting Book", "Are you sure about it?").then((result) => {
+        if (result.isConfirmed) {
+            //console.log("delete book")
+            var swal = loading("Deleting Book...", "This will take a moment...");
+            $.ajax({
+                type: 'post',
+                url: '/302cem-group7-project/public/php/stock_delete_book.php',
+                data: {isbn: book_detail[0].isbn, image: book_detail[0].image},
+                success: function (result) {
+                    console.log(result)
+                    result = JSON.parse(result);
+
+                    loadingcomplete(swal);
+                    if (result.status == 1) {
+                        loadingsuccess("Success!", "Book deleted successfully!", true).then(() => {
+                            nav_back();
+                        });
+                    } else {
+                        loadingfailure("Error", result.message, true)
+                    }
+                }
+            });
+        }
+    })
 }
 
 function nav_back() {
