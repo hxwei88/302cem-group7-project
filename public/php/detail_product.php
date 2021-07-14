@@ -1,6 +1,6 @@
 <?php
 
-class detail_product {
+class Detail_Product {
 
     public function main() {
         include ('folder_path.php');
@@ -32,7 +32,7 @@ class detail_product {
 
 }
 
-$detail_product = new detail_product();
+$detail_product = new Detail_Product();
 $detail_product->main();
 
 ?>

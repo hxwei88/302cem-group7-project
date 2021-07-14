@@ -34,7 +34,7 @@ class stock_delete_bookTest extends PHPUnit\Framework\TestCase {
      */
     public function testMain() {
         //insert book with isbn "test" to run
-        $_POST = array("isbn"=>"test");
+        $_POST = array("isbn"=>"test", "image"=>"../resources/images/default_book.png");
         
         $expected = json_encode(array("status"=>1, "message"=>"The book has been deleted."));
         $this->expectOutputString($expected);
@@ -43,7 +43,7 @@ class stock_delete_bookTest extends PHPUnit\Framework\TestCase {
     
     public function testMainFail() {
         //insert book with isbn "test" to run
-        $_POST = array("isbn"=>"");
+        $_POST = array("isbn"=>"", "image"=>"../resources/images/default_book.png");
         
         $expected = json_encode(array("status"=>0, "message"=>"An error has occurred during deletion."));
         $this->expectOutputString($expected);
