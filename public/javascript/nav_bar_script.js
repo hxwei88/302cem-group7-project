@@ -7,7 +7,6 @@ function check_user_database() {
         type: 'post',
         url: '/302cem-group7-project/public/php/check_user_cart.php',
         success: function (result) {
-
             var data = JSON.parse(result);
             if(data != null)
             {
@@ -230,7 +229,7 @@ function add_to_database() {
         data: {'product': cart_item, 'totalincart': total_in_cart},
         url: '/302cem-group7-project/public/php/add_to_cart.php',
         success: function (result) {
-            alert(result);
+            //alert(result);
         }
     });
 

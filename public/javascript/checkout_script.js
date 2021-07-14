@@ -94,6 +94,7 @@ function invoiceEmail() {
 function updateAddress(event) {
     event.preventDefault();
     var swal = loading("Adding Address...", "Please Wait");
+    var new_address = $('#newAddressModal').val();
     $.ajax({
         type: 'post',
         url: '/302cem-group7-project/public/php/checkout_add_address.php',
@@ -105,12 +106,18 @@ function updateAddress(event) {
             result = JSON.parse(result)
             loadingcomplete(swal);
             if (result.status == 1) {
-                loadingsuccess("Address Added Successfully!", "Thank You For Waiting", true)
+                loadingsuccess("Address Added Successfully!", "Thank You For Waiting", true).then(() => {
+                    //need to close the modal
+                    $('#addressModal').modal('hide');
+
+                    //need to autofill the address
+                    $('#adr').val(new_address);
+                });
             } else {
-                loadingfailure("Address Failed To Add!", "Please Try Again", false)
+                loadingfailure("Address Failed To Add!", "Please Try Again", false).then(() => {
+                    $('#addressModal').modal('hide');
+                });
             }
-            //need to close the modal
-            //need to autofill the address
         }
     });
 }
@@ -148,8 +155,8 @@ function update_order_history() {
         data: {'orderDetail': checkout_item, 'fname': fname, 'email': email, 'address': address},
         url: '/302cem-group7-project/public/php/add_order_history.php',
         success: function (result) {
-//            console.log("email result " + result)
-//            alert(result);
+            console.log("email result " + result)
+            alert(result);
             result = JSON.parse(result);
 
             if (result.status == 1)

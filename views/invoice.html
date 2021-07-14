@@ -1,4 +1,55 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<style>
+    body{margin-top:20px;
+         background:#eee;
+    }
+
+    .invoice {
+        padding: 30px;
+    }
+
+    .invoice h2 {
+        margin-top: 0px;
+        line-height: 0.8em;
+    }
+
+    .invoice .small {
+        font-weight: 300;
+    }
+
+    .invoice hr {
+        margin-top: 10px;
+        border-color: #ddd;
+    }
+
+    .invoice .table tr.line {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .invoice .table td {
+        border: none;
+    }
+
+    .invoice .identity {
+        margin-top: 10px;
+        font-size: 1.1em;
+        font-weight: 300;
+    }
+
+    .invoice .identity strong {
+        font-weight: 600;
+    }
+
+
+    .grid {
+        position: relative;
+        width: 100%;
+        background: #fff;
+        color: #666666;
+        border-radius: 2px;
+        margin-bottom: 25px;
+        box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+    }
+</style>
 <div class="container">
     <div class="row">
         <!-- BEGIN INVOICE -->
@@ -53,25 +104,11 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>1</td>
-                                        <td><strong>Template Design</strong><br>A website template is a pre-designed webpage, or set of webpages, that anyone can modify with their own content and images to setup a website.</td>
-                                        <td class="text-center">15</td>
-                                        <td class="text-center">$75</td>
-                                        <td class="text-right">$1,125.00</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td><strong>Template Development</strong><br>Web development is a broad term for the work involved in developing a web site for the Internet (World Wide Web) or an intranet (a private network).</td>
-                                        <td class="text-center">15</td>
-                                        <td class="text-center">$75</td>
-                                        <td class="text-right">$1,125.00</td>
-                                    </tr>
-                                    <tr class="line">
-                                        <td>3</td>
-                                        <td><strong>Testing</strong><br>Take measures to check the quality, performance, or reliability of (something), especially before putting it into widespread use or practice.</td>
-                                        <td class="text-center">2</td>
-                                        <td class="text-center">$75</td>
-                                        <td class="text-right">$150.00</td>
+                                        <td>'.($x+1).'</td>
+                                        <td><strong>'.$book_details[$x]->name.'</strong><br>'.$book_details[$x]->isbn.'</td>
+                                        <td class="text-center">'.$book_details[$x]->quantity.'</td>
+                                        <td class="text-center">RM'.$book_details[$x]->price.'</td>
+                                        <td class="text-right">RM'.number_format(($book_details[$x]->price * $book_details[$x]->quantity), 2).'</td>
                                     </tr>
                                     <tr>
                                         <td colspan="3">
@@ -88,4 +125,3 @@
         <!-- END INVOICE -->
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
