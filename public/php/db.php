@@ -2,10 +2,6 @@
 
 class Database {
 
-//    private $dbHost = "remotemysql.com";
-//    private $dbUsername = "8Q5ZMBBfQp";
-//    private $dbPassword = "YW6EDH5lvv";
-//    private $dbName = "8Q5ZMBBfQp";
     public $conn;
 
     public function main() {
@@ -21,6 +17,7 @@ class Database {
         global $conn;
 
         $conn = mysqli_connect('localhost', $dbUsername, $dbPassword, $dbName, "3306") or die("unable to connect");
+
         /** Comment it after testing is done * */
         //if connection failed directly return with error message
 
