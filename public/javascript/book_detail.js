@@ -64,7 +64,7 @@ function display_book_btn(result) {
         if (item.isbn == g_isbn) {
             //if cookie exists then enable button
             if (cookieexist() == true) {
-                if (item.isbn > 0) {
+                if (item.quantity > 0) {
                     html += '<button type="button" style="width:200px" class="btn btn-primary btn-md" value=' + item.isbn + ' onclick =\'add_to_cart_detail(' + JSON.stringify(item) + ')\'><i class="fas fa-cart-plus me-3"></i>Add to Cart</button>';
                 }else{
                     html += '<button type="button" style="width:200px" class="btn btn-primary btn-md" value=' + item.isbn + ' onclick =\'add_to_cart_detail(' + JSON.stringify(item) + ')\' disabled><i class="fas fa-cart-plus me-3"></i>Add to Cart</button>'; 
