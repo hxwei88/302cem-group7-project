@@ -16,7 +16,8 @@ class Database {
 
         global $conn;
 
-        $conn = mysqli_connect('localhost', $dbUsername, $dbPassword, $dbName) or die("unable to connect");
+        $conn = mysqli_connect('localhost', $dbUsername, $dbPassword, $dbName, "3306") or die("unable to connect");
+      
         /** Comment it after testing is done * */
         //if connection failed directly return with error message
 
