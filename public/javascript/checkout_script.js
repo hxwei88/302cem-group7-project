@@ -155,8 +155,6 @@ function update_order_history() {
         data: {'orderDetail': checkout_item, 'fname': fname, 'email': email, 'address': address},
         url: '/302cem-group7-project/public/php/add_order_history.php',
         success: function (result) {
-            console.log("email result " + result)
-            alert(result);
             result = JSON.parse(result);
 
             if (result.status == 1)
