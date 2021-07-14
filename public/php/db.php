@@ -16,7 +16,7 @@ class Database {
         
         $dbUsername = "root";
         $dbPassword = "";
-        $dbName = "test";
+        $dbName = "bookstore";
 
         global $conn;
 
