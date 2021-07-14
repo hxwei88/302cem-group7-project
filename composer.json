@@ -3,11 +3,9 @@
     "description": "Description of project 302cem-group7-project.",
     "authors": [
         {
-            "name": "hxwei",
+            "name": "pp",
             "email": "your@email.here"
         }
     ],
-    "require": {
-        "phpmailer/phpmailer": "dev-master"
-    }
+    "require": {}
 }
