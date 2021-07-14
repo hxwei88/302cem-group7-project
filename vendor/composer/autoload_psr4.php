@@ -6,4 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    '302cem-group7-project\\' => array($baseDir . '/302cem-group7-project'),
 );

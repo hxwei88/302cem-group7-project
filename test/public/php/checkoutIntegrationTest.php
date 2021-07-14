@@ -5,10 +5,6 @@ require_once '../../302cem-group7-project/public/php/checkout_user_profile.php';
 require_once '../../302cem-group7-project/public/php/add_order_history.php';
 require_once '../../302cem-group7-project/public/php/reduce_book_quantity.php';
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
 class checkoutIntegrationTest extends PHPUnit\Framework\TestCase {
     protected $object1;
     protected $object2;
@@ -27,7 +23,7 @@ class checkoutIntegrationTest extends PHPUnit\Framework\TestCase {
     }
 
     //checkout user profile test
-    public function testMain() {
+    public function testCheckUserExist() {
         $_COOKIE = array('userid' => 1);
 
         $response = $this->object1->main();
@@ -35,7 +31,7 @@ class checkoutIntegrationTest extends PHPUnit\Framework\TestCase {
     }
 
     //checkout add address test
-    public function testMain2() {
+    public function testCheckAddressExist() {
 
         $_POST = array('newAddressModal' => "addresstest");
         $_COOKIE = array('userid' => 1);
@@ -46,8 +42,7 @@ class checkoutIntegrationTest extends PHPUnit\Framework\TestCase {
     }
 
     //checkout add order history
-    public function testMain3() {
-
+    public function testAddOrderHistory() {
         $_POST = array('orderDetail' => '[{"isbn":"2536112536112","name":"Entanglement","quantity":"2","price":"501.20","og_quantity":"2"}]', 'fname' => "testxw", 'email' => "testxw@gmail.com", 'address' => "testaddr");
         $_COOKIE = array('userid' => 1);
 
@@ -57,9 +52,9 @@ class checkoutIntegrationTest extends PHPUnit\Framework\TestCase {
     }
 
     //reduce book quantity
-    public function testMain4() {
+    public function testReduceBookQuantity() {
 
-        $_POST = array("product" => '[{"isbn":"9780345404473","name":"The Three-Body Problem","quantity":1000,"price":"362.00","og_quantity":"16"}]');
+        $_POST = array("product" => '[{"isbn":"test","name":"The Three-Body Problem","quantity":2,"price":"362.00","og_quantity":"16"}]');
 
         $expected = json_encode(array("status" => 1, "message" => "Search Result Returned."));
         $this->expectOutputString($expected);
