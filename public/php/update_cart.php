@@ -6,8 +6,8 @@ class Update_Cart {
         include ('folder_path.php');
         include_once ('db.php');
 
-        $product = $_POST['product'];
-        $totalincart = $_POST['totalincart'];
+        $product = addslashes($_POST['product']);
+        $totalincart = addslashes($_POST['totalincart']);
         $data = json_decode($product, true);
         global $conn;
         if ($data != null) {

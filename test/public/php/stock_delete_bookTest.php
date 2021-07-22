@@ -32,16 +32,16 @@ class stock_delete_bookTest extends PHPUnit\Framework\TestCase {
      * @covers Stock_Delete_Book::main
      * @todo   Implement testMain().
      */
-    public function testMain() {
+    public function testDeleteExistingBook() {
         //insert book with isbn "test" to run
-        $_POST = array("isbn"=>"test", "image"=>"../resources/images/default_book.png");
+        $_POST = array("isbn"=>"whatever2", "image"=>"../resources/images/default_book.png");
         
         $expected = json_encode(array("status"=>1, "message"=>"The book has been deleted."));
         $this->expectOutputString($expected);
         $this->object->main();
     }
     
-    public function testMainFail() {
+    public function testDeleteNonExistingBook() {
         //insert book with isbn "test" to run
         $_POST = array("isbn"=>"", "image"=>"../resources/images/default_book.png");
         

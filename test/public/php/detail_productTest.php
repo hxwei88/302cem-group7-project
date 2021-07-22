@@ -32,20 +32,17 @@ class detail_productTest extends PHPUnit\Framework\TestCase {
      * @covers Add_Order_History::main
      * @todo   Implement testMain().
      */
-    public function test_detail_product() {
+    public function testGetExistingProductDetail() {
         $_POST = array('isbn' => "69420");
         $response = $this->object->main();
         $this->assertTrue($response);
     }
     
-    public function test_detail_product_fail() {
+    public function testGetNonExistingProductDetail() {
         $_POST = array('isbn' => null);
         $expected = json_encode(array("status" => 0, "message" => "Product fail show."));
         $this->expectOutputString($expected);
         $this->object->main();
-        
-//        $response = $this->object->main();
-//        $this->assertFalse($response);
     }
 
 }

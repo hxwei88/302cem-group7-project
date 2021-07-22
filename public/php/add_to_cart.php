@@ -9,8 +9,8 @@ class Add_To_Cart {
         global $conn;
 
         if (isset($_POST['product'])) {
-            $product = $_POST['product'];
-            $totalincart = $_POST['totalincart'];
+            $product = addslashes($_POST['product']);
+            $totalincart = addslashes($_POST['totalincart']);
             $query1 = "INSERT INTO cart (product, userid, totalincart) VALUES ( '" . $product . "', '" . $_COOKIE["userid"] . "', '" . $totalincart . "' )";
             $query2 = mysqli_query($conn, $query1);
 

@@ -33,20 +33,25 @@ class Stock_Update_BookTest extends PHPUnit\Framework\TestCase {
      */
     
     
-    public function testMain() {
+    public function testUpdateExistingBook() {
         //if testing, change old_isbn and detail value
         $_FILES['detail-image'] = array('name' => 'default_book.png', 'size'=>1000, 'tmp_name' => 'C:\xampp\tmp\default_book.png');
-        $_POST = array('old_isbn'=>"whatever2",'detail-isbn'=>"whatever3", 'detail-name-input'=>"nameTest2", 'detail-author-input'=>"authorTest2", 'detail-date'=>"dateTest2", 'detail-des'=>"descTest2", 'detail-tp'=>12, 'detail-rp'=>12, 'detail-quantity'=>12);
+        $_POST = array('old_isbn'=>"whatever3",'detail-isbn'=>"whatever", 
+            'detail-name-input'=>"nameTest2", 'detail-author-input'=>"authorTest2", 
+            'detail-date'=>"dateTest2", 'detail-des'=>"descTest2", 'detail-tp'=>12, 
+            'detail-rp'=>12, 'detail-quantity'=>12);
         
-        $expected = json_encode(array("status"=>1, "message"=>"The book with ISBN: whatever2 has been updated."));
+        $expected = json_encode(array("status"=>1, "message"=>"The book with ISBN: whatever3 has been updated."));
         $this->expectOutputString($expected);
         $this->object->main();
     }
     
-    public function testMainFail() {
+    public function testUpdateNonExistingBook() {
         //if testing, change old_isbn value
         $_FILES['detail-image'] = array('name' => 'default_book.png', 'size'=>1000, 'tmp_name' => 'C:\xampp\tmp\default_book.png');
-        $_POST = array('old_isbn'=>"whatever2",'detail-isbn'=>"whatever2", 'detail-name-input'=>"nameTest2", 'detail-author-input'=>"authorTest2", 'detail-date'=>"dateTest2", 'detail-des'=>"descTest2", 'detail-tp'=>12, 'detail-rp'=>12, 'detail-quantity'=>12);
+        $_POST = array('old_isbn'=>"whatever2",'detail-isbn'=>"whatever2", 'detail-name-input'=>"nameTest2", 
+            'detail-author-input'=>"authorTest2", 'detail-date'=>"dateTest2", 'detail-des'=>"descTest2", 
+            'detail-tp'=>12, 'detail-rp'=>12, 'detail-quantity'=>12);
         
         $expected = json_encode(array("status"=>0, "message"=>"An error has occurred when inserting."));
         $this->expectOutputString($expected);

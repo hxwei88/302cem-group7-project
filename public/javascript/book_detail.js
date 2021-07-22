@@ -27,6 +27,11 @@ function display_book_details(result) {
 
     result.forEach(function (item, index, arr) {
         //if the retrieved isbn from books table matches the url isbn value
+        item.description = item.description.replace(/[\/\(\)\']/g, "&apos;");
+        item.isbn = item.isbn.replace(/[\/\(\)\']/g, "&apos;");
+        item.name = item.name.replace(/[\/\(\)\']/g, "&apos;");
+        item.author = item.author.replace(/[\/\(\)\']/g, "&apos;");
+        
         if (item.isbn == g_isbn) {
             html += '<h2><span class="bookDetail-text"> ' + item.name + '</span></h2>' +
                     '<p><span class="bookDetail-text">By ' + item.author + '</span></p><br>' +

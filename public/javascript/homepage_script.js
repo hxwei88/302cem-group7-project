@@ -65,6 +65,11 @@ function display(data) {
             {
                 var image = item.image;
             }
+            item.description = item.description.replace(/[\/\(\)\']/g, "&apos;");
+            item.isbn = item.isbn.replace(/[\/\(\)\']/g, "&apos;");
+            item.name = item.name.replace(/[\/\(\)\']/g, "&apos;");
+            item.author = item.author.replace(/[\/\(\)\']/g, "&apos;");
+            
             console.log(JSON.stringify(item))
             var x = JSON.stringify(item);
             var n = 1;
