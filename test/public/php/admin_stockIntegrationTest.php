@@ -41,31 +41,33 @@ class admin_stockIntegrationTest extends PHPUnit\Framework\TestCase
      * @covers Add_Order_History::main
      * @todo   Implement testMain().
      */
-    public function testMain()
+    public function testGetBooksData()
     {
         //1st unit
         $response1 = $this->object1->main();
         $this->assertTrue($response1);
     }
     
-    public function testMain2() {
+    public function testGetBookDetail() {
         //2nd unit
-        $_POST = array('isbn' => "cocka");
+        $_POST = array('isbn' => "test");
         $response2 = $this->object2->main();
         $this->assertTrue($response2);
     }
     
-    public function testMain3() {
+    public function testUpdateBook() {
         //3rd unit
         $_FILES['detail-image'] = array('name' => 'default_book.png', 'size'=>1000, 'tmp_name' => 'C:\xampp\tmp\default_book.png');
-        $_POST = array('old_isbn'=>"cocka",'detail-isbn'=>"test123", 'detail-name-input'=>"nameTest2", 'detail-author-input'=>"authorTest2", 'detail-date'=>"dateTest2", 'detail-des'=>"descTest2", 'detail-tp'=>12, 'detail-rp'=>12, 'detail-quantity'=>12);
+        $_POST = array('old_isbn'=>"test",'detail-isbn'=>"test123", 'detail-name-input'=>"nameTest2", 
+            'detail-author-input'=>"authorTest2", 'detail-date'=>"dateTest2", 'detail-des'=>"descTest2", 
+            'detail-tp'=>12, 'detail-rp'=>12, 'detail-quantity'=>12);
         
-        $expected1 = json_encode(array("status"=>1, "message"=>"The book with ISBN: cocka has been updated."));
+        $expected1 = json_encode(array("status"=>1, "message"=>"The book with ISBN: test has been updated."));
         $this->expectOutputString($expected1);
         $this->object3->main();
     }
     
-    public function testMain4() {
+    public function testDeleteBook() {
         //4th unit
         $_POST = array("isbn"=>"test123", "image"=>"../resources/images/default_book.png");
         

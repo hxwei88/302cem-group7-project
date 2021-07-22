@@ -31,12 +31,12 @@ class stockTest extends PHPUnit\Framework\TestCase {
      * @covers History::main
      * @todo   Implement testMain().
      */
-    public function testMain(): void {
+    public function testDefaultGetBookData(): void {
         $response = $this->object->main();
         $this->assertTrue($response);
     }
 
-    public function testSearch(): void {
+    public function testSearchGetBookData(): void {
         //Search criteria
         $_POST = array('orderDetail'=>"The");
         
